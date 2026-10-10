@@ -1,11 +1,15 @@
-{
-  "mcpServers": {
-    "shadcn": {
-      "command": "npx",
-      "args": [
-        "shadcn@latest",
-        "mcp"
-      ]
-    }
-  }
-}
+   {
+     "mcpServers": {
+       "shadcn": {
+         "command": "npx",
+         "args": ["shadcn@latest", "mcp"]
+       },
+       "refero": {
+         "type": "http",
+         "url": "https://api.refero.design/mcp",
+         "headers": {
+           "Authorization": "Bearer ${REFERO_API_KEY}"
+         }
+       }
+     }
+   }
