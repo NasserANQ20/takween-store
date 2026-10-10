@@ -3,94 +3,104 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0c0b0a" />
+  <meta name="theme-color" content="#fbf7f6" />
   <title>لينا تيك</title>
-  <meta name="description" content="لينا تيك — إكسسوارات تقنية فاخرة تواكب أحدث الصيحات: كفرات جلد، شواحن لاسلكية، سماعات، أساور ساعات وحقائب." />
+  <meta name="description" content="لينا تيك — إكسسوارات تقنية ناعمة بألوان الطبيعة: كفرات، أساور ساعة، سماعات، شواحن وهدايا." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22 fill=%22%23b8456c%22%3E❀%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Readex+Pro:wght@200;300;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <a class="skip" href="#products">تخطَّ إلى المنتجات</a>
+  <a class="skip" href="#products">تخطَّي إلى المنتجات</a>
 
-  <div class="announce">شحن مجاني للطلبات فوق <span data-free-over></span> · كود <b dir="ltr">LINA10</b> لخصم ١٠٪ على أول طلب</div>
+  <div class="announce">شحن مجاني للطلبات فوق <span data-free-over></span> · استخدمي كود <b dir="ltr">LINA10</b> لخصم ١٠٪ على أول طلب</div>
 
   <header class="header">
     <div class="wrap header__inner">
-      <a href="#" class="logo" aria-label="الصفحة الرئيسية"><span data-store-name>لينا تيك</span><small data-store-name-en>LINA TECH</small></a>
+      <a href="#" class="logo" aria-label="الصفحة الرئيسية"><span class="logo__mark" aria-hidden="true">❀</span><span data-store-name>لينا تيك</span></a>
       <nav class="nav" aria-label="القائمة الرئيسية">
-        <a href="#collections">المجموعات</a>
-        <a href="#products">المنتجات</a>
-        <a href="#faq">الأسئلة</a>
-        <a href="#contact">تواصل</a>
+        <a href="#new">الأحدث</a>
+        <a href="#products">المتجر</a>
+        <a href="#why">لماذا لينا</a>
+        <a href="#faq">مساعدة</a>
       </nav>
       <button type="button" class="cart-btn" data-act="cart" aria-label="فتح السلة">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l-1 12h-11l-1-12z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg>
         <span class="cart-count" id="cartCount" hidden>0</span>
       </button>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero__glow" aria-hidden="true"></div>
-      <div class="wrap hero__inner">
-        <div class="hero__copy">
-          <span class="eyebrow">مجموعة خريف ٢٠٢٦</span>
-          <h1>تقنيتك،<br /><em>بلمسة فخامة</em></h1>
-          <p>جلد إيطالي، ألمنيوم مصقول، وسيراميك. إكسسوارات مختارة بعناية لجوالك وساعتك ومكتبك.</p>
-          <div class="hero__cta">
-            <a href="#products" class="btn btn--gold">تسوّق المجموعة</a>
-            <a href="#collections" class="btn btn--line">تصفّح الأقسام</a>
+    <!-- Store headline -->
+    <section class="wrap intro">
+      <h1>المتجر. <span>أجمل طريقة لاقتناء إكسسوارات تحبينها.</span></h1>
+      <a class="intro__help" data-wa href="#" target="_blank" rel="noopener">
+        <img src="images/lifestyle-peony.webp" alt="" />
+        <span><b>تحتاجين مساعدة؟</b><small>كلّمينا على واتساب ←</small></span>
+      </a>
+    </section>
+
+    <!-- Category nav -->
+    <nav class="wrap catnav" id="catNav" aria-label="الأقسام"></nav>
+
+    <!-- Hero banner -->
+    <section class="wrap">
+      <div class="banner">
+        <img class="banner__img" src="images/hero.webp" alt="سماعات وردية وكفر جلد وساعة بسوار لؤلؤ وكيبل مضفّر بين أوراق الأوكالبتوس" />
+        <div class="banner__txt">
+          <span class="eyebrow">مجموعة الربيع</span>
+          <h2>ناعمة. طبيعية.<br />وتشبهك.</h2>
+          <p>درجات الورد والمريمية على إكسسوارات يومية تستخدمينها في كل لحظة.</p>
+          <div class="banner__cta">
+            <a href="#products" class="btn btn--primary">تسوّقي الآن</a>
+            <a href="#new" class="btn btn--text">شوفي الجديد ←</a>
           </div>
         </div>
-        <div class="hero__stage" aria-hidden="true">
-          <div class="stage__item stage__item--a"><div class="art art--hero" style="--tint:#4f6a8a" data-icon="headphones"></div><span>سماعات بعزل نشط</span></div>
-          <div class="stage__item stage__item--b"><div class="art art--hero" style="--tint:#a0703c" data-icon="case"></div><span>كفر جلد MagSafe</span></div>
-          <div class="stage__item stage__item--c"><div class="art art--hero" style="--tint:#d4b06a" data-icon="watchMesh"></div><span>سوار ميلانيز ذهبي</span></div>
-        </div>
       </div>
     </section>
 
-    <section class="trust wrap" aria-label="مزايا التسوق">
-      <div class="trust__item">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg>
-        <div><b>شحن سريع</b><small><span data-ship-days></span> لكل المدن</small></div>
-      </div>
-      <div class="trust__item">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
-        <div><b>ضمان سنة</b><small>على كل الأجهزة الإلكترونية</small></div>
-      </div>
-      <div class="trust__item">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5l2 2M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M20 4v5h-5M4 20v-5h5"/></svg>
-        <div><b>استبدال سهل</b><small>خلال ١٤ يوماً من الاستلام</small></div>
-      </div>
-      <div class="trust__item">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg>
-        <div><b>دفع مرن</b><small>عند الاستلام أو تحويل أو Apple Pay</small></div>
+    <!-- New arrivals -->
+    <section id="new" class="shelf">
+      <h2 class="wrap shelf__title">الأحدث. <span>وصل حديثاً ويستاهل نظرة.</span></h2>
+      <div class="scroller" id="newRow"></div>
+    </section>
+
+    <!-- Why Lina -->
+    <section id="why" class="shelf">
+      <h2 class="wrap shelf__title">الفرق مع لينا. <span>أسباب أكثر للتسوّق معنا.</span></h2>
+      <div class="scroller scroller--small">
+        <div class="perk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><b>توصيل خلال <span data-ship-days></span></b><p>لكل مدن المملكة، ومجاناً فوق <span data-free-over></span>.</p></div>
+        <div class="perk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7"/><path d="M12 7c-2-4-6-4-6-1.5S9 7 12 7zm0 0c2-4 6-4 6-1.5S15 7 12 7z"/></svg><b>تغليف وردي مجاني</b><p>كل طلب يصلك جاهزاً للإهداء مع بطاقة باسمك.</p></div>
+        <div class="perk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><b>ضمان سنة كاملة</b><p>على الشواحن والسماعات والباور بانك.</p></div>
+        <div class="perk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5l2 2M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M20 4v5h-5M4 20v-5h5"/></svg><b>استبدال خلال ١٤ يوماً</b><p>غيّرتِ رأيك؟ نستبدل المنتج بكل سهولة.</p></div>
+        <div class="perk"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg><b>ادفعي بطريقتك</b><p>عند الاستلام، تحويل، Apple Pay أو تقسيط تابي.</p></div>
       </div>
     </section>
 
-    <section id="collections" class="section wrap">
-      <div class="section__head">
-        <span class="eyebrow">الأقسام</span>
-        <h2>كل ما يكمل أجهزتك</h2>
-      </div>
-      <div class="colls" id="collList"></div>
+    <!-- Moods -->
+    <section class="wrap moods" aria-label="تسوّقي حسب الأسلوب">
+      <a href="#products" class="mood" data-act="cat" data-cat="cases">
+        <img src="images/lifestyle-peony.webp" alt="كفر وردي وعلبة سماعات بجانب باقة فاوانيا"  />
+        <span class="mood__txt"><small>مستوحاة من الورد</small><b>كفرات بلون الفاوانيا</b><em>تسوّقي الكفرات ←</em></span>
+      </a>
+      <a href="#products" class="mood" data-act="cat" data-cat="audio">
+        <img src="images/lifestyle-garden.webp" alt="سماعة بلوتوث خضراء وكيبل وردي على طاولة خشبية في حديقة"  />
+        <span class="mood__txt"><small>لمسة من الحديقة</small><b>صوت يرافقك في كل جلسة</b><em>تسوّقي الصوتيات ←</em></span>
+      </a>
     </section>
 
-    <section id="products" class="section wrap">
+    <!-- All products -->
+    <section id="products" class="wrap section">
       <div class="toolbar">
-        <div class="section__head">
-          <span class="eyebrow">المجموعة</span>
-          <h2>الأكثر أناقة هذا الموسم</h2>
-        </div>
+        <h2 class="shelf__title shelf__title--flush">كل المنتجات. <span>اختاري اللي يشبهك.</span></h2>
         <div class="toolbar__ctl">
           <label class="field">
-            <span class="sr">ابحث في المنتجات</span>
+            <span class="sr">ابحثي في المنتجات</span>
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-            <input type="search" id="search" placeholder="ابحث عن كفر، شاحن، سوار…" autocomplete="off" />
+            <input type="search" id="search" placeholder="ابحثي عن كفر، سوار، سماعة…" autocomplete="off" />
           </label>
           <label class="field field--select">
             <span class="sr">ترتيب المنتجات</span>
@@ -108,57 +118,56 @@
         <small class="result-count" id="resultCount"></small>
       </div>
       <div class="grid" id="grid"></div>
-      <p class="empty" id="empty" hidden>لا توجد منتجات مطابقة لبحثك. جرّب كلمة أخرى أو اختر «الكل».</p>
+      <p class="empty" id="empty" hidden>ما لقينا منتجات بهذا الاسم. جرّبي كلمة ثانية أو اختاري «الكل».</p>
     </section>
 
-    <section class="gift wrap" aria-labelledby="giftTitle">
-      <div class="gift__art art art--hero" style="--tint:#c9a45c" data-icon="gift"></div>
-      <div class="gift__copy">
-        <span class="eyebrow">هدية جاهزة</span>
-        <h2 id="giftTitle">صندوق لينا تيك الحصري</h2>
-        <p>كفر جلد وسوار ساعة وكيبل مضفّر في صندوق أسود مغناطيسي، مع بطاقة إهداء بخط اليد. وفّر ١٢١ ر.س مقارنة بشراء القطع منفردة.</p>
-        <button type="button" class="btn btn--gold" data-act="view" data-id="20">اطّلع على الصندوق</button>
+    <!-- Gift -->
+    <section class="wrap">
+      <div class="gift">
+        <img src="images/gift-box.webp" alt="صندوق هدية وردي فيه كفر جلد وسوار ساعة وكيبل"  />
+        <div class="gift__copy">
+          <span class="eyebrow">هدية جاهزة</span>
+          <h2>صندوق لينا. <span>هدية تفرّح من أول نظرة.</span></h2>
+          <p>كفر جلد وسوار ساعة وكيبل مضفّر في صندوق وردي مغناطيسي بشريطة ساتان. أوفر من شراء القطع منفردة.</p>
+          <button type="button" class="btn btn--primary" data-act="view" data-id="20">اطّلعي على الصندوق</button>
+        </div>
       </div>
     </section>
 
-    <section id="faq" class="section wrap faq">
-      <div class="section__head">
-        <span class="eyebrow">مساعدة</span>
-        <h2>أسئلة شائعة</h2>
-      </div>
+    <!-- FAQ -->
+    <section id="faq" class="wrap section faq">
+      <h2 class="shelf__title shelf__title--flush">أسئلة شائعة. <span>كل اللي تحتاجين تعرفينه.</span></h2>
       <div class="faq__list" id="faqList"></div>
     </section>
   </main>
 
   <footer id="contact" class="footer">
-    <div class="wrap footer__grid">
-      <div class="footer__brand">
-        <a href="#" class="logo"><span data-store-name>لينا تيك</span><small data-store-name-en>LINA TECH</small></a>
-        <p data-store-tagline></p>
-        <a class="btn btn--gold" data-wa href="#" target="_blank" rel="noopener">راسلنا على واتساب</a>
+    <div class="wrap">
+      <p class="footer__note">الأسعار شاملة ضريبة القيمة المضافة. صور المنتجات للتوضيح وقد يختلف اللون قليلاً حسب الشاشة.</p>
+      <div class="footer__grid">
+        <div>
+          <h4>تسوّقي</h4>
+          <ul class="footer__links" id="footCats"></ul>
+        </div>
+        <div>
+          <h4>تواصلي معنا</h4>
+          <ul class="contact" id="contactList"></ul>
+        </div>
+        <div>
+          <h4>طرق الدفع</h4>
+          <div class="payments" id="payments"></div>
+          <h4 class="mt">السياسات</h4>
+          <ul class="footer__links">
+            <li>الاستبدال والاسترجاع خلال ١٤ يوماً</li>
+            <li>ضمان سنة على الإلكترونيات</li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <h4>تسوّق</h4>
-        <ul class="footer__links" id="footCats"></ul>
-      </div>
-      <div>
-        <h4>تواصل معنا</h4>
-        <ul class="contact" id="contactList"></ul>
-      </div>
-      <div>
-        <h4>طرق الدفع</h4>
-        <div class="payments" id="payments"></div>
-        <h4 class="mt">السياسات</h4>
-        <ul class="footer__links">
-          <li>الاستبدال والاسترجاع خلال ١٤ يوماً</li>
-          <li>ضمان سنة على الإلكترونيات</li>
-        </ul>
-      </div>
+      <div class="copy"><span>© <span id="year"></span> <span data-store-name>لينا تيك</span>. جميع الحقوق محفوظة.</span><span data-store-tagline></span></div>
     </div>
-    <div class="wrap copy">© <span id="year"></span> <span data-store-name>لينا تيك</span>. جميع الحقوق محفوظة.</div>
   </footer>
 
-  <a class="wa-float" data-wa href="#" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+  <a class="wa-float" data-wa href="#" target="_blank" rel="noopener" aria-label="تواصلي معنا عبر واتساب">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.4-1.8-.9-.8.8c-1-.4-2-1.4-2.4-2.4l.8-.8-.9-1.8z"/></svg>
   </a>
 
@@ -176,7 +185,7 @@
     <div class="modal__backdrop" data-close></div>
     <aside class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle" tabindex="-1">
       <div class="drawer__head">
-        <h3 id="cartTitle">سلة التسوق <span id="cartTitleCount"></span></h3>
+        <h3 id="cartTitle">حقيبة التسوق <span id="cartTitleCount"></span></h3>
         <button type="button" class="icon-btn" data-close aria-label="إغلاق السلة">✕</button>
       </div>
       <div class="drawer__body" id="cartItems"></div>
@@ -200,20 +209,21 @@
               <option>الدفع عند الاستلام</option>
               <option>تحويل بنكي</option>
               <option>Apple Pay / مدى</option>
+              <option>تقسيط تابي</option>
             </select>
           </label>
         </div>
         <label for="fAddr">العنوان بالتفصيل<textarea id="fAddr" name="address" rows="2" required placeholder="الحي، الشارع، رقم المبنى"></textarea></label>
         <label for="fNotes">ملاحظات أو رسالة إهداء (اختياري)<textarea id="fNotes" name="notes" rows="2"></textarea></label>
         <div class="summary" id="checkoutSummary"></div>
-        <button class="btn btn--gold btn--block" type="submit">مراجعة الطلب</button>
+        <button class="btn btn--primary btn--block" type="submit">مراجعة الطلب</button>
       </form>
       <div id="orderDone" class="done" hidden>
         <div class="done__mark" aria-hidden="true">✓</div>
         <h3>طلبك جاهز للإرسال</h3>
-        <p>رقم الطلب <b id="orderNo" dir="ltr"></b>. اضغط الزر لإرسال التفاصيل على واتساب، وسنؤكد الطلب ونرسل لك موعد التوصيل.</p>
+        <p>رقم الطلب <b id="orderNo" dir="ltr"></b>. اضغطي الزر لإرسال التفاصيل على واتساب، وبنأكد طلبك ونرسل لك موعد التوصيل.</p>
         <pre class="done__text" id="orderText"></pre>
-        <a class="btn btn--gold btn--block" id="sendWa" href="#" target="_blank" rel="noopener" data-act="sent">إرسال الطلب على واتساب</a>
+        <a class="btn btn--primary btn--block" id="sendWa" href="#" target="_blank" rel="noopener" data-act="sent">إرسال الطلب على واتساب</a>
         <button type="button" class="btn btn--line btn--block" data-act="copy">نسخ تفاصيل الطلب</button>
       </div>
     </div>
@@ -222,7 +232,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/config.js"></script>
-  <script src="js/icons.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

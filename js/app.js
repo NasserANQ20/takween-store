@@ -14,12 +14,12 @@
   };
 
   function svg(name) {
-    const body = ICONS[name] || "";
+    const body = (typeof ICONS !== "undefined" && ICONS[name]) || "";
     return `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
   }
   function art(p, cls = "art") {
-    const inner = p.image ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" />` : svg(p.icon);
-    return `<div class="${cls}" style="--tint:${esc(p.tint || "#c9a45c")}">${inner}</div>`;
+    const inner = p.image ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" decoding="async" />` : svg(p.icon);
+    return `<div class="${cls}">${inner}</div>`;
   }
   const priceHtml = (p) =>
     `<div class="price"><b>${fmt(p.price)}</b>${p.oldPrice ? `<s>${fmt(p.oldPrice)}</s><em>وفّر ${Math.round((1 - p.price / p.oldPrice) * 100)}٪</em>` : ""}</div>`;
@@ -65,21 +65,31 @@
       .map((c) => `<li><a href="#products" data-act="cat" data-cat="${c.id}">${esc(c.name)}</a></li>`).join("");
   }
 
-  // ---------- Collections ----------
-  function renderCollections() {
-    $("#collList").innerHTML = CATEGORIES.filter((c) => c.id !== "all")
-      .map((c) => {
-        const n = PRODUCTS.filter((p) => p.category === c.id).length;
-        return `<a href="#products" class="coll" data-act="cat" data-cat="${c.id}">
-          <span class="coll__art">${svg(c.icon)}</span>
-          <span class="coll__txt"><b>${esc(c.name)}</b><small>${esc(c.note)} · ${n.toLocaleString("ar-SA")} منتجات</small></span>
-          <span class="coll__go" aria-hidden="true">←</span>
-        </a>`;
-      }).join("");
+  // ---------- Category nav + new arrivals ----------
+  function renderCatNav() {
+    $("#catNav").innerHTML = CATEGORIES.filter((c) => c.id !== "all")
+      .map((c) => `<a href="#products" class="catnav__item" data-act="cat" data-cat="${c.id}">
+          <span class="catnav__img"><img src="${esc(c.image)}" alt="" loading="lazy" /></span>
+          <span>${esc(c.name)}</span>
+        </a>`).join("");
+  }
+
+  function renderNew() {
+    $("#newRow").innerHTML = PRODUCTS.filter((p) => p.isNew).map((p) => `
+      <article class="tile">
+        <button type="button" class="tile__btn" data-act="view" data-id="${p.id}">
+          <span class="tile__txt">
+            <small class="tile__eyebrow">${esc(p.badge || "جديد")}</small>
+            <b>${esc(p.name)}</b>
+            <span class="tile__desc">${esc(p.desc)}</span>
+            <span class="tile__price">${fmt(p.price)}</span>
+          </span>
+          ${art(p, "art art--tile")}
+        </button>
+      </article>`).join("");
   }
 
   function renderStatic() {
-    $$("[data-icon]").forEach((el) => (el.innerHTML = svg(el.dataset.icon)));
     $("#faqList").innerHTML = FAQ.map(
       (f, i) => `<details${i === 0 ? " open" : ""}><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`
     ).join("");
@@ -121,7 +131,7 @@
           <small class="card__cat">${esc(catName(p.category))}</small>
           <h3 class="card__title"><button type="button" data-act="view" data-id="${p.id}">${esc(p.name)}</button></h3>
           ${priceHtml(p)}
-          <button type="button" class="btn btn--line" data-act="quick" data-id="${p.id}">أضف للسلة</button>
+          <button type="button" class="btn btn--buy" data-act="quick" data-id="${p.id}">أضيفي للسلة</button>
         </div>
       </article>`).join("");
   }
@@ -152,7 +162,7 @@
           <ul class="specs">${(p.specs || []).map((s) => `<li>${esc(s)}</li>`).join("")}</ul>
           <div class="pm__row">
             <div class="qty"><button type="button" data-act="pmqty" data-d="1" aria-label="زيادة">+</button><span>${m.qty.toLocaleString("ar-SA")}</span><button type="button" data-act="pmqty" data-d="-1" aria-label="إنقاص">−</button></div>
-            <button type="button" class="btn btn--gold" data-act="pmadd">أضف للسلة · ${fmt(p.price * m.qty)}</button>
+            <button type="button" class="btn btn--primary" data-act="pmadd">أضيفي للسلة · ${fmt(p.price * m.qty)}</button>
           </div>
           <p class="pm__note">شحن ${esc(STORE.shippingDays)} · استبدال خلال ١٤ يوماً</p>
         </div>
@@ -199,7 +209,7 @@
     $("#cartCount").hidden = count() === 0;
     $("#cartTitleCount").textContent = count() ? `(${count().toLocaleString("ar-SA")})` : "";
     if (!state.cart.length) {
-      $("#cartItems").innerHTML = `<div class="cart-empty">${svg("bag")}<p>سلتك فارغة حالياً</p><button type="button" class="btn btn--line" data-close>تصفّح المجموعة</button></div>`;
+      $("#cartItems").innerHTML = `<div class="cart-empty"><img src="images/gift-box.webp" alt="" /><p>سلتك فارغة حالياً</p><button type="button" class="btn btn--line" data-close>تصفّحي المتجر</button></div>`;
       $("#cartFoot").innerHTML = "";
       return;
     }
@@ -208,7 +218,7 @@
     const pct = Math.min(100, (t.net / STORE.freeShippingOver) * 100);
     $("#cartItems").innerHTML = `
       <div class="ship">
-        <p>${left > 0 ? `أضف <b>${fmt(left)}</b> لتحصل على شحن مجاني` : "مبروك! طلبك مؤهل للشحن المجاني"}</p>
+        <p>${left > 0 ? `أضيفي <b>${fmt(left)}</b> وتحصلين على شحن مجاني` : "مبروك! طلبك مؤهّل للشحن المجاني"}</p>
         <div class="ship__bar"><span style="width:${pct}%"></span></div>
       </div>
       ${state.cart.map((l) => {
@@ -236,7 +246,7 @@
       </form>
       ${c ? `<p class="coupon__ok">✓ ${esc(c.label)} <button type="button" class="link" data-act="uncoupon">إلغاء</button></p>` : `<p class="coupon__hint">جرّب الكود <b dir="ltr">LINA10</b> لخصم أول طلب</p>`}
       ${summaryHtml()}
-      <button type="button" class="btn btn--gold btn--block" data-act="checkout">إتمام الطلب</button>`;
+      <button type="button" class="btn btn--primary btn--block" data-act="checkout">إتمام الطلب</button>`;
   }
 
   function setQty(key, d) {
@@ -374,7 +384,8 @@
   // ---------- Init ----------
   renderInfo();
   renderStatic();
-  renderCollections();
+  renderCatNav();
+  renderNew();
   renderCats();
   renderGrid();
   renderCart();
