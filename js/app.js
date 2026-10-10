@@ -1,6 +1,6 @@
 (() => {
   const $ = (s, el = document) => el.querySelector(s);
-  const CART_KEY = "takween_cart";
+  const CART_KEY = STORE.cartKey || "takween_cart";
 
   // ---------- Helpers ----------
   const fmt = (n) => `${n.toLocaleString("ar-SA")} ${STORE.currency}`;

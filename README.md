@@ -29,3 +29,9 @@ python3 -m http.server 8000
 2. من إعدادات المستودع: **Settings → Pages**.
 3. اختر **Deploy from a branch** ثم `main` و `/ (root)` واحفظ.
 4. سيصبح المتجر متاحاً على `https://<اسم-المستخدم>.github.io/takween-store/`.
+
+## متجر لينا تيك ✦
+نسخة ثانية بثيم داكن فاخر بلمسة ذهبية، مخصّصة للإكسسوارات التقنية، موجودة في مجلد **`lina-tech/`**.
+- الإعدادات والمنتجات في `lina-tech/js/config.js`، والألوان في أعلى `lina-tech/css/style.css`.
+- يستخدم نفس منطق السلة والطلب عبر واتساب (`js/app.js`) مع سلة مستقلة.
+- محلياً: `http://localhost:8000/lina-tech/` — وعلى GitHub Pages: `https://<اسم-المستخدم>.github.io/takween-store/lina-tech/`
