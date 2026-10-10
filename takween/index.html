@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تكوين | المتجر</title>
+  <meta name="description" content="متجر تكوين — منتجات مختارة بعناية" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="logo" data-store-name>تكوين</a>
+      <nav class="nav">
+        <a href="#products">المنتجات</a>
+        <a href="#about">من نحن</a>
+        <a href="#contact">تواصل</a>
+      </nav>
+      <button class="cart-btn" id="openCart" aria-label="السلة">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero__inner">
+      <h1>أهلاً بك في <span data-store-name>تكوين</span></h1>
+      <p data-store-tagline></p>
+      <a href="#products" class="btn btn--primary">تسوّق الآن</a>
+    </div>
+  </section>
+
+  <section class="features container">
+    <div class="feature"><span>🚚</span><div><b>شحن سريع</b><small id="shipNote"></small></div></div>
+    <div class="feature"><span>🔒</span><div><b>طلب آمن</b><small>تأكيد الطلب عبر واتساب</small></div></div>
+    <div class="feature"><span>↩️</span><div><b>استرجاع سهل</b><small>خلال ٧ أيام</small></div></div>
+  </section>
+
+  <main id="products" class="container">
+    <div class="toolbar">
+      <h2>منتجاتنا</h2>
+      <input type="search" id="search" placeholder="ابحث عن منتج..." />
+    </div>
+    <div class="cats" id="cats"></div>
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty" hidden>لا توجد منتجات مطابقة.</p>
+  </main>
+
+  <section id="about" class="about">
+    <div class="container">
+      <h2>من نحن</h2>
+      <p>في <span data-store-name>تكوين</span> نختار كل منتج بعناية لنقدّم لك الجودة والأناقة بأسعار مناسبة. هدفنا أن تكون تجربة التسوّق معنا سهلة وممتعة من أول نقرة حتى وصول طلبك.</p>
+    </div>
+  </section>
+
+  <footer id="contact" class="footer">
+    <div class="container footer__inner">
+      <div>
+        <div class="logo" data-store-name>تكوين</div>
+        <small data-store-tagline></small>
+      </div>
+      <div class="footer__links" id="contactLinks"></div>
+    </div>
+    <div class="container copy">© <span id="year"></span> <span data-store-name>تكوين</span>. جميع الحقوق محفوظة.</div>
+  </footer>
+
+  <!-- نافذة المنتج -->
+  <div class="modal" id="productModal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__box" role="dialog" aria-modal="true">
+      <button class="icon-btn modal__close" data-close aria-label="إغلاق">✕</button>
+      <div id="productModalBody"></div>
+    </div>
+  </div>
+
+  <!-- السلة -->
+  <div class="drawer" id="cartDrawer" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <aside class="drawer__panel">
+      <div class="drawer__head">
+        <h3>سلة التسوق</h3>
+        <button class="icon-btn" data-close aria-label="إغلاق">✕</button>
+      </div>
+      <div class="drawer__body" id="cartItems"></div>
+      <div class="drawer__foot" id="cartFoot"></div>
+    </aside>
+  </div>
+
+  <!-- إتمام الطلب -->
+  <div class="modal" id="checkoutModal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__box" role="dialog" aria-modal="true">
+      <button class="icon-btn modal__close" data-close aria-label="إغلاق">✕</button>
+      <h3>إتمام الطلب</h3>
+      <form id="checkoutForm" class="form">
+        <label>الاسم الكامل<input name="name" required /></label>
+        <label>رقم الجوال<input name="phone" type="tel" required inputmode="tel" /></label>
+        <label>المدينة<input name="city" required /></label>
+        <label>العنوان بالتفصيل<textarea name="address" rows="2" required></textarea></label>
+        <label>ملاحظات (اختياري)<textarea name="notes" rows="2"></textarea></label>
+        <div class="summary" id="checkoutSummary"></div>
+        <button class="btn btn--primary btn--block" type="submit">إرسال الطلب عبر واتساب</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

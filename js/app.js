@@ -1,245 +1,380 @@
 (() => {
   const $ = (s, el = document) => el.querySelector(s);
-  const CART_KEY = STORE.cartKey || "takween_cart";
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
   // ---------- Helpers ----------
-  const fmt = (n) => `${n.toLocaleString("ar-SA")} ${STORE.currency}`;
+  const fmt = (n) => `${Math.round(n).toLocaleString("ar-SA")} ${STORE.currency}`;
   const byId = (id) => PRODUCTS.find((p) => p.id === id);
+  const catName = (id) => (CATEGORIES.find((c) => c.id === id) || {}).name || "";
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+  const waLink = (text) => `https://wa.me/${STORE.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
+  const mem = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  };
 
-  function thumb(p) {
-    const bg = `background: linear-gradient(135deg, ${p.color}22, ${p.color}55)`;
-    const inner = p.image ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" />` : p.emoji;
-    return { bg, inner };
+  function svg(name) {
+    const body = ICONS[name] || "";
+    return `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
   }
-
-  function loadCart() {
-    try {
-      const raw = JSON.parse(localStorage.getItem(CART_KEY) || "{}");
-      // تجاهل المنتجات التي حُذفت من الكتالوج
-      return Object.fromEntries(Object.entries(raw).filter(([id, q]) => byId(+id) && q > 0));
-    } catch {
-      return {};
-    }
+  function art(p, cls = "art") {
+    const inner = p.image ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" />` : svg(p.icon);
+    return `<div class="${cls}" style="--tint:${esc(p.tint || "#c9a45c")}">${inner}</div>`;
   }
-  function saveCart() {
-    try { localStorage.setItem(CART_KEY, JSON.stringify(state.cart)); } catch {}
-  }
+  const priceHtml = (p) =>
+    `<div class="price"><b>${fmt(p.price)}</b>${p.oldPrice ? `<s>${fmt(p.oldPrice)}</s><em>وفّر ${Math.round((1 - p.price / p.oldPrice) * 100)}٪</em>` : ""}</div>`;
 
   function toast(msg) {
     const t = $("#toast");
     t.textContent = msg;
     t.classList.add("show");
     clearTimeout(toast._t);
-    toast._t = setTimeout(() => t.classList.remove("show"), 1800);
+    toast._t = setTimeout(() => t.classList.remove("show"), 2000);
   }
 
+  // ---------- State ----------
+  const saved = mem.get(STORE.cartKey, {});
   const state = {
-    category: "all",
-    query: "",
-    cart: loadCart(),
+    cat: "all",
+    q: "",
+    sort: "featured",
+    cart: (Array.isArray(saved.lines) ? saved.lines : []).filter((l) => byId(l.id) && l.qty > 0),
+    coupon: COUPONS[saved.coupon] ? saved.coupon : "",
+    modal: null, // { id, finish, qty }
   };
+  const save = () => mem.set(STORE.cartKey, { lines: state.cart, coupon: state.coupon });
 
   // ---------- Store info ----------
-  function renderStoreInfo() {
-    document.title = `${STORE.name} | المتجر`;
-    document.querySelectorAll("[data-store-name]").forEach((el) => (el.textContent = STORE.name));
-    document.querySelectorAll("[data-store-tagline]").forEach((el) => (el.textContent = STORE.tagline));
-    $("#shipNote").textContent = STORE.freeShippingOver
-      ? `مجاني للطلبات فوق ${fmt(STORE.freeShippingOver)}`
-      : `رسوم الشحن ${fmt(STORE.shippingFee)}`;
+  function renderInfo() {
+    document.title = `${STORE.name} | ${STORE.tagline}`;
+    $$("[data-store-name]").forEach((el) => (el.textContent = STORE.name));
+    $$("[data-store-name-en]").forEach((el) => (el.textContent = STORE.nameEn));
+    $$("[data-store-tagline]").forEach((el) => (el.textContent = STORE.tagline));
+    $$("[data-free-over]").forEach((el) => (el.textContent = fmt(STORE.freeShippingOver)));
+    $$("[data-ship-days]").forEach((el) => (el.textContent = STORE.shippingDays));
+    $$("[data-wa]").forEach((el) => (el.href = waLink("مرحباً لينا تيك، عندي استفسار")));
     $("#year").textContent = new Date().getFullYear();
+    $("#contactList").innerHTML = `
+      <li><span>واتساب</span><a href="${waLink()}" target="_blank" rel="noopener" dir="ltr">+${esc(STORE.whatsapp)}</a></li>
+      <li><span>البريد</span><span class="sel" dir="ltr">${esc(STORE.email)}</span></li>
+      <li><span>إنستغرام</span><a href="https://instagram.com/${esc(STORE.instagram)}" target="_blank" rel="noopener" dir="ltr">@${esc(STORE.instagram)}</a></li>
+      <li><span>تيك توك</span><a href="https://www.tiktok.com/@${esc(STORE.tiktok)}" target="_blank" rel="noopener" dir="ltr">@${esc(STORE.tiktok)}</a></li>
+      <li><span>الموقع</span><span>${esc(STORE.city)}</span></li>`;
+    $("#payments").innerHTML = STORE.payments.map((p) => `<span>${esc(p)}</span>`).join("");
+    $("#footCats").innerHTML = CATEGORIES.filter((c) => c.id !== "all")
+      .map((c) => `<li><a href="#products" data-act="cat" data-cat="${c.id}">${esc(c.name)}</a></li>`).join("");
+  }
 
-    const links = [];
-    if (STORE.whatsapp) links.push(`<a href="https://wa.me/${STORE.whatsapp}" target="_blank" rel="noopener">واتساب</a>`);
-    if (STORE.instagram) links.push(`<a href="https://instagram.com/${esc(STORE.instagram)}" target="_blank" rel="noopener">إنستغرام</a>`);
-    if (STORE.email) links.push(`<a href="mailto:${esc(STORE.email)}">البريد</a>`);
-    $("#contactLinks").innerHTML = links.join("");
+  // ---------- Collections ----------
+  function renderCollections() {
+    $("#collList").innerHTML = CATEGORIES.filter((c) => c.id !== "all")
+      .map((c) => {
+        const n = PRODUCTS.filter((p) => p.category === c.id).length;
+        return `<a href="#products" class="coll" data-act="cat" data-cat="${c.id}">
+          <span class="coll__art">${svg(c.icon)}</span>
+          <span class="coll__txt"><b>${esc(c.name)}</b><small>${esc(c.note)} · ${n.toLocaleString("ar-SA")} منتجات</small></span>
+          <span class="coll__go" aria-hidden="true">←</span>
+        </a>`;
+      }).join("");
+  }
+
+  function renderStatic() {
+    $$("[data-icon]").forEach((el) => (el.innerHTML = svg(el.dataset.icon)));
+    $("#faqList").innerHTML = FAQ.map(
+      (f, i) => `<details${i === 0 ? " open" : ""}><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`
+    ).join("");
   }
 
   // ---------- Catalog ----------
   function renderCats() {
     $("#cats").innerHTML = CATEGORIES.map(
-      (c) => `<button class="cat ${c.id === state.category ? "active" : ""}" data-cat="${c.id}">${esc(c.name)}</button>`
+      (c) => `<button type="button" class="chip ${c.id === state.cat ? "active" : ""}" data-act="cat" data-cat="${c.id}">${esc(c.name)}</button>`
     ).join("");
   }
 
-  function renderGrid() {
-    const q = state.query.trim().toLowerCase();
-    const list = PRODUCTS.filter(
-      (p) =>
-        (state.category === "all" || p.category === state.category) &&
-        (!q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))
+  function list() {
+    const q = state.q.trim().toLowerCase();
+    const items = PRODUCTS.filter(
+      (p) => (state.cat === "all" || p.category === state.cat) &&
+        (!q || [p.name, p.desc, catName(p.category)].some((s) => s.toLowerCase().includes(q)))
     );
-    $("#empty").hidden = list.length > 0;
-    $("#grid").innerHTML = list
-      .map((p) => {
-        const t = thumb(p);
-        return `
-        <article class="card">
-          <div class="thumb" style="${t.bg}" data-view="${p.id}">
-            ${t.inner}
-            ${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ""}
-          </div>
-          <div class="card__body">
-            <div class="card__title" data-view="${p.id}">${esc(p.name)}</div>
-            <div class="price"><b>${fmt(p.price)}</b>${p.oldPrice ? `<s>${fmt(p.oldPrice)}</s>` : ""}</div>
-            <button class="btn btn--primary" data-add="${p.id}">أضف للسلة</button>
-          </div>
-        </article>`;
-      })
-      .join("");
+    const sorters = {
+      featured: (a, b) => a.rank - b.rank,
+      new: (a, b) => (b.badge === "جديد") - (a.badge === "جديد") || b.id - a.id,
+      low: (a, b) => a.price - b.price,
+      high: (a, b) => b.price - a.price,
+    };
+    return items.sort(sorters[state.sort]);
   }
 
+  function renderGrid() {
+    const items = list();
+    $("#empty").hidden = items.length > 0;
+    $("#resultCount").textContent = `${items.length.toLocaleString("ar-SA")} منتج`;
+    $("#grid").innerHTML = items.map((p) => `
+      <article class="card">
+        <button type="button" class="card__media" data-act="view" data-id="${p.id}" aria-label="عرض ${esc(p.name)}">
+          ${art(p)}
+          ${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ""}
+        </button>
+        <div class="card__body">
+          <small class="card__cat">${esc(catName(p.category))}</small>
+          <h3 class="card__title"><button type="button" data-act="view" data-id="${p.id}">${esc(p.name)}</button></h3>
+          ${priceHtml(p)}
+          <button type="button" class="btn btn--line" data-act="quick" data-id="${p.id}">أضف للسلة</button>
+        </div>
+      </article>`).join("");
+  }
+
+  // ---------- Product modal ----------
   function openProduct(id) {
     const p = byId(id);
-    const t = thumb(p);
-    $("#productModalBody").innerHTML = `
-      <div class="pm__thumb" style="${t.bg}">${t.inner}</div>
-      <h3>${esc(p.name)}</h3>
-      <div class="price"><b>${fmt(p.price)}</b>${p.oldPrice ? `<s>${fmt(p.oldPrice)}</s>` : ""}</div>
-      <p class="pm__desc">${esc(p.desc)}</p>
-      <div class="pm__row">
-        <div class="qty"><button data-pm="-1">−</button><span id="pmQty">1</span><button data-pm="1">+</button></div>
-        <button class="btn btn--primary" data-pm-add="${p.id}">أضف للسلة</button>
-      </div>`;
+    state.modal = { id, finish: (p.finishes || [])[0] || "", qty: 1 };
+    renderProduct();
     open("#productModal");
+  }
+  function renderProduct() {
+    const p = byId(state.modal.id);
+    const m = state.modal;
+    $("#productModalBody").innerHTML = `
+      <div class="pm">
+        <div class="pm__media">${art(p, "art art--lg")}${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ""}</div>
+        <div class="pm__info">
+          <small class="card__cat">${esc(catName(p.category))}</small>
+          <h3 id="pmTitle">${esc(p.name)}</h3>
+          ${priceHtml(p)}
+          <p class="pm__desc">${esc(p.desc)}</p>
+          ${p.finishes?.length ? `
+            <div class="pm__opt">
+              <span>الخيار: <b>${esc(m.finish)}</b></span>
+              <div class="opts">${p.finishes.map((f) => `<button type="button" class="opt ${f === m.finish ? "active" : ""}" data-act="finish" data-v="${esc(f)}">${esc(f)}</button>`).join("")}</div>
+            </div>` : ""}
+          <ul class="specs">${(p.specs || []).map((s) => `<li>${esc(s)}</li>`).join("")}</ul>
+          <div class="pm__row">
+            <div class="qty"><button type="button" data-act="pmqty" data-d="1" aria-label="زيادة">+</button><span>${m.qty.toLocaleString("ar-SA")}</span><button type="button" data-act="pmqty" data-d="-1" aria-label="إنقاص">−</button></div>
+            <button type="button" class="btn btn--gold" data-act="pmadd">أضف للسلة · ${fmt(p.price * m.qty)}</button>
+          </div>
+          <p class="pm__note">شحن ${esc(STORE.shippingDays)} · استبدال خلال ١٤ يوماً</p>
+        </div>
+      </div>`;
   }
 
   // ---------- Cart ----------
-  const cartEntries = () => Object.entries(state.cart).map(([id, qty]) => ({ p: byId(+id), qty }));
-  const cartCount = () => Object.values(state.cart).reduce((a, b) => a + b, 0);
+  const lineKey = (l) => `${l.id}|${l.finish}`;
+  const count = () => state.cart.reduce((a, l) => a + l.qty, 0);
 
   function totals() {
-    const subtotal = cartEntries().reduce((s, { p, qty }) => s + p.price * qty, 0);
-    const free = STORE.freeShippingOver && subtotal >= STORE.freeShippingOver;
-    const shipping = subtotal === 0 || free ? 0 : STORE.shippingFee;
-    return { subtotal, shipping, total: subtotal + shipping };
+    const subtotal = state.cart.reduce((s, l) => s + byId(l.id).price * l.qty, 0);
+    const c = COUPONS[state.coupon];
+    const discount = c ? Math.round((subtotal * c.pct) / 100) : 0;
+    const net = subtotal - discount;
+    const shipping = subtotal === 0 || net >= STORE.freeShippingOver ? 0 : STORE.shippingFee;
+    return { subtotal, discount, net, shipping, total: net + shipping };
   }
 
-  function addToCart(id, qty = 1) {
-    state.cart[id] = (state.cart[id] || 0) + qty;
-    saveCart();
+  function addToCart(id, finish, qty = 1) {
+    const p = byId(id);
+    finish = finish ?? ((p.finishes || [])[0] || "");
+    const line = state.cart.find((l) => l.id === id && l.finish === finish);
+    if (line) line.qty += qty;
+    else state.cart.push({ id, finish, qty });
+    save();
     renderCart();
     const c = $("#cartCount");
     c.classList.remove("bump"); void c.offsetWidth; c.classList.add("bump");
-    toast(`تمت إضافة "${byId(id).name}" إلى السلة`);
-  }
-
-  function setQty(id, qty) {
-    if (qty <= 0) delete state.cart[id];
-    else state.cart[id] = qty;
-    saveCart();
-    renderCart();
+    toast(`أُضيف «${p.name}» إلى السلة`);
   }
 
   function summaryHtml() {
-    const { subtotal, shipping, total } = totals();
-    let note = "";
-    if (STORE.freeShippingOver && subtotal > 0 && subtotal < STORE.freeShippingOver) {
-      note = `<div class="muted">أضف ${fmt(STORE.freeShippingOver - subtotal)} للحصول على شحن مجاني</div>`;
-    }
+    const t = totals();
     return `
-      <div class="row"><span>المجموع الفرعي</span><span>${fmt(subtotal)}</span></div>
-      <div class="row"><span>الشحن</span><span>${shipping ? fmt(shipping) : "مجاني"}</span></div>
-      <div class="row row--total"><span>الإجمالي</span><span>${fmt(total)}</span></div>
-      ${note}`;
+      <div class="row"><span>المجموع الفرعي</span><span>${fmt(t.subtotal)}</span></div>
+      ${t.discount ? `<div class="row row--gold"><span>خصم ${esc(state.coupon)}</span><span>− ${fmt(t.discount)}</span></div>` : ""}
+      <div class="row"><span>الشحن</span><span>${t.shipping ? fmt(t.shipping) : "مجاني"}</span></div>
+      <div class="row row--total"><span>الإجمالي</span><span>${fmt(t.total)}</span></div>`;
   }
 
   function renderCart() {
-    $("#cartCount").textContent = cartCount();
-    const items = cartEntries();
-    if (!items.length) {
-      $("#cartItems").innerHTML = `<div class="cart-empty"><span>🛒</span>سلتك فارغة</div>`;
+    $("#cartCount").textContent = count().toLocaleString("ar-SA");
+    $("#cartCount").hidden = count() === 0;
+    $("#cartTitleCount").textContent = count() ? `(${count().toLocaleString("ar-SA")})` : "";
+    if (!state.cart.length) {
+      $("#cartItems").innerHTML = `<div class="cart-empty">${svg("bag")}<p>سلتك فارغة حالياً</p><button type="button" class="btn btn--line" data-close>تصفّح المجموعة</button></div>`;
       $("#cartFoot").innerHTML = "";
       return;
     }
-    $("#cartItems").innerHTML = items
-      .map(({ p, qty }) => {
-        const t = thumb(p);
+    const t = totals();
+    const left = STORE.freeShippingOver - t.net;
+    const pct = Math.min(100, (t.net / STORE.freeShippingOver) * 100);
+    $("#cartItems").innerHTML = `
+      <div class="ship">
+        <p>${left > 0 ? `أضف <b>${fmt(left)}</b> لتحصل على شحن مجاني` : "مبروك! طلبك مؤهل للشحن المجاني"}</p>
+        <div class="ship__bar"><span style="width:${pct}%"></span></div>
+      </div>
+      ${state.cart.map((l) => {
+        const p = byId(l.id);
         return `
         <div class="ci">
-          <div class="ci__thumb" style="${t.bg}">${t.inner}</div>
-          <div class="ci__info"><b>${esc(p.name)}</b><small>${fmt(p.price)}</small></div>
-          <div class="qty">
-            <button data-qty="${p.id}" data-d="-1">−</button><span>${qty}</span><button data-qty="${p.id}" data-d="1">+</button>
+          ${art(p, "art art--sm")}
+          <div class="ci__info">
+            <b>${esc(p.name)}</b>
+            ${l.finish ? `<small>${esc(l.finish)}</small>` : ""}
+            <span class="ci__price">${fmt(p.price * l.qty)}</span>
+          </div>
+          <div class="ci__ctl">
+            <div class="qty qty--sm"><button type="button" data-act="qty" data-k="${esc(lineKey(l))}" data-d="1" aria-label="زيادة">+</button><span>${l.qty.toLocaleString("ar-SA")}</span><button type="button" data-act="qty" data-k="${esc(lineKey(l))}" data-d="-1" aria-label="إنقاص">−</button></div>
+            <button type="button" class="link" data-act="remove" data-k="${esc(lineKey(l))}">إزالة</button>
           </div>
         </div>`;
-      })
-      .join("");
-    $("#cartFoot").innerHTML = `${summaryHtml()}<button class="btn btn--primary btn--block" id="toCheckout">إتمام الطلب</button>`;
+      }).join("")}`;
+    const c = COUPONS[state.coupon];
+    $("#cartFoot").innerHTML = `
+      <form class="coupon" id="couponForm">
+        <label class="sr" for="couponInput">كود الخصم</label>
+        <input id="couponInput" name="code" placeholder="كود الخصم" autocomplete="off" dir="ltr" value="${esc(state.coupon)}" />
+        <button type="submit" class="btn btn--line">${c ? "تغيير" : "تطبيق"}</button>
+      </form>
+      ${c ? `<p class="coupon__ok">✓ ${esc(c.label)} <button type="button" class="link" data-act="uncoupon">إلغاء</button></p>` : `<p class="coupon__hint">جرّب الكود <b dir="ltr">LINA10</b> لخصم أول طلب</p>`}
+      ${summaryHtml()}
+      <button type="button" class="btn btn--gold btn--block" data-act="checkout">إتمام الطلب</button>`;
+  }
+
+  function setQty(key, d) {
+    const l = state.cart.find((x) => lineKey(x) === key);
+    if (!l) return;
+    l.qty += d;
+    if (l.qty <= 0) state.cart = state.cart.filter((x) => x !== l);
+    save();
+    renderCart();
   }
 
   // ---------- Checkout ----------
+  function startCheckout() {
+    $("#checkoutForm").hidden = false;
+    $("#orderDone").hidden = true;
+    $("#checkoutSummary").innerHTML = summaryHtml();
+    open("#checkoutModal");
+  }
+
   function submitOrder(e) {
     e.preventDefault();
     const f = Object.fromEntries(new FormData(e.target));
-    const { subtotal, shipping, total } = totals();
-    const lines = cartEntries().map(({ p, qty }) => `• ${p.name} × ${qty} = ${fmt(p.price * qty)}`);
+    const t = totals();
+    const orderNo = `LT-${Date.now().toString().slice(-6)}`;
+    const lines = state.cart.map((l) => {
+      const p = byId(l.id);
+      return `• ${p.name}${l.finish ? ` (${l.finish})` : ""} × ${l.qty} = ${fmt(p.price * l.qty)}`;
+    });
     const msg = [
-      `طلب جديد من متجر ${STORE.name} 🛍️`,
+      `طلب جديد من متجر ${STORE.name} ✦`,
+      `رقم الطلب: ${orderNo}`,
       "",
       ...lines,
       "",
-      `المجموع: ${fmt(subtotal)}`,
-      `الشحن: ${shipping ? fmt(shipping) : "مجاني"}`,
-      `الإجمالي: ${fmt(total)}`,
+      `المجموع: ${fmt(t.subtotal)}`,
+      t.discount ? `الخصم (${state.coupon}): −${fmt(t.discount)}` : null,
+      `الشحن: ${t.shipping ? fmt(t.shipping) : "مجاني"}`,
+      `الإجمالي: ${fmt(t.total)}`,
       "",
       `الاسم: ${f.name}`,
       `الجوال: ${f.phone}`,
       `المدينة: ${f.city}`,
       `العنوان: ${f.address}`,
-      f.notes ? `ملاحظات: ${f.notes}` : "",
-    ].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n");
+      `طريقة الدفع: ${f.payment}`,
+      f.notes ? `ملاحظات: ${f.notes}` : null,
+    ].filter((l) => l !== null).join("\n");
 
-    window.open(`https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
-    state.cart = {};
-    saveCart();
+    $("#orderNo").textContent = orderNo;
+    $("#orderText").textContent = msg;
+    $("#sendWa").href = waLink(msg);
+    $("#checkoutForm").hidden = true;
+    $("#orderDone").hidden = false;
+  }
+
+  function finishOrder() {
+    state.cart = [];
+    state.coupon = "";
+    save();
     renderCart();
-    e.target.reset();
-    closeAll();
-    toast("شكراً لك! تم تحويلك إلى واتساب لتأكيد الطلب");
+    $("#checkoutForm").reset();
+    setTimeout(() => { closeAll(); toast("شكراً لك! سنؤكد طلبك على واتساب"); }, 300);
+  }
+
+  function copyOrder() {
+    const text = $("#orderText").textContent;
+    const fallback = () => {
+      const r = document.createRange();
+      r.selectNodeContents($("#orderText"));
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      toast("حدّدنا نص الطلب، انسخه يدوياً");
+    };
+    try {
+      navigator.clipboard.writeText(text).then(() => toast("تم نسخ تفاصيل الطلب"), fallback);
+    } catch { fallback(); }
   }
 
   // ---------- Overlays ----------
+  let lastFocus = null;
   function open(sel) {
-    closeAll();
-    $(sel).hidden = false;
-    document.body.style.overflow = "hidden";
+    closeAll(true);
+    lastFocus = document.activeElement;
+    const el = $(sel);
+    el.hidden = false;
+    document.body.classList.add("locked");
+    setTimeout(() => (el.querySelector("[data-autofocus], button, input") || el).focus(), 30);
   }
-  function closeAll() {
-    document.querySelectorAll(".modal, .drawer").forEach((m) => (m.hidden = true));
-    document.body.style.overflow = "";
+  function closeAll(silent) {
+    $$(".modal, .drawer").forEach((m) => (m.hidden = true));
+    document.body.classList.remove("locked");
+    if (!silent && lastFocus) lastFocus.focus?.();
   }
 
   // ---------- Events ----------
   document.addEventListener("click", (e) => {
-    const t = e.target.closest("button, [data-view], [data-close]");
+    if (e.target.closest("[data-close]")) return closeAll();
+    const t = e.target.closest("[data-act]");
     if (!t) return;
     const d = t.dataset;
-    if (d.close !== undefined) return closeAll();
-    if (d.cat) { state.category = d.cat; renderCats(); renderGrid(); return; }
-    if (d.view) return openProduct(+d.view);
-    if (d.add) return addToCart(+d.add);
-    if (d.qty) return setQty(+d.qty, (state.cart[d.qty] || 0) + +d.d);
-    if (d.pm) {
-      const el = $("#pmQty");
-      el.textContent = Math.max(1, +el.textContent + +d.pm);
-      return;
-    }
-    if (d.pmAdd) { addToCart(+d.pmAdd, +$("#pmQty").textContent); return closeAll(); }
-    if (t.id === "openCart") return open("#cartDrawer");
-    if (t.id === "toCheckout") {
-      $("#checkoutSummary").innerHTML = summaryHtml();
-      return open("#checkoutModal");
+    switch (d.act) {
+      case "cat":
+        state.cat = d.cat;
+        renderCats(); renderGrid();
+        if (t.tagName === "A") { e.preventDefault(); closeAll(true); $("#products").scrollIntoView({ behavior: "smooth" }); }
+        break;
+      case "view": return openProduct(+d.id);
+      case "quick": return addToCart(+d.id);
+      case "finish": state.modal.finish = d.v; return renderProduct();
+      case "pmqty": state.modal.qty = Math.max(1, state.modal.qty + +d.d); return renderProduct();
+      case "pmadd": addToCart(state.modal.id, state.modal.finish, state.modal.qty); return closeAll();
+      case "qty": return setQty(d.k, +d.d);
+      case "remove": return setQty(d.k, -Infinity);
+      case "uncoupon": state.coupon = ""; save(); return renderCart();
+      case "cart": return open("#cartDrawer");
+      case "checkout": return startCheckout();
+      case "copy": return copyOrder();
+      case "sent": return finishOrder();
     }
   });
+
+  document.addEventListener("submit", (e) => {
+    if (e.target.id === "couponForm") {
+      e.preventDefault();
+      const code = (e.target.code.value || "").trim().toUpperCase();
+      if (!code) return;
+      if (COUPONS[code]) { state.coupon = code; save(); renderCart(); toast(`تم تطبيق ${COUPONS[code].label}`); }
+      else toast("الكود غير صحيح، تأكد منه وحاول مرة أخرى");
+    }
+  });
+
   document.addEventListener("keydown", (e) => e.key === "Escape" && closeAll());
-  $("#search").addEventListener("input", (e) => { state.query = e.target.value; renderGrid(); });
+  $("#search").addEventListener("input", (e) => { state.q = e.target.value; renderGrid(); });
+  $("#sort").addEventListener("change", (e) => { state.sort = e.target.value; renderGrid(); });
   $("#checkoutForm").addEventListener("submit", submitOrder);
 
   // ---------- Init ----------
-  renderStoreInfo();
+  renderInfo();
+  renderStatic();
+  renderCollections();
   renderCats();
   renderGrid();
   renderCart();
