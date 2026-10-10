@@ -6,10 +6,7 @@
        },
        "refero": {
          "type": "http",
-         "url": "https://api.refero.design/mcp",
-         "headers": {
-           "Authorization": "Bearer ${REFERO_API_KEY}"
-         }
+         "url": "https://api.refero.design/mcp"
        }
      }
    }
