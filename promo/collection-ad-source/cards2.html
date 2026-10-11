@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Lora:wght@400;600&family=Mada:wght@300;500;700;900&display=swap">
+<style>
+html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hidden}
+.c{position:absolute;inset:0;overflow:hidden;display:none;color:#fff;font-family:"Mada",sans-serif;text-align:center}
+.c.on{display:block}
+.en{font-family:"Lora",serif;direction:ltr;letter-spacing:.42em;font-size:27px;color:#e2b07f;margin-inline-start:.42em}
+.topscrim{position:absolute;inset:0 0 auto 0;height:720px;background:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,0))}
+.botscrim{position:absolute;inset:auto 0 0 0;height:820px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.78))}
+.ar{font-weight:700;font-size:92px;line-height:1.2;text-shadow:0 4px 40px rgba(0,0,0,.45)}
+.big{font-family:"Lora",serif;font-weight:600;direction:ltr;font-size:150px;letter-spacing:.06em;line-height:1}
+.sub{font-weight:300;font-size:44px;margin-top:14px;opacity:.95}
+/* collection lower-third */
+.lt{position:absolute;inset-inline:80px;bottom:250px;text-align:right}
+.lt .idx{font-family:"Lora",serif;direction:ltr;text-align:right;font-size:30px;letter-spacing:.3em;color:#e2b07f}
+.lt .cat{font-weight:900;font-size:128px;line-height:1.05;margin-top:6px}
+.lt .clr{display:flex;gap:18px;align-items:center;justify-content:flex-start;margin-top:22px;font-weight:500;font-size:40px}
+.lt .clr i{width:38px;height:38px;border-radius:50%;border:3px solid rgba(255,255,255,.85);display:inline-block}
+.lt .rule{height:4px;width:120px;background:#c98a55;margin-top:30px;margin-inline-start:0}
+/* inside title */
+.inside{position:absolute;inset-inline:0;top:190px}
+/* callouts */
+.dot{position:absolute;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:#c98a55;color:#fff;font:600 26px "Lora",serif;display:grid;place-items:center;box-shadow:0 0 0 8px rgba(201,138,85,.28),0 0 30px rgba(201,138,85,.7)}
+.ln{position:absolute;height:3px;background:linear-gradient(90deg,rgba(201,138,85,.2),#c98a55)}
+.cap{position:absolute;inset-inline:60px;bottom:200px;text-align:center}
+.cap .n{font-family:"Lora",serif;font-size:30px;letter-spacing:.3em;color:#e2b07f;direction:ltr}
+.cap .t{font-weight:700;font-size:70px;margin-top:10px;line-height:1.2}
+.cap .d{font-weight:300;font-size:38px;opacity:.9;margin-top:8px}
+/* hook */
+.hook{position:absolute;inset-inline:0;top:330px}
+/* end card */
+#end{background:radial-gradient(70% 45% at 50% 46%,#2a1c12 0%,#0b0907 70%,#060504 100%)}
+.ec{position:absolute;inset:0;display:none;text-align:center;color:#f5f1e8;font-family:"Mada",sans-serif}
+.ec.on{display:block}
+.e1{top:520px}.e1 .h{font-weight:700;font-size:80px;line-height:1.25}
+.e2{top:800px}.wm{font-family:"Lora",serif;font-weight:600;direction:ltr;font-size:112px;letter-spacing:.22em;margin-inline-start:.22em;line-height:1}
+.wm small{display:block;font-weight:400;font-size:30px;letter-spacing:.6em;color:#c98a55;margin-top:26px}
+.gem{color:#c98a55;font-size:30px;margin-bottom:34px}
+.e3{top:1100px}.sig{font-family:"Aref Ruqaa",serif;font-weight:700;font-size:74px;color:#d29a66}
+.e4{top:1265px}.ct{font-family:"Lora",serif;direction:ltr;font-size:40px;line-height:1.75}
+.ct em{font-style:normal;color:#9d8670;font-size:28px;letter-spacing:.24em;margin-inline-end:18px}
+.cta{display:inline-block;margin-top:44px;background:#f5f1e8;color:#1c1611;font-weight:700;font-size:48px;padding:24px 70px;border-radius:999px}
+.shop{margin-top:30px;font-weight:500;font-size:34px;color:#cdb9a3}
+.shop b{font-family:"Lora",serif;font-weight:600;letter-spacing:.08em;color:#fff}
+</style></head><body>
+<div id="root"></div>
+<script>
+const root=document.getElementById('root');
+const add=(id,html,cls='c')=>root.insertAdjacentHTML('beforeend',`<div class="${cls}" id="${id}">${html}</div>`);
+add('hook',`<div class="topscrim"></div><div class="hook"><div class="en">TAKWEEN TABLES</div><div class="ar" style="margin-top:22px">كل طاولة… حكاية</div></div>`);
+add('t01',`<div class="topscrim"></div><div class="hook"><div class="big">TABLE 01</div><div class="sub">توقيع تكوين</div></div>`);
+const COL=[
+ ['01','COFFEE','طاولة قهوة','زمرّدي · ذهبي',['#1f5a43','#c9a24a']],
+ ['02','MAJLIS','طاولة مجلس','سنديان مدخّن · ترافرتين',['#6b4a32','#e3d2b3']],
+ ['03','DINING','طاولة طعام','نيرو ماركينا · بلوط',['#151515','#d2b48c']],
+ ['04','SERVICE','طاولة خدمة','وردي · ذهبي',['#d9a3a0','#c9a24a']],
+ ['05','CONSOLE','طاولة مدخل','كحلي · رخام',['#1b2a4a','#efeae2']],
+ ['06','LIVING','طاولة وسط','ترافرتين · أخضر مريمي',['#e6d5b8','#9cae8b']],
+];
+COL.forEach(([n,en,ar,clr,sw],i)=>add('col'+i,`<div class="botscrim"></div><div class="lt"><div class="idx">${n} / 06 · ${en}</div><div class="cat">${ar}</div><div class="clr">${sw.map(c=>`<i style="background:${c}"></i>`).join('')}<span>${clr}</span></div><div class="rule"></div></div>`));
+add('inq',`<div class="inside" style="top:760px"><div class="en">INSIDE TABLE 01</div><div class="ar" style="font-size:120px;margin-top:20px">ماذا بداخلها؟</div></div>`);
+add('ins',`<div class="topscrim" style="height:520px"></div><div class="inside"><div class="en">ENGINEERED INSIDE</div><div class="ar" style="font-size:78px;margin-top:14px">هندسة من الداخل</div></div>`);
+// callouts: [y, x-edge, title, detail]
+const L=[[565,1000,'رخام كرارا طبيعي','سماكة 20 مم · مصقول ومعالج ضد البقع'],
+ [672,985,'لوح ألمنيوم خلوي','يخفّف الوزن ويحمي الرخام من الكسر'],
+ [772,990,'إطار نحاسي مصقول','خط النحاس اللي يميّز تكوين'],
+ [865,985,'هيكل فولاذي مقوّى','ثبات كامل بدون أي اهتزاز'],
+ [1020,975,'درج تخزين مخفي','سكك بإغلاق هادئ'],
+ [1240,955,'قاعدة جوز مضلّعة','خشب طبيعي مشطّب يدوياً'],
+ [1400,960,'قاعدة نحاس','بأرجل مانعة للانزلاق تحمي الأرضية']];
+const DX=1036;
+L.forEach((_,k)=>{let h='';
+  for(let j=0;j<=k;j++){const [y,x]=L[j];h+=`<div class="ln" style="top:${y-1}px;left:${x}px;width:${DX-x}px;opacity:${j===k?1:.55}"></div><div class="dot" style="top:${y}px;left:${DX}px;opacity:${j===k?1:.6}">${j+1}</div>`}
+  const [,,t,d]=L[k];
+  h+=`<div class="botscrim" style="height:520px"></div><div class="cap"><div class="n">0${k+1} / 07</div><div class="t">${t}</div><div class="d">${d}</div></div>`;
+  add('call'+k,h)});
+add('svc1',`<div class="topscrim"></div><div class="hook" style="top:300px"><div class="en">VIRTUAL 3D PREVIEW</div><div class="ar" style="margin-top:20px">صمّمها 3D<br>قبل التصنيع</div></div>`);
+add('svc2',`<div class="botscrim"></div><div class="cap" style="bottom:260px"><div class="n">MADE TO MEASURE</div><div class="t" style="font-size:80px">بمقاسك… وبلونك</div><div class="d">والخامة اللي تختارها</div></div>`);
+add('end','');
+add('e1',`<div class="h">طاولتك…<br>كما تخيّلتها</div>`,'ec e1');
+add('e2',`<div class="gem">◆</div><div class="wm">TAKWEEN<small>FINE TABLES</small></div>`,'ec e2');
+add('e3',`<div class="sig">بقلم المهندس ناصر</div>`,'ec e3');
+add('e4',`<div class="ct"><em>TIKTOK · INSTAGRAM</em>@takweentables<br><em>PHONE</em>0504688928</div><div class="cta">اطلب طاولتك بمقاسك</div><div class="shop">متوفرة الآن في متجرنا على <b>TikTok Shop</b></div>`,'ec e4');
+window.IDS=[...document.querySelectorAll('.c,.ec')].map(e=>e.id);
+</script>
+</body></html>
