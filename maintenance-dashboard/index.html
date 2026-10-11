@@ -7,295 +7,460 @@
 <meta name="description" content="لوحة تحليلية تفاعلية للتكاليف الشهرية لإصلاح الآليات - الإدارة العامة للصيانة">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
 <style>
-/* Layout: operations console — header + filter rail, KPI strip, then two-column analytic grid that collapses to one column on phones */
+/* Layout: petrol sidebar (right, RTL) + calm mist canvas; hero cost card leads, then sections: overview → regions (tile map) → fleet & faults → records → data */
 :root{
-  --bg:#f3f5f8; --surface:#ffffff; --surface-2:#f8fafc; --ink:#13202d; --ink-2:#4a5868; --muted:#778594; --line:#dfe5ec; --line-2:#eef2f6;
-  --accent:#1d5fa8; --accent-ink:#ffffff; --accent-soft:#e4eefa;
-  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --heat:42,120,214;
-  --good:#1a7f4b; --good-bg:#e3f4ea; --warn:#9a5d00; --warn-bg:#fdf0d8; --crit:#b8322a; --crit-bg:#fbe5e3;
-  --plate-bg:#ffffff; --plate-line:#13202d;
-  --f-display:"Readex Pro","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --bg:#edf1f1; --surface:#ffffff; --surface-2:#f4f7f7; --ink:#15282e; --ink-2:#4f646a; --muted:#8a9b9f; --line:#e1e8e8; --line-2:#edf2f2;
+  --side:#0f2f37; --side-2:#163e48; --side-ink:#dbe9eb; --side-muted:#86a5ab;
+  --accent:#1d6f8a; --accent-rgb:29,111,138; --accent-soft:#e2eef1; --sand:#c98545; --sand-rgb:201,133,69; --sand-soft:#f7ede2;
+  --hero-a:#113843; --hero-b:#1f6273; --hero-ink:#eaf4f5; --hero-muted:#a9c8cd;
+  --good:#2e8562; --good-bg:#e1f1e9; --bad:#b0533f; --bad-bg:#f7e5e0; --warn:#9a6a1f; --warn-bg:#f6ecd9;
+  --shadow:0 1px 1px rgba(15,47,55,.04),0 8px 24px -12px rgba(15,47,55,.14);
+  --f-display:"Alexandria","IBM Plex Sans Arabic",Tahoma,sans-serif;
   --f-body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif;
-  --r:10px; --shadow:0 1px 2px rgba(19,32,45,.05),0 2px 8px rgba(19,32,45,.04);
+  --r:18px; --r-sm:12px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0e141b; --surface:#16202a; --surface-2:#1a2531; --ink:#e8edf2; --ink-2:#aab6c3; --muted:#7f8c99; --line:#2a3644; --line-2:#212c38;
-  --accent:#5598e7; --accent-ink:#0e141b; --accent-soft:#19293b;
-  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --heat:85,152,231;
-  --good:#4cc283; --good-bg:#16301f; --warn:#e3a33a; --warn-bg:#33270f; --crit:#f07a70; --crit-bg:#3a1c1a;
-  --plate-bg:#e8edf2; --plate-line:#0e141b; --shadow:none; color-scheme:dark}}
+  --bg:#0a1518; --surface:#102026; --surface-2:#14282f; --ink:#e3eef0; --ink-2:#a2b6ba; --muted:#6d8589; --line:#1d343b; --line-2:#172d34;
+  --side:#071114; --side-2:#0f2329; --side-ink:#d3e3e6; --side-muted:#6f9097;
+  --accent:#3593ad; --accent-rgb:53,147,173; --accent-soft:#132f37; --sand:#c98240; --sand-rgb:201,130,64; --sand-soft:#2e2318;
+  --hero-a:#0d313a; --hero-b:#165565; --hero-ink:#e6f2f4; --hero-muted:#93b8be;
+  --good:#5bbf92; --good-bg:#12302a; --bad:#e08a77; --bad-bg:#35201b; --warn:#ddb064; --warn-bg:#30260f;
+  --shadow:0 1px 0 rgba(255,255,255,.02); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0e141b; --surface:#16202a; --surface-2:#1a2531; --ink:#e8edf2; --ink-2:#aab6c3; --muted:#7f8c99; --line:#2a3644; --line-2:#212c38;
-  --accent:#5598e7; --accent-ink:#0e141b; --accent-soft:#19293b;
-  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --heat:85,152,231;
-  --good:#4cc283; --good-bg:#16301f; --warn:#e3a33a; --warn-bg:#33270f; --crit:#f07a70; --crit-bg:#3a1c1a;
-  --plate-bg:#e8edf2; --plate-line:#0e141b; --shadow:none; color-scheme:dark}
+  --bg:#0a1518; --surface:#102026; --surface-2:#14282f; --ink:#e3eef0; --ink-2:#a2b6ba; --muted:#6d8589; --line:#1d343b; --line-2:#172d34;
+  --side:#071114; --side-2:#0f2329; --side-ink:#d3e3e6; --side-muted:#6f9097;
+  --accent:#3593ad; --accent-rgb:53,147,173; --accent-soft:#132f37; --sand:#c98240; --sand-rgb:201,130,64; --sand-soft:#2e2318;
+  --hero-a:#0d313a; --hero-b:#165565; --hero-ink:#e6f2f4; --hero-muted:#93b8be;
+  --good:#5bbf92; --good-bg:#12302a; --bad:#e08a77; --bad-bg:#35201b; --warn:#ddb064; --warn-bg:#30260f;
+  --shadow:0 1px 0 rgba(255,255,255,.02); color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.55;direction:rtl}
-.wrap{max-width:1360px;margin:0 auto;padding-inline:20px;padding-block:18px 48px;display:flex;flex-direction:column;gap:18px}
-h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;font-weight:600}
-h1{font-size:1.45rem;letter-spacing:-.01em}
-h2{font-size:1.02rem}
-.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.6;direction:rtl;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;font-weight:600;letter-spacing:-.005em}
+.num,.fig{font-family:var(--f-display);font-variant-numeric:tabular-nums}
 button,select,input{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:500;white-space:nowrap}
-.btn:hover{border-color:var(--accent)}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.btn.primary:hover{filter:brightness(1.08)}
-.btn.ghost{background:transparent}
-.btn svg{width:16px;height:16px;flex:none}
-.btn:disabled{opacity:.5;cursor:not-allowed}
+svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
-/* header */
-.top{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between}
-.top .eyebrow{font-size:.78rem;color:var(--muted);letter-spacing:.02em;font-weight:500}
+/* shell */
+.app{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100%}
+.side{background:var(--side);color:var(--side-ink);position:sticky;top:env(safe-area-inset-top,0px);height:100vh;display:flex;flex-direction:column;gap:22px;padding:24px 18px}
+.brand{display:flex;gap:12px;align-items:center}
+.brand .mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(140deg,var(--accent),var(--sand));display:grid;place-items:center;color:#fff}
+.brand .mark svg{width:22px;height:22px}
+.brand b{font-family:var(--f-display);font-weight:600;font-size:.98rem;display:block;line-height:1.3}
+.brand span{font-size:.74rem;color:var(--side-muted)}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav .cap{font-size:.7rem;color:var(--side-muted);letter-spacing:.06em;padding:0 10px 6px}
+.nav a{display:flex;align-items:center;gap:12px;color:var(--side-ink);text-decoration:none;padding:10px 12px;border-radius:10px;font-size:.9rem;opacity:.82}
+.nav a:hover,.nav a.on{background:var(--side-2);opacity:1}
+.nav a.on{box-shadow:inset -3px 0 0 var(--sand)}
+.side .cta{margin-top:auto;background:var(--side-2);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.side .cta p{margin:0;font-size:.8rem;color:var(--side-muted);line-height:1.5}
+.side .cta b{font-family:var(--f-display);font-weight:500;font-size:.9rem}
+.sbtn{display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;padding:10px;cursor:pointer;font-weight:500;font-size:.86rem}
+.sbtn.pri{background:var(--sand);color:#1d1408}
+.sbtn.alt{background:transparent;color:var(--side-ink);border:1px solid rgba(255,255,255,.14)}
+.sbtn:hover{filter:brightness(1.07)}
+.main{min-width:0;padding-inline:32px;padding-block:26px 64px;display:flex;flex-direction:column;gap:28px}
+
+/* topbar */
+.top{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:flex-end;justify-content:space-between}
+.crumb{font-size:.78rem;color:var(--muted);display:flex;gap:8px;align-items:center}
+.crumb i{width:4px;height:4px;border-radius:50%;background:var(--muted);display:inline-block}
+.top h1{font-size:1.7rem;margin-top:4px}
 .top .sub{color:var(--ink-2);font-size:.9rem;margin-top:2px}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;gap:2px;box-shadow:var(--shadow)}
+.seg button{border:0;background:transparent;padding:7px 14px;border-radius:9px;cursor:pointer;font-size:.85rem;color:var(--ink-2);display:inline-flex;gap:6px;align-items:center}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff;box-shadow:0 4px 12px -4px rgba(var(--accent-rgb),.6)}
+.seg button .tag{font-size:.64rem;opacity:.8;background:rgba(127,127,127,.16);border-radius:4px;padding:0 5px}
+.seg.sm button{padding:4px 10px;font-size:.78rem}
+.selw{position:relative;display:inline-flex;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding-inline:12px 4px}
+.selw svg{color:var(--muted)}
+.selw select{border:0;background:transparent;padding:10px 8px;outline:none;cursor:pointer;min-width:150px}
 
-/* filter rail */
-.rail{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;box-shadow:var(--shadow)}
-.rail label.lbl{font-size:.78rem;color:var(--muted);font-weight:500}
-.seg{display:flex;flex-wrap:wrap;gap:4px;min-width:0}
-.seg button{border:1px solid transparent;background:var(--surface-2);padding:6px 12px;border-radius:999px;cursor:pointer;font-size:.86rem;display:inline-flex;align-items:center;gap:6px}
-.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
-.seg button .tag{font-size:.68rem;opacity:.75;border:1px solid currentColor;border-radius:4px;padding:0 4px}
-.fgroup{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap}
-select{background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
-
-/* KPIs */
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
-.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:flex;flex-direction:column;gap:4px;box-shadow:var(--shadow);min-width:0}
-.kpi .k{font-size:.8rem;color:var(--ink-2);font-weight:500}
-.kpi .v{font-family:var(--f-display);font-size:1.6rem;font-weight:600;line-height:1.2}
-.kpi .v small{font-size:.8rem;color:var(--muted);font-weight:500;margin-inline-start:4px}
-.kpi .d{font-size:.78rem;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.pill{display:inline-flex;align-items:center;gap:3px;border-radius:999px;padding:1px 8px;font-size:.74rem;font-weight:600}
-.pill.up{background:var(--crit-bg);color:var(--crit)}
-.pill.down{background:var(--good-bg);color:var(--good)}
-.pill.flat{background:var(--line-2);color:var(--ink-2)}
-.pill.warn{background:var(--warn-bg);color:var(--warn)}
-.meter{height:6px;border-radius:3px;background:var(--line-2);overflow:hidden;display:flex;gap:2px;margin-top:4px}
-.meter i{display:block;height:100%}
+/* hero row */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1.85fr);gap:18px}
+.herocard{position:relative;overflow:hidden;border-radius:var(--r);padding:24px 26px 18px;color:var(--hero-ink);background:radial-gradient(120% 140% at 0% 100%,rgba(var(--sand-rgb),.32),transparent 55%),linear-gradient(150deg,var(--hero-a),var(--hero-b));display:flex;flex-direction:column;gap:6px;min-height:270px}
+.herocard::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:18px 18px;mask-image:linear-gradient(to bottom,#000,transparent 70%);pointer-events:none}
+.herocard .lab{font-size:.84rem;color:var(--hero-muted);display:flex;align-items:center;gap:8px}
+.herocard .big{font-family:var(--f-display);font-weight:600;font-size:clamp(2.1rem,3.6vw,2.9rem);line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.herocard .big small{font-size:.9rem;font-weight:400;color:var(--hero-muted);margin-inline-start:8px;letter-spacing:0}
+.herocard .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:.82rem;color:var(--hero-muted)}
+.herocard .spark{position:relative;height:96px;margin-top:auto;z-index:1}
+.chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:2px 10px;font-size:.75rem;font-weight:600;font-family:var(--f-display)}
+.chip.up{background:var(--bad-bg);color:var(--bad)}
+.chip.down{background:var(--good-bg);color:var(--good)}
+.chip.flat{background:var(--line-2);color:var(--ink-2)}
+.chip.warn{background:var(--warn-bg);color:var(--warn)}
+.herocard .chip{background:rgba(255,255,255,.12);color:var(--hero-ink)}
+.kgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;display:grid;grid-template-columns:1fr auto;gap:4px 14px;align-items:center;box-shadow:var(--shadow);min-width:0}
+.kpi .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);grid-row:1/3;grid-column:2}
+.kpi .ic.s{background:var(--sand-soft);color:var(--sand)}
+.kpi .k{font-size:.82rem;color:var(--ink-2)}
+.kpi .v{font-family:var(--f-display);font-size:1.7rem;font-weight:600;line-height:1.2;font-variant-numeric:tabular-nums}
+.kpi .v small{font-size:.78rem;color:var(--muted);font-weight:400;margin-inline-start:4px}
+.kpi .d{grid-column:1/-1;font-size:.78rem;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px;padding-top:10px;border-top:1px dashed var(--line)}
+.ring{display:flex;align-items:center;gap:10px}
+.ring svg{width:40px;height:40px;transform:rotate(-90deg)}
+.bar2{flex:1;height:8px;border-radius:4px;background:var(--line-2);display:flex;gap:2px;overflow:hidden;min-width:60px}
+.bar2 i{display:block;height:100%}
 
 /* insights */
-.insights{background:var(--accent-soft);border-radius:var(--r);padding:14px 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px 24px}
-.insights h2{grid-column:1/-1;font-size:.9rem;color:var(--accent)}
-.insights p{margin:0;font-size:.9rem;color:var(--ink);padding-inline-start:14px;position:relative}
-.insights p::before{content:"";position:absolute;inset-inline-start:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.insights b{font-weight:600}
+.ins{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.ins .c{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;box-shadow:var(--shadow)}
+.ins .c .dot{width:32px;height:32px;border-radius:10px;flex:none;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.ins .c.s .dot{background:var(--sand-soft);color:var(--sand)}
+.ins .c p{margin:0;font-size:.86rem;color:var(--ink-2);line-height:1.55}
+.ins .c b{color:var(--ink);font-weight:600}
 
-/* grid & panels */
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-.panel{grid-column:span 6;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0;box-shadow:var(--shadow)}
-.panel.w12{grid-column:1/-1}.panel.w7{grid-column:span 7}.panel.w5{grid-column:span 5}.panel.w8{grid-column:span 8}.panel.w4{grid-column:span 4}
-.ph{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
-.ph .hint{font-size:.78rem;color:var(--muted);margin-top:2px}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--ink-2)}
-.legend span{display:inline-flex;align-items:center;gap:6px}
-.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
-.chart{position:relative;height:280px;min-width:0}
-.chart.tall{height:380px}
-.note{font-size:.8rem;color:var(--warn);background:var(--warn-bg);border-radius:8px;padding:6px 10px}
-@media (max-width:980px){.panel,.panel.w7,.panel.w5,.panel.w8,.panel.w4{grid-column:1/-1}}
+/* sections */
+.sec{display:flex;flex-direction:column;gap:16px;scroll-margin-top:16px}
+.sech{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.sech h2{font-size:1.15rem}
+.sech .ln{flex:1;height:1px;background:var(--line);min-width:40px}
+.sech span{font-size:.8rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px}
+.card{grid-column:span 6;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;display:flex;flex-direction:column;gap:14px;min-width:0;box-shadow:var(--shadow)}
+.c12{grid-column:1/-1}.c8{grid-column:span 8}.c7{grid-column:span 7}.c5{grid-column:span 5}.c4{grid-column:span 4}
+.ch{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.ch h3{font-size:1rem;font-weight:600}
+.ch .h{font-size:.78rem;color:var(--muted);margin-top:3px}
+.lg{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--ink-2)}
+.lg span{display:inline-flex;align-items:center;gap:7px}
+.lg i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chart{position:relative;height:300px;min-width:0}
+.chart.t{height:400px}.chart.s{height:250px}
+.note{font-size:.82rem;color:var(--warn);background:var(--warn-bg);border-radius:var(--r-sm);padding:10px 14px;display:flex;gap:10px;align-items:center}
+
+/* donut */
+.donut{display:grid;grid-template-columns:1fr;gap:14px;align-items:center}
+.donut .cv{position:relative;height:210px}
+.donut .center{position:absolute;inset:0;display:grid;place-items:center;text-align:center;pointer-events:none}
+.donut .center b{font-family:var(--f-display);font-size:1.7rem;font-weight:600;display:block;line-height:1.1}
+.donut .center span{font-size:.76rem;color:var(--muted)}
+.dl{display:flex;flex-direction:column;gap:8px}
+.dl div{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;align-items:center;font-size:.85rem;padding:8px 12px;border-radius:10px;background:var(--surface-2)}
+.dl i{width:10px;height:10px;border-radius:3px}
+.dl .p{color:var(--muted);font-size:.78rem}
+
+/* tile map */
+.mapw{display:flex;flex-direction:column;gap:12px}
+.tmap{direction:ltr;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(6,minmax(64px,auto));gap:8px}
+.tile{direction:rtl;border:0;border-radius:14px;padding:9px 10px;text-align:right;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;gap:4px;min-width:0;transition:transform .15s ease,box-shadow .15s ease;position:relative}
+.tile:hover{transform:translateY(-2px);box-shadow:0 8px 18px -10px rgba(15,47,55,.5)}
+.tile .n{font-size:.74rem;line-height:1.25;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.tile .v{font-family:var(--f-display);font-weight:600;font-size:.95rem;font-variant-numeric:tabular-nums}
+.tile.sel{outline:2.5px solid var(--sand);outline-offset:2px}
+.tile.dim{opacity:.4}
+.scale{display:flex;align-items:center;gap:10px;font-size:.74rem;color:var(--muted)}
+.scale i{flex:1;height:8px;border-radius:4px;background:linear-gradient(to left,rgba(var(--accent-rgb),.08),rgba(var(--accent-rgb),1))}
 
 /* tables */
-.tscroll{overflow-x:auto;min-width:0;border:1px solid var(--line-2);border-radius:8px}
-table{border-collapse:collapse;width:100%;font-size:.85rem}
-th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line-2);white-space:nowrap}
-th{background:var(--surface-2);color:var(--ink-2);font-weight:600;font-size:.78rem;position:sticky;top:0}
-th.sort{cursor:pointer;user-select:none}
-th.sort::after{content:" ↕";opacity:.4}
-th.sort.asc::after{content:" ↑";opacity:1}th.sort.desc::after{content:" ↓";opacity:1}
+.tw{overflow-x:auto;min-width:0;border-radius:var(--r-sm);border:1px solid var(--line-2)}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:.85rem}
+th,td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--line-2);white-space:nowrap}
+th{background:var(--surface-2);color:var(--muted);font-weight:500;font-size:.76rem;position:sticky;top:0;z-index:1}
 td.n,th.n{text-align:left;font-variant-numeric:tabular-nums}
-td.wrap{white-space:normal;min-width:260px;max-width:520px;color:var(--ink-2)}
-tr.total td{font-weight:700;background:var(--surface-2)}
-tbody tr:hover td{background:var(--line-2)}
-tr.clickable{cursor:pointer}
-.heat td.h{text-align:left;font-variant-numeric:tabular-nums}
-.plate{display:inline-flex;align-items:center;direction:rtl;border:1.5px solid var(--plate-line);background:var(--plate-bg);color:#13202d;border-radius:4px;padding:0 6px;font-weight:600;font-size:.8rem;letter-spacing:.04em;line-height:1.6}
+td.n{font-family:var(--f-display);font-size:.84rem}
+th.sort{cursor:pointer;user-select:none}
+th.sort::after{content:" ⇅";opacity:.4}
+th.sort.asc::after{content:" ↑";opacity:1}th.sort.desc::after{content:" ↓";opacity:1}
+td.wrap{white-space:normal;min-width:280px;max-width:560px;color:var(--ink-2);line-height:1.6}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--surface-2)}
+tr.clk{cursor:pointer}
+tr.sel td{background:var(--accent-soft)}
+tr.total td{font-weight:600;background:var(--surface-2);border-top:1px solid var(--line)}
+.share{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.share i{display:block;height:6px;border-radius:3px;background:var(--accent);min-width:2px}
+.heat td.h{text-align:center;font-family:var(--f-display);font-variant-numeric:tabular-nums;font-size:.82rem;border-bottom:2px solid var(--surface);border-left:2px solid var(--surface)}
 .zero{color:var(--muted)}
-.badge{display:inline-block;font-size:.72rem;border-radius:4px;padding:1px 6px;background:var(--line-2);color:var(--ink-2)}
+.plate{display:inline-flex;align-items:stretch;border:1.5px solid #253c43;border-radius:5px;overflow:hidden;background:#fbfdfd;color:#15282e;font-family:var(--f-display);font-weight:500;font-size:.76rem;line-height:1.7;direction:rtl}
+.plate span{padding:0 7px;letter-spacing:.05em}
+.plate em{font-style:normal;background:#1d6f8a;color:#fff;font-size:.56rem;padding:0 3px;display:grid;place-items:center;letter-spacing:.02em}
+.badge{display:inline-block;font-size:.7rem;border-radius:6px;padding:2px 8px;background:var(--line-2);color:var(--ink-2)}
+.badge.s{background:var(--sand-soft);color:var(--sand)}
+.badge.a{background:var(--accent-soft);color:var(--accent)}
 .tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.tools input[type=search]{background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:7px 10px;min-width:0;width:260px;max-width:100%}
-.pager{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:.82rem;color:var(--ink-2)}
-.rank{display:flex;flex-direction:column}
-.rank .row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line-2)}
-.rank .row:last-child{border-bottom:0}
-.rank .i{width:22px;height:22px;border-radius:6px;background:var(--surface-2);display:grid;place-items:center;font-size:.75rem;color:var(--ink-2);font-weight:600}
-.rank .t{min-width:0}
-.rank .t div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rank .t .s{font-size:.78rem;color:var(--muted)}
-.rank .c{font-weight:600;font-variant-numeric:tabular-nums}
+.inp{display:flex;align-items:center;gap:8px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding-inline:10px;min-width:0}
+.inp input{border:0;background:transparent;padding:9px 0;outline:none;width:240px;max-width:100%;min-width:0}
+.inp svg{color:var(--muted)}
+.tools select{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:9px 10px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);padding:9px 14px;border-radius:10px;cursor:pointer;font-weight:500;font-size:.85rem;white-space:nowrap}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.pri:hover{filter:brightness(1.08);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.pager{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
 
-/* months manager */
-.mlist{display:flex;flex-direction:column;gap:6px}
-.mitem{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:8px 10px;border:1px solid var(--line-2);border-radius:8px;flex-wrap:wrap}
-.mitem .mt{font-weight:600}
+/* ranking */
+.rank{display:flex;flex-direction:column}
+.rank .row{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line-2)}
+.rank .row:last-child{border-bottom:0}
+.rank .i{width:30px;height:30px;border-radius:9px;background:var(--surface-2);display:grid;place-items:center;font-family:var(--f-display);font-size:.8rem;color:var(--ink-2)}
+.rank .row:nth-child(-n+3) .i{background:var(--sand-soft);color:var(--sand);font-weight:600}
+.rank .t{min-width:0;display:flex;flex-direction:column;gap:3px}
+.rank .t .a{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rank .t .s{font-size:.77rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank .c{font-family:var(--f-display);font-weight:600;font-variant-numeric:tabular-nums;text-align:left}
+.rank .c small{display:block;font-weight:400;font-size:.7rem;color:var(--muted)}
+
+/* data management */
+.mlist{display:flex;flex-direction:column;gap:10px}
+.mitem{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:12px 14px;border:1px solid var(--line-2);border-radius:var(--r-sm);background:var(--surface-2);flex-wrap:wrap}
+.mitem .mi{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);flex:none}
+.mitem .mi.s{background:var(--sand-soft);color:var(--sand)}
+.mitem .mt{font-family:var(--f-display);font-weight:500;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .mitem .ms{font-size:.78rem;color:var(--muted)}
+.mitem>div:first-child{display:flex;gap:12px;align-items:center;min-width:0}
+.uploadcard{border:1.5px dashed var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;background:linear-gradient(180deg,var(--surface-2),var(--surface));justify-content:center}
+.uploadcard .bi{width:56px;height:56px;border-radius:16px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.uploadcard .bi svg{width:26px;height:26px}
+.uploadcard p{margin:0;color:var(--muted);font-size:.84rem;max-width:42ch}
 
 /* modal */
-.modal{position:fixed;inset:0;background:rgba(10,16,24,.55);display:flex;align-items:flex-start;justify-content:center;padding:max(24px,env(safe-area-inset-top,0px)) 16px 24px;z-index:50;overflow-y:auto}
-.dialog{background:var(--surface);border:1px solid var(--line);border-radius:14px;width:100%;max-width:720px;padding:20px;display:flex;flex-direction:column;gap:14px}
-.dialog .x{margin-inline-start:auto}
-.drop{border:2px dashed var(--line);border-radius:12px;padding:26px 16px;text-align:center;display:flex;flex-direction:column;gap:8px;align-items:center;background:var(--surface-2);cursor:pointer}
-.drop.over{border-color:var(--accent);background:var(--accent-soft)}
-.drop svg{width:34px;height:34px;color:var(--accent)}
+.modal{position:fixed;inset:0;background:rgba(7,20,24,.55);backdrop-filter:blur(4px);display:flex;align-items:flex-start;justify-content:center;padding:max(28px,env(safe-area-inset-top,0px)) 16px 28px;z-index:50;overflow-y:auto}
+.dialog{background:var(--surface);border:1px solid var(--line);border-radius:22px;width:100%;max-width:740px;padding:24px;display:flex;flex-direction:column;gap:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.35)}
+.dialog .x{margin-inline-start:auto;border:0;background:var(--surface-2);width:34px;height:34px;border-radius:10px;cursor:pointer}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;font-size:.82rem;color:var(--ink-2)}
+.steps div{background:var(--surface-2);border-radius:var(--r-sm);padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.steps b{color:var(--ink);font-family:var(--f-display);font-weight:500;display:flex;gap:8px;align-items:center}
+.steps b em{font-style:normal;width:22px;height:22px;border-radius:7px;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:.72rem}
+.drop{border:2px dashed var(--line);border-radius:var(--r);padding:30px 16px;text-align:center;display:flex;flex-direction:column;gap:8px;align-items:center;background:var(--surface-2);cursor:pointer;transition:border-color .15s,background .15s}
+.drop:hover,.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.drop svg{width:36px;height:36px;color:var(--accent)}
 .drop .s{font-size:.8rem;color:var(--muted)}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;font-size:.82rem;color:var(--ink-2)}
-.steps div{background:var(--surface-2);border-radius:8px;padding:10px}
-.steps b{display:block;color:var(--ink);font-size:.86rem;margin-bottom:2px}
-.formrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.formrow label{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--ink-2)}
-.formrow select,.formrow input{background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
-.preview{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
-.preview div{background:var(--surface-2);border-radius:8px;padding:8px 10px}
-.preview .k{font-size:.74rem;color:var(--muted)}
-.preview .v{font-weight:600;font-variant-numeric:tabular-nums}
-.msg{font-size:.84rem;border-radius:8px;padding:8px 12px}
-.msg.err{background:var(--crit-bg);color:var(--crit)}
+.formrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.formrow label{display:flex;flex-direction:column;gap:6px;font-size:.8rem;color:var(--ink-2)}
+.formrow select,.formrow input{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.preview{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.preview div{background:var(--surface-2);border-radius:10px;padding:10px 12px}
+.preview .k{font-size:.72rem;color:var(--muted)}
+.preview .v{font-family:var(--f-display);font-weight:600;font-variant-numeric:tabular-nums}
+.msg{font-size:.84rem;border-radius:10px;padding:10px 14px}
+.msg.err{background:var(--bad-bg);color:var(--bad)}
 .msg.wrn{background:var(--warn-bg);color:var(--warn)}
 .msg.ok{background:var(--good-bg);color:var(--good)}
-.msg ul{margin:4px 0 0;padding-inline-start:18px}
 .foot{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
-.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));inset-inline-start:50%;transform:translateX(50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:.88rem;z-index:60;max-width:calc(100% - 32px)}
-.empty{color:var(--muted);font-size:.85rem;padding:20px 0;text-align:center}
-@media (max-width:560px){.wrap{padding-inline:16px}h1{font-size:1.2rem}.kpi .v{font-size:1.35rem}.chart{height:240px}.chart.tall{height:420px}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.toast{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--side);color:var(--side-ink);padding:12px 18px;border-radius:12px;font-size:.88rem;z-index:60;max-width:calc(100% - 32px);box-shadow:0 12px 30px -10px rgba(0,0,0,.4)}
+.empty{color:var(--muted);font-size:.85rem;padding:24px 0;text-align:center}
+
+@media (max-width:1180px){.hero{grid-template-columns:1fr}.c8,.c7,.c5,.c4,.card{grid-column:1/-1}}
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;min-width:0;align-items:center;padding:14px 16px;gap:12px}
+  .nav{flex-direction:row;overflow-x:auto;width:100%;order:3}.nav .cap{display:none}.nav a{white-space:nowrap;padding:8px 10px}.nav a.on{box-shadow:inset 0 -2px 0 var(--sand)}
+  .side .cta{margin:0 auto 0 0;background:none;padding:0;flex-direction:row}.side .cta p,.side .cta b{display:none}
+  .main{padding-inline:16px}
+}
+@media (max-width:560px){.kgrid{grid-template-columns:1fr}.top h1{font-size:1.3rem}.chart{height:260px}.chart.t{height:440px}.selw select{min-width:0}.side .cta .sbtn span{display:none}.tmap{grid-template-rows:repeat(6,minmax(58px,auto));gap:6px}.tile .v{font-size:.82rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 
 
-<div class="wrap">
-  <header class="top">
-    <div>
-      <div class="eyebrow">الإدارة العامة للصيانة · شعب الصيانة بإدارات الشؤون الفنية بالمناطق</div>
-      <h1>لوحة التكاليف الشهرية لإصلاح الآليات</h1>
-      <div class="sub" id="periodLabel"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.4 2.4-2.1-.6-.6-2.1z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6z"/><path d="M9 4v14M15 6v14"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r=".8"/><circle cx="4" cy="12" r=".8"/><circle cx="4" cy="18" r=".8"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v13c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-13M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 16V4m0 0-4.5 4.5M12 4l4.5 4.5M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12m0 0-4.5-4.5M12 16l4.5-4.5M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></symbol>
+  <symbol id="i-coin" viewBox="0 0 24 24"><ellipse cx="12" cy="7" rx="7" ry="3"/><path d="M5 7v5c0 1.7 3.1 3 7 3s7-1.3 7-3V7M5 12v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5 2.8 19.5h18.4z"/><path d="M12 10v4.5M12 17.2v.1"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m8.2 12.2 2.6 2.6 5-5.2"/></symbol>
+  <symbol id="i-avg" viewBox="0 0 24 24"><path d="M4 19.5h16M6.5 16V11M11 16V6M15.5 16v-7M20 16v-3"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11V9a3 3 0 0 1 3-3h12l-3-3M20 13v2a3 3 0 0 1-3 3H5l3 3"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3.5 16.5 5.5-5.5 4 4 7.5-7.5"/><path d="M15 7.5h5.5V13"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5M9 13.5l2 2 4-4"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 7h15M10 11v6M14 11v6M6 7l1 12.5A1.5 1.5 0 0 0 8.5 21h7a1.5 1.5 0 0 0 1.5-1.5L18 7M9 7V4.5h6V7"/></symbol>
+</svg>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <div class="mark"><svg class="i" style="stroke:#fff"><use href="#i-wrench"/></svg></div>
+      <div><b>الإدارة العامة للصيانة</b><span>تحليل تكاليف الإصلاح</span></div>
     </div>
-    <div class="actions">
-      <button class="btn ghost" id="btnTpl" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>تحميل نموذج Excel</button>
-      <button class="btn primary" id="btnUpload" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9m0 0l-4 4m4-4l4 4M4 3h16"/></svg>رفع ملف شهري</button>
+    <nav class="nav" aria-label="أقسام اللوحة">
+      <div class="cap">الأقسام</div>
+      <a href="#overview" class="on"><svg class="i"><use href="#i-grid"/></svg>نظرة عامة</a>
+      <a href="#regions"><svg class="i"><use href="#i-map"/></svg>المناطق</a>
+      <a href="#fleet"><svg class="i"><use href="#i-truck"/></svg>الآليات والأعطال</a>
+      <a href="#records"><svg class="i"><use href="#i-list"/></svg>السجل التفصيلي</a>
+      <a href="#data"><svg class="i"><use href="#i-db"/></svg>إدارة البيانات</a>
+    </nav>
+    <div class="cta">
+      <b>إضافة شهر جديد</b>
+      <p>عبّئ نموذج Excel الشهري ثم ارفعه ليُحلل فوراً.</p>
+      <button class="sbtn pri" id="btnUpload" type="button"><svg class="i"><use href="#i-up"/></svg><span>رفع ملف شهري</span></button>
+      <button class="sbtn alt" id="btnTpl" type="button"><svg class="i"><use href="#i-down"/></svg><span>تحميل النموذج</span></button>
     </div>
-  </header>
+  </aside>
 
-  <section class="rail" aria-label="عوامل التصفية">
-    <div class="fgroup" style="flex:1 1 420px">
-      <label class="lbl">الفترة</label>
-      <div class="seg" id="monthSeg" role="group" aria-label="الفترة"></div>
-    </div>
-    <div class="fgroup">
-      <label class="lbl" for="regionSel">المنطقة</label>
-      <select id="regionSel"></select>
-    </div>
-  </section>
+  <main class="main">
+    <header class="top" id="overview">
+      <div>
+        <div class="crumb">شعب الصيانة بإدارات الشؤون الفنية بالمناطق <i></i> <span id="periodShort"></span></div>
+        <h1>التكاليف الشهرية لإصلاح الآليات</h1>
+        <div class="sub" id="periodLabel"></div>
+      </div>
+      <div class="filters">
+        <div class="seg" id="monthSeg" role="group" aria-label="الفترة"></div>
+        <label class="selw" for="regionSel"><svg class="i"><use href="#i-pin"/></svg><select id="regionSel" aria-label="المنطقة"></select></label>
+      </div>
+    </header>
 
-  <section class="kpis" id="kpis" aria-label="المؤشرات الرئيسية"></section>
-  <section class="insights" id="insights" aria-label="قراءة سريعة"></section>
+    <section class="hero" aria-label="المؤشرات الرئيسية">
+      <div class="herocard" id="heroCard"></div>
+      <div class="kgrid" id="kpis"></div>
+    </section>
 
-  <section class="grid">
-    <article class="panel w7">
-      <div class="ph"><div><h2>إجمالي تكاليف الإصلاح شهرياً</h2><div class="hint">بالريال · الشهر المحدد مظلل · اضغط على عمود لاختيار الشهر</div></div></div>
-      <div class="chart"><canvas id="cTrend" aria-label="إجمالي التكاليف شهرياً" role="img"></canvas></div>
-    </article>
-    <article class="panel w5">
-      <div class="ph"><div><h2>الآليات التي تم إصلاحها شهرياً</h2><div class="hint">عدد الآليات حسب وجود تكلفة</div></div>
-        <div class="legend"><span><i style="background:var(--s1)"></i>بتكاليف</span><span><i style="background:var(--s2)"></i>بدون تكاليف</span></div></div>
-      <div class="chart"><canvas id="cCount" aria-label="عدد الآليات شهرياً" role="img"></canvas></div>
-    </article>
+    <section class="ins" id="insights" aria-label="مؤشرات لافتة"></section>
 
-    <article class="panel w7">
-      <div class="ph"><div><h2>التكاليف حسب المنطقة</h2><div class="hint">مرتبة تنازلياً · اضغط على منطقة لتصفية اللوحة</div></div></div>
-      <div class="chart tall"><canvas id="cRegion" aria-label="التكاليف حسب المنطقة" role="img"></canvas></div>
-    </article>
-    <article class="panel w5">
-      <div class="ph"><div><h2>مصفوفة المناطق × الأشهر</h2><div class="hint">التكلفة بالألف ريال · شدة اللون تمثل الحجم</div></div></div>
-      <div class="tscroll"><table class="heat" id="tHeat"></table></div>
-    </article>
+    <section class="sec">
+      <div class="sech"><h2>الاتجاه الشهري</h2><span class="ln"></span><span>اضغط على عمود لاختيار الشهر</span></div>
+      <div class="grid">
+        <article class="card c8">
+          <div class="ch"><div><h3>إجمالي تكاليف الإصلاح</h3><div class="h">بالريال السعودي لكل شهر هجري</div></div></div>
+          <div class="chart"><canvas id="cTrend" role="img" aria-label="إجمالي التكاليف شهرياً"></canvas></div>
+        </article>
+        <article class="card c4">
+          <div class="ch"><div><h3>تركيبة الإصلاحات</h3><div class="h">بتكاليف مقابل بدون تكاليف</div></div></div>
+          <div class="donut"><div class="cv"><canvas id="cDonut" role="img" aria-label="نسبة الإصلاحات بتكاليف وبدون تكاليف"></canvas><div class="center" id="donutC"></div></div><div class="dl" id="donutL"></div></div>
+        </article>
+        <article class="card c12">
+          <div class="ch"><div><h3>الآليات التي تم إصلاحها شهرياً</h3><div class="h">عدد الآليات حسب وجود تكلفة</div></div>
+            <div class="lg"><span><i style="background:var(--accent)"></i>بتكاليف</span><span><i style="background:var(--sand)"></i>بدون تكاليف</span></div></div>
+          <div class="chart s"><canvas id="cCount" role="img" aria-label="عدد الآليات شهرياً"></canvas></div>
+        </article>
+      </div>
+    </section>
 
-    <article class="panel w12">
-      <div class="ph"><div><h2>ملخص المناطق</h2><div class="hint">للفترة والمنطقة المحددتين · اضغط على صف للتصفية</div></div></div>
-      <div class="tscroll"><table id="tRegion"></table></div>
-    </article>
+    <section class="sec" id="regions">
+      <div class="sech"><h2>المناطق</h2><span class="ln"></span><span>اضغط على أي منطقة لتصفية اللوحة</span></div>
+      <div class="grid">
+        <article class="card c5">
+          <div class="ch"><div><h3>خريطة المناطق</h3><div class="h">توزيع تقريبي حسب الموقع الجغرافي</div></div>
+            <div class="seg sm" id="mapMetric" role="group" aria-label="مقياس الخريطة"><button type="button" data-k="c" aria-pressed="true">التكلفة</button><button type="button" data-k="n" aria-pressed="false">الآليات</button><button type="button" data-k="b" aria-pressed="false">المتعطلة</button></div></div>
+          <div class="mapw"><div class="tmap" id="tmap"></div><div class="scale"><span>أقل</span><i></i><span>أعلى</span></div></div>
+        </article>
+        <article class="card c7">
+          <div class="ch"><div><h3>ترتيب المناطق حسب التكلفة</h3><div class="h">للفترة المحددة</div></div></div>
+          <div class="chart t"><canvas id="cRegion" role="img" aria-label="التكاليف حسب المنطقة"></canvas></div>
+        </article>
+        <article class="card c12">
+          <div class="ch"><div><h3>مصفوفة المناطق عبر الأشهر</h3><div class="h">التكلفة بالألف ريال · شدة اللون تمثل الحجم · العمود الأخير يقارن آخر شهرين</div></div></div>
+          <div class="tw"><table class="heat" id="tHeat"></table></div>
+        </article>
+        <article class="card c12">
+          <div class="ch"><div><h3>ملخص المناطق</h3><div class="h">للفترة المحددة</div></div></div>
+          <div class="tw"><table id="tRegion"></table></div>
+        </article>
+      </div>
+    </section>
 
-    <article class="panel w12" id="detailNote" hidden><div class="note" id="detailNoteText"></div></article>
+    <section class="sec" id="fleet">
+      <div class="sech"><h2>الآليات والأعطال</h2><span class="ln"></span><span>من البيانات التفصيلية لكل آلية</span></div>
+      <div class="note" id="detailNote" hidden><svg class="i"><use href="#i-alert"/></svg><span id="detailNoteText"></span></div>
+      <div class="grid">
+        <article class="card c6">
+          <div class="ch"><div><h3>أعلى أنواع الآليات تكلفة</h3><div class="h">أعلى 10 أنواع</div></div></div>
+          <div class="chart t"><canvas id="cTypes" role="img" aria-label="أعلى أنواع الآليات تكلفة"></canvas></div>
+        </article>
+        <article class="card c6">
+          <div class="ch"><div><h3>فئات الأعطال الأكثر تكراراً</h3><div class="h">مصنفة آلياً من وصف الإصلاح · قد يقع الإصلاح في أكثر من فئة</div></div></div>
+          <div class="chart t"><canvas id="cCats" role="img" aria-label="تكرار فئات الأعطال"></canvas></div>
+        </article>
+        <article class="card c5">
+          <div class="ch"><div><h3>شرائح قيمة الإصلاح</h3><div class="h">عدد الإصلاحات في كل شريحة (ريال)</div></div></div>
+          <div class="chart"><canvas id="cDist" role="img" aria-label="توزيع قيمة الإصلاح"></canvas></div>
+        </article>
+        <article class="card c7">
+          <div class="ch"><div><h3>أعلى 10 إصلاحات تكلفة</h3><div class="h">للفترة المحددة</div></div></div>
+          <div class="rank" id="topList"></div>
+        </article>
+        <article class="card c12">
+          <div class="ch"><div><h3>آليات تكرر إصلاحها</h3><div class="h">نفس رقم اللوحة ظهر أكثر من مرة عبر الأشهر التفصيلية · مؤشر على أعطال متكررة تستحق المراجعة</div></div><span class="badge s" id="repBadge"></span></div>
+          <div class="tw" style="max-height:380px"><table id="tRepeat"></table></div>
+        </article>
+      </div>
+    </section>
 
-    <article class="panel w6">
-      <div class="ph"><div><h2>أعلى أنواع الآليات تكلفة</h2><div class="hint">أعلى 12 نوعاً · من البيانات التفصيلية</div></div></div>
-      <div class="chart tall"><canvas id="cTypes" aria-label="أعلى أنواع الآليات تكلفة" role="img"></canvas></div>
-    </article>
-    <article class="panel w6">
-      <div class="ph"><div><h2>تكرار فئات الأعطال</h2><div class="hint">مصنفة آلياً من وصف الإصلاح · قد يقع الإصلاح الواحد في أكثر من فئة</div></div></div>
-      <div class="chart tall"><canvas id="cCats" aria-label="تكرار فئات الأعطال" role="img"></canvas></div>
-    </article>
+    <section class="sec" id="records">
+      <div class="sech"><h2>السجل التفصيلي</h2><span class="ln"></span><span id="tblHint"></span></div>
+      <article class="card c12">
+        <div class="ch"><div class="tools">
+            <label class="inp" for="q"><svg class="i"><use href="#i-search"/></svg><input type="search" id="q" placeholder="ابحث بنوع الآلية أو رقم اللوحة أو الإصلاح"></label>
+            <select id="costFilter" aria-label="نوع التكلفة"><option value="all">كل الإصلاحات</option><option value="paid">بتكاليف</option><option value="free">بدون تكاليف</option></select>
+          </div>
+          <button class="btn" id="btnExport" type="button"><svg class="i"><use href="#i-down"/></svg>تصدير Excel</button></div>
+        <div class="tw"><table id="tDetail"></table></div>
+        <div class="pager"><span id="pgInfo"></span><span class="tools"><button class="btn" id="pgPrev" type="button">السابق</button><button class="btn" id="pgNext" type="button">التالي</button></span></div>
+      </article>
+    </section>
 
-    <article class="panel w5">
-      <div class="ph"><div><h2>توزيع قيمة الإصلاح</h2><div class="hint">عدد الإصلاحات في كل شريحة تكلفة</div></div></div>
-      <div class="chart"><canvas id="cDist" aria-label="توزيع قيمة الإصلاح" role="img"></canvas></div>
-    </article>
-    <article class="panel w7">
-      <div class="ph"><div><h2>أعلى 10 إصلاحات تكلفة</h2><div class="hint">للفترة المحددة</div></div></div>
-      <div class="rank" id="topList"></div>
-    </article>
-
-    <article class="panel w12">
-      <div class="ph"><div><h2>آليات تكرر إصلاحها</h2><div class="hint">نفس رقم اللوحة ظهر أكثر من مرة عبر جميع الأشهر التفصيلية · مؤشر على أعطال متكررة</div></div><span class="badge" id="repBadge"></span></div>
-      <div class="tscroll" style="max-height:360px"><table id="tRepeat"></table></div>
-    </article>
-
-    <article class="panel w12">
-      <div class="ph"><div><h2>سجل الإصلاحات التفصيلي</h2><div class="hint" id="tblHint"></div></div>
-        <div class="tools">
-          <input type="search" id="q" placeholder="بحث: نوع الآلية، رقم اللوحة، الإصلاح…" aria-label="بحث في السجل">
-          <select id="costFilter" aria-label="نوع التكلفة"><option value="all">كل الإصلاحات</option><option value="paid">بتكاليف</option><option value="free">بدون تكاليف</option></select>
-          <button class="btn" id="btnExport" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>تصدير Excel</button>
-        </div></div>
-      <div class="tscroll"><table id="tDetail"></table></div>
-      <div class="pager"><span id="pgInfo"></span><span class="tools"><button class="btn" id="pgPrev" type="button">السابق</button><button class="btn" id="pgNext" type="button">التالي</button></span></div>
-    </article>
-
-    <article class="panel w12">
-      <div class="ph"><div><h2>الأشهر المحملة</h2><div class="hint">البيانات المرفوعة تحفظ في هذا المتصفح فقط</div></div>
-        <button class="btn ghost" id="btnReset" type="button">استعادة البيانات الأصلية</button></div>
-      <div class="mlist" id="mlist"></div>
-    </article>
-  </section>
+    <section class="sec" id="data">
+      <div class="sech"><h2>إدارة البيانات</h2><span class="ln"></span><span>البيانات المرفوعة تحفظ في هذا المتصفح فقط</span></div>
+      <div class="grid">
+        <article class="card c7">
+          <div class="ch"><div><h3>الأشهر المحملة</h3><div class="h" id="mCount"></div></div><button class="btn" id="btnReset" type="button">استعادة البيانات الأصلية</button></div>
+          <div class="mlist" id="mlist"></div>
+        </article>
+        <article class="card c5 uploadcard">
+          <div class="bi"><svg class="i"><use href="#i-file"/></svg></div>
+          <h3>أضف بيانات شهر جديد</h3>
+          <p>حمّل النموذج، عبّئ سطراً لكل آلية تم إصلاحها، ثم ارفعه. تقبل اللوحة أيضاً ملفات "بيان الآليات الجاهزة" وتقارير الملخص حسب المنطقة.</p>
+          <div class="tools" style="justify-content:center"><button class="btn pri" id="btnUpload2" type="button"><svg class="i"><use href="#i-up"/></svg>رفع ملف شهري</button><button class="btn" id="btnTpl3" type="button"><svg class="i"><use href="#i-down"/></svg>تحميل النموذج</button></div>
+        </article>
+      </div>
+    </section>
+  </main>
 </div>
 
 <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mTitle">
   <div class="dialog">
-    <div class="ph"><div><h2 id="mTitle">رفع بيانات شهر جديد</h2><div class="hint">عبّئ نموذج Excel ثم ارفعه هنا ليُضاف إلى التحليل</div></div>
-      <button class="btn ghost x" id="mClose" type="button" aria-label="إغلاق">✕</button></div>
+    <div class="ch"><div><h3 id="mTitle" style="font-size:1.15rem">رفع بيانات شهر جديد</h3><div class="h">تتحقق اللوحة من الأعمدة والقيم قبل الإضافة</div></div>
+      <button class="x" id="mClose" type="button" aria-label="إغلاق">✕</button></div>
     <div class="steps">
-      <div><b>1. حمّل النموذج</b>ملف Excel بقوائم منسدلة للمناطق والأشهر.<br><button class="btn" id="btnTpl2" type="button" style="margin-top:6px">تحميل النموذج</button></div>
-      <div><b>2. عبّئ البيانات</b>سطر لكل آلية: النوع، اللوحة، المنطقة، الإصلاح، القيمة.</div>
-      <div><b>3. ارفع وراجع</b>تتحقق اللوحة من الأعمدة والقيم ثم تضيف الشهر.</div>
+      <div><b><em>1</em>حمّل النموذج</b>بقوائم منسدلة للمناطق والأشهر.<button class="btn" id="btnTpl2" type="button" style="margin-top:6px;align-self:flex-start"><svg class="i"><use href="#i-down"/></svg>النموذج</button></div>
+      <div><b><em>2</em>عبّئ البيانات</b>النوع، اللوحة، المنطقة، الإصلاح، القيمة.</div>
+      <div><b><em>3</em>ارفع وراجع</b>راجع المعاينة والشهر ثم أضف.</div>
     </div>
     <label class="drop" id="drop" for="file">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path d="M14 3v6h6M9 13l2 2 4-4"/></svg>
+      <svg class="i"><use href="#i-file"/></svg>
       <b>اسحب ملف Excel هنا أو اضغط للاختيار</b>
-      <span class="s">‎.xlsx / .xls · يقبل النموذج الجديد، وبيان الآليات الجاهزة، وتقرير الملخص حسب المنطقة</span>
+      <span class="s">‎.xlsx · ‎.xls · النموذج الجديد أو بيان الآليات الجاهزة أو تقرير الملخص</span>
       <input type="file" id="file" accept=".xlsx,.xls,.xlsm,.csv" hidden>
     </label>
     <div id="parseOut" hidden>
       <div class="preview" id="pv"></div>
-      <div class="formrow" style="margin-top:10px">
+      <div class="formrow" style="margin-top:12px">
         <label for="fMonth">الشهر الهجري<select id="fMonth"></select></label>
         <label for="fYear">السنة (هـ)<input id="fYear" type="number" min="1400" max="1500" step="1"></label>
       </div>
-      <div id="pMsgs" style="display:flex;flex-direction:column;gap:8px;margin-top:10px"></div>
+      <div id="pMsgs" style="display:flex;flex-direction:column;gap:8px;margin-top:12px"></div>
     </div>
     <div class="foot">
       <button class="btn" id="mCancel" type="button">إلغاء</button>
-      <button class="btn primary" id="mAdd" type="button" disabled>إضافة إلى التحليل</button>
+      <button class="btn pri" id="mAdd" type="button" disabled>إضافة إلى التحليل</button>
     </div>
   </div>
 </div>
-<div class="toast" id="toast" hidden></div>
+<div class="toast" id="toast" hidden role="status"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -304,48 +469,52 @@ const BUILTIN={"m1":[["فورد انقاذ","أ ن ط 2419","مكة المكرم
 const TPL_B64="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bpM7SEycecURAXRFAiOVHAYWFzLkUO6SkAYTAc2UyUTwAoJkphyAmPoLvfIMuSkVzq0+OX9FLIOGTl7SJRIUirAMBSEXcuPv75Nqd4zX+iyBbYRUMmTVF8pDicE9M3JD2FQl867aJguF2+JUzbsaviZgS8N6bp0tJ//bXtQ9tBc9RvOjmeAes4dzm3q4wkWs/1jWHvky3zlw2zreA17mEyxDpH7BfYqKgBGrYr66r0/5JZw7tHvxgSCb/NbbpPbd4Ax81KtapWQrET9LB3wfkgZjjFv0NF+PFGKtprGtxtoxDHmAWPMMoWY434dFmhoz1YusOY0Kb0HVQOU/29QNaPYNNByRBV4xmbY2o+ROCjzc/u8NsMLEjuHti78BUEsDBBQAAAAIAB0xS11dU/EColsAAFFiAwAYAAAAeGwvd29ya3NoZWV0cy9zaGVldDEueG1srN19j5xZcqfnr0K0AUMCvO467+esZgawFDHwAgYsSLb379YMR9PYfhl3tzS7/vQm2SQzmFHnjlhgAUk15J2ZlSfrYdaPo+6rfvPXH3/6Lz//+e3bX9781++/++Hn3371519++ct//Prrn//w57fff/Pz//rjX97+8K786cefvv/ml3e//Olfv/75Lz+9/eaPH+70/Xdf15eX+fX333z7w1e/+82H3/vHn373mx//7Zfvvv3h7T/+9Obnf/v++29++m9///a7H//626/KV59+45++/dc///L+N77+3W/+8s2/vv3nt7/833/5x5/e/errz4/yx2+/f/vDz9/++MObn97+6bdf/W/lP/6+vLz093f5cJv/59u3f/3Z/Oc3P71/0P/rx//j7Z8+PPSb94f7lx9//C/v43/642+/evnq/Sf74e2b//bPf/nu23e36V+9+eXHv7y//T+8/e67d59ifPXmmz/88u2/v/3Hdzf77Vf/8uMvv/z4/fv+7on/8s0v737rTz/9+P+9/eHDc3j73dt3t3339P7ibvzrg3x80Pen/n8/HuGrzyd8/6Tsf/50kt9/eKnfvXT/8s3Pb//hx+/+87d//OXPv/1qf/Xmj2//9M2/fffLP/341//97ceXb7x/vD/8+N3PH/7vm7/+etv11Zs//NvP757Mx/u+ewLff/vDrx+/+a8fX3Vz+9ovd6gf71Cf7lDm5Q7t4x3a82e43aF/vEN/usN8udxhfLzD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";
 const MONTHS=['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
 const REGIONS=['الرياض','مكة المكرمة','المدينة المنورة','المشاعر والعاصمة المقدسة','الشرقية','القصيم','عسير','تبوك','حائل','الحدود الشمالية','جازان','نجران','الباحة','الجوف'];
+/* tile-map cartogram: [row, col] with col 1 = west */
+const TILE={'الجوف':[1,2],'الحدود الشمالية':[1,3],'تبوك':[2,1],'حائل':[2,2],'القصيم':[2,3],'المدينة المنورة':[3,1],'الرياض':[3,3],'الشرقية':[3,4],'مكة المكرمة':[4,1],'المشاعر والعاصمة المقدسة':[4,2],'الباحة':[5,1],'عسير':[5,2],'نجران':[5,3],'جازان':[6,2]};
+const SHORT={'المشاعر والعاصمة المقدسة':'المشاعر والعاصمة','الحدود الشمالية':'الحدود الشمالية','المدينة المنورة':'المدينة المنورة'};
 const STORE='mx-maint-dash-v1';
 const $=s=>document.querySelector(s);
 const fmt=n=>Math.round(n).toLocaleString('en-US');
 const fmt2=n=>Number(n).toLocaleString('en-US',{maximumFractionDigits:2});
 const pct=(a,b)=>b?(a/b*100):0;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ico=(id,cls='i')=>`<svg class="${cls}"><use href="#i-${id}"/></svg>`;
 function norm(s){return String(s??'').replace(/[ً-ٟـ]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/\s+/g,' ').trim()}
 function canonRegion(s){const n=norm(s);if(!n)return '';
   const map=[[/مشاعر|العاصمه/,'المشاعر والعاصمة المقدسة'],[/مكه/,'مكة المكرمة'],[/مدينه/,'المدينة المنورة'],[/رياض/,'الرياض'],[/شرقيه/,'الشرقية'],[/قصيم/,'القصيم'],[/عسير/,'عسير'],[/تبوك/,'تبوك'],[/حائل|حايل/,'حائل'],[/حدود|شماليه/,'الحدود الشمالية'],[/جازان|جيزان/,'جازان'],[/نجران/,'نجران'],[/باحه/,'الباحة'],[/جوف/,'الجوف']];
   for(const[r,v]of map)if(r.test(n))return v;return String(s).trim()}
-function plateKey(p){const n=norm(p).replace(/هـ/g,'ه').replace(/[\s\-_]/g,'');return n.length>=3?n:''}
+function plateKey(p){if(/بدون|لا ?يوجد|غير محدد/.test(norm(p)))return'';const n=norm(p).replace(/هـ/g,'ه').replace(/[\s\-_]/g,'');return n.length>=3?n:''}
 function parseCost(v){if(v==null||v==='')return{c:0,ok:true};if(typeof v==='number')return{c:v,ok:isFinite(v)&&v>=0};
   const s=String(v).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[,،\s]|ريال|ر\.س/g,'');
   if(/بدون|لايوجد|لا يوجد|^-+$|مجان/.test(norm(v)))return{c:0,ok:true};
   const f=parseFloat(s);return isFinite(f)?{c:f,ok:true}:{c:0,ok:false}}
 const mkey=(y,m)=>y*100+m;
 const mlabel=m=>`${MONTHS[m.m-1]} ${m.y}هـ`;
+function plate(p){if(!p||p.trim()==='-'||!p.trim())return'<span class="zero">–</span>';return`<span class="plate"><em>KSA</em><span>${esc(p)}</span></span>`}
 
-/* ---------- repair categories ---------- */
 const CATS=[
  ['البطاريات',/بطاري/],
  ['الإطارات والكفرات',/كفر|اطار|بنشر|جنط/],
- ['الفرامل',/فرامل|اقمشه|قماش|هوب|كليبر|بلف فرامل/],
- ['المحرك',/مكينه|محرك|بخاخ|بواجي|سير |سيور|راس|كرتير|توضيب مكينه|طرمبه بنزين|طرمبه ديزل|كمبيوتر المكينه/],
+ ['الفرامل',/فرامل|اقمشه|قماش|هوب|كليبر/],
+ ['المحرك',/مكينه|محرك|بخاخ|بواجي|سير |سيور|راس|كرتير|طرمبه بنزين|طرمبه ديزل/],
  ['ناقل الحركة والدفع',/جربوكس|قير|دبل|كلتش|دسك|عمود|شيال|دفرنس|كردان/],
  ['التكييف والتبريد',/مكيف|كمبروسر|كمبرسور|رديتر|ثلاجه|تبريد|فريون|مروحه/],
- ['الكهرباء والحساسات',/كهرب|ظفيره|سلك|اسلاك|دينمو|سلف|لمب|انوار|اضاءه|حساس|فيوز|ريموت|شاشه|مفتاح|طبلون|كمبيوتر|عداد|سفتي|فلاشر|سرينه|ميكرفون/],
- ['المضخات ومعدات الإطفاء والإنقاذ',/مضخه|سلالم|سلم|ونش|وانش|رافعه|هيدرول|خزان التوزيع|مدفع|خرطوم|ليات|لي ماء/],
- ['التعليق والتوجيه',/مساعد|دركسون|مقص|جلب|ميزان|عكس|ذراع|يايات|ياي|مقصات|بلي/],
- ['الزيوت والفلاتر والصيانة الدورية',/زيت|فلتر|تشحيم|صيانه دوريه|غيار/],
- ['الهيكل والسمكرة والزجاج',/سمكر|دهان|زجاج|باب|مرايه|بودي|صدام|كبوت|جلد|كرسي|مقعد|مساحات/],
+ ['الكهرباء والحساسات',/كهرب|ظفيره|سلك|اسلاك|دينمو|سلف|لمب|انوار|اضاءه|حساس|فيوز|ريموت|شاشه|مفتاح|طبلون|كمبيوتر|عداد|فلاشر|سرينه|ميكرفون|سفتي|ونان|شمعه|فحمات|برمجه/],
+ ['المضخات ومعدات الإطفاء',/مضخه|سلالم|سلم|ونش|وانش|رافعه|هيدرول|خزان التوزيع|مدفع|خرطوم|ليات|لي ماء/],
+ ['التعليق والتوجيه',/مساعد|دركسون|مقص|جلب|ميزان|عكس|ذراع|ياي|بلي/],
+ ['الزيوت والفلاتر',/زيت|فلتر|تشحيم|صيانه دوريه|غيار/],
+ ['الهيكل والزجاج',/سمكر|دهان|زجاج|باب|مرايه|بودي|صدام|كبوت|جلد|كرسي|مقعد|مساحات/],
+ ['التسريبات وأنظمة الهواء والماء',/تهريب|تسريب|هواء|بلف|هوز|ربل|سيفون|محبس|عوامه|طرمبه ماء/],
+ ['حوادث وأعطال متعددة',/حادث|ميكانيك|متعدد|صيانه وقائيه/],
  ['كشف وفحص',/كشف|فحص/],
 ];
 function catsOf(text){const n=norm(text);const out=[];for(const[name,re]of CATS)if(re.test(n))out.push(name);return out.length?out:['أخرى']}
 
-/* ---------- state ---------- */
-let months=[], state={month:'all',region:'all',q:'',cost:'all',page:0,sort:{k:'c',d:-1}};
+let months=[], state={month:'all',region:'all',q:'',cost:'all',page:0,sort:{k:'c',d:-1},map:'c'};
 function buildMonth(y,m,{rows,summary,broken,source,file}){
   const mo={y,m,key:mkey(y,m),source,file:file||'',detail:!!rows,rows:[],sum:{}};
   if(rows){mo.rows=rows.map((r,i)=>({id:`${mo.key}-${i}`,t:String(r[0]||'').trim(),p:String(r[1]||'').trim(),r:canonRegion(r[2]),d:String(r[3]||'').trim(),c:+r[4]||0,mk:mo.key}));
-    for(const r of mo.rows){const s=mo.sum[r.r]||(mo.sum[r.r]={n:0,c:0,z:0,b:null});s.n++;s.c+=r.c;if(!r.c)s.z++}
-  }
+    for(const r of mo.rows){const s=mo.sum[r.r]||(mo.sum[r.r]={n:0,c:0,z:0,b:null});s.n++;s.c+=r.c;if(!r.c)s.z++}}
   if(summary)for(const s of summary){const reg=canonRegion(s[0]);if(!reg)continue;mo.sum[reg]={n:+s[1]||0,c:+s[2]||0,z:+s[3]||0,b:s[4]==null?null:+s[4]||0}}
   if(broken)for(const[reg,b]of Object.entries(broken)){const k=canonRegion(reg);(mo.sum[k]||(mo.sum[k]={n:0,c:0,z:0,b:null})).b=b}
   return mo}
@@ -362,132 +531,165 @@ function initData(){const st=loadStore();let base=builtinMonths();
     for(const u of st.up||[]){const mo=buildMonth(u.y,u.m,{rows:u.rows,summary:u.summary,broken:u.broken,source:'upload',file:u.file});base=base.filter(b=>b.key!==mo.key);base.push(mo)}}
   months=base.sort((a,b)=>a.key-b.key)}
 
-/* ---------- selectors ---------- */
 const selMonths=()=>state.month==='all'?months:months.filter(m=>m.key===state.month);
 const regOK=r=>state.region==='all'||r===state.region;
-function aggSum(ms){const o={};const bm=[...ms].reverse().find(m=>Object.values(m.sum).some(s=>s.b!=null));
-  for(const m of ms)for(const[r,s]of Object.entries(m.sum)){if(!regOK(r))continue;const a=o[r]||(o[r]={n:0,c:0,z:0,b:null});a.n+=s.n;a.c+=s.c;a.z+=s.z;if(m===bm&&s.b!=null)a.b=s.b}return o} /* broken vehicles is a snapshot: keep the latest month's figure, never sum */
+/* broken vehicles is a snapshot: take it from the latest month in the selection that reports it, never sum */
+function aggSum(ms,ignoreRegion=false){const o={};const bm=[...ms].reverse().find(m=>Object.values(m.sum).some(s=>s.b!=null));
+  for(const m of ms)for(const[r,s]of Object.entries(m.sum)){if(!ignoreRegion&&!regOK(r))continue;const a=o[r]||(o[r]={n:0,c:0,z:0,b:null});a.n+=s.n;a.c+=s.c;a.z+=s.z;if(m===bm&&s.b!=null)a.b=s.b}return o}
 function totals(o){const t={n:0,c:0,z:0,b:null};for(const s of Object.values(o)){t.n+=s.n;t.c+=s.c;t.z+=s.z;if(s.b!=null)t.b=(t.b||0)+s.b}return t}
 const detailRows=ms=>ms.filter(m=>m.detail).flatMap(m=>m.rows).filter(r=>regOK(r.r));
+const monthOf=k=>months.find(m=>m.key===k);
 
-/* ---------- theme & charts ---------- */
+/* ---------- chart system ---------- */
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-function alpha(hex,a){const h=hex.replace('#','');const v=parseInt(h.length===3?h.split('').map(x=>x+x).join(''):h,16);return`rgba(${v>>16&255},${v>>8&255},${v&255},${a})`}
+const rgba=(rgb,a)=>`rgba(${rgb},${a})`;
 const charts={};
-function baseOpts(extra={}){const ink2=css('--ink-2'),line=css('--line-2'),font=css('--f-body');
-  Chart.defaults.font.family=font;Chart.defaults.color=ink2;
-  return Object.assign({responsive:true,maintainAspectRatio:false,animation:{duration:250},
-    plugins:{legend:{display:false},tooltip:{rtl:true,textDirection:'rtl',backgroundColor:css('--ink'),titleColor:css('--bg'),bodyColor:css('--bg'),padding:10,cornerRadius:6,displayColors:false,titleFont:{family:font,weight:'600'},bodyFont:{family:font}}},
-    _grid:line},extra)}
-function draw(id,cfg){if(charts[id])charts[id].destroy();charts[id]=new Chart(document.getElementById(id),cfg)}
-const kfmt=v=>v>=1e6?(v/1e6).toFixed(1).replace(/\.0$/,'')+' مليون':v>=1e3?Math.round(v/1e3)+' ألف':v;
+const kfmt=v=>v>=1e6?(v/1e6).toFixed(1).replace(/\.0$/,'')+'م':v>=1e3?Math.round(v/1e3)+'ألف':v;
+const short=v=>v>=1e6?(v/1e6).toFixed(2).replace(/0$/,'')+' م':v>=1e3?(v/1e3).toFixed(v>=1e5?0:1).replace(/\.0$/,'')+' ألف':fmt(v);
+function T(){return{ink:css('--ink'),ink2:css('--ink-2'),muted:css('--muted'),line:css('--line-2'),surface:css('--surface'),acc:css('--accent-rgb'),sand:css('--sand-rgb'),font:css('--f-display')}}
+/* vertical/horizontal gradient fill scoped to the chart area */
+function grad(ctx,rgb,from,to,horizontal){const{chart}=ctx;const a=chart.chartArea;if(!a)return rgba(rgb,to);
+  const g=horizontal?chart.ctx.createLinearGradient(a.right,0,a.left,0):chart.ctx.createLinearGradient(0,a.bottom,0,a.top);g.addColorStop(0,rgba(rgb,from));g.addColorStop(1,rgba(rgb,to));return g}
+/* value labels at the end of bars */
+const valueLabels={id:'valueLabels',afterDatasetsDraw(chart,args,opts){if(!opts||!opts.on)return;const{ctx}=chart;const t=T();ctx.save();ctx.font=`500 11px ${t.font}`;ctx.fillStyle=t.ink2;
+  const last=chart.data.datasets.length-1;const meta=chart.getDatasetMeta(opts.stackTop?last:0);
+  meta.data.forEach((el,i)=>{let v=opts.stackTop?chart.data.datasets.reduce((s,d)=>s+(+d.data[i]||0),0):chart.data.datasets[0].data[i];if(!v&&v!==0)return;const txt=(opts.f||short)(v);
+    if(chart.options.indexAxis==='y'){ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(txt,el.x-8,el.y)}else{ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText(txt,el.x,el.y-6)}});ctx.restore()}};
+Chart.register(valueLabels);
+function base(extra){const t=T();Chart.defaults.font.family=css('--f-body');Chart.defaults.color=t.muted;
+  return Object.assign({responsive:true,maintainAspectRatio:false,animation:{duration:600,easing:'easeOutQuart'},
+    layout:{padding:{top:22,left:6,right:6}},
+    plugins:{legend:{display:false},tooltip:{rtl:true,textDirection:'rtl',backgroundColor:t.surface,borderColor:css('--line'),borderWidth:1,titleColor:t.ink,bodyColor:t.ink2,footerColor:t.ink2,padding:12,cornerRadius:12,displayColors:false,caretSize:6,
+      titleFont:{family:t.font,weight:'600',size:13},bodyFont:{family:css('--f-body'),size:12},footerFont:{family:css('--f-body'),size:12,weight:'500'},boxPadding:6}}},extra)}
+function tip(cb,extra={}){const b=base().plugins.tooltip;return{...b,...extra,callbacks:cb}}
+function draw(id,cfg){if(charts[id])charts[id].destroy();const el=document.getElementById(id);if(el)charts[id]=new Chart(el,cfg)}
+const axisY=(t,extra={})=>({position:'right',grid:{color:t.line,drawTicks:false},border:{display:false},ticks:{padding:10,callback:kfmt,font:{family:t.font,size:11}},...extra});
+const axisX=(t,extra={})=>({reverse:true,grid:{display:false},border:{display:false},ticks:{padding:8,color:t.ink2,font:{size:12}},...extra});
 
 /* ---------- render ---------- */
 function renderFilters(){
-  const seg=$('#monthSeg');
-  seg.innerHTML=`<button type="button" data-m="all" aria-pressed="${state.month==='all'}">كل الأشهر</button>`+months.map(m=>`<button type="button" data-m="${m.key}" aria-pressed="${state.month===m.key}">${esc(mlabel(m))}${m.detail?'':'<span class="tag">ملخص</span>'}</button>`).join('');
+  $('#monthSeg').innerHTML=`<button type="button" data-m="all" aria-pressed="${state.month==='all'}">كل الأشهر</button>`+months.map(m=>`<button type="button" data-m="${m.key}" aria-pressed="${state.month===m.key}">${esc(MONTHS[m.m-1])}${m.detail?'':'<span class="tag">ملخص</span>'}</button>`).join('');
   const regs=[...new Set([...REGIONS,...months.flatMap(m=>Object.keys(m.sum))])];
-  const sel=$('#regionSel');sel.innerHTML=`<option value="all">جميع المناطق</option>`+regs.map(r=>`<option${r===state.region?' selected':''}>${esc(r)}</option>`).join('');
+  $('#regionSel').innerHTML=`<option value="all">جميع المناطق</option>`+regs.map(r=>`<option${r===state.region?' selected':''}>${esc(r)}</option>`).join('');
   const ms=selMonths();
-  $('#periodLabel').textContent=ms.length?(state.month==='all'?`الفترة: ${mlabel(months[0])} – ${mlabel(months[months.length-1])} · ${months.length} أشهر`:`الفترة: ${mlabel(ms[0])}`)+(state.region==='all'?' · جميع المناطق':` · ${state.region}`):'لا توجد بيانات محملة';
+  $('#periodShort').textContent=months.length?`${mlabel(months[0])} – ${mlabel(months[months.length-1])}`:'';
+  $('#periodLabel').textContent=ms.length?(state.month==='all'?`جميع الأشهر المحملة (${months.length})`:mlabel(ms[0]))+' · '+(state.region==='all'?'جميع المناطق':state.region):'لا توجد بيانات محملة';
 }
-function prevMonthOf(key){const i=months.findIndex(m=>m.key===key);return i>0?months[i-1]:null}
-function deltaPill(cur,prev,invert=false){if(prev==null||!prev)return '';const d=pct(cur-prev,prev);const cls=Math.abs(d)<0.5?'flat':(d>0)!==invert?'up':'down';
-  return`<span class="pill ${cls}">${d>0?'▲':d<0?'▼':'■'} ${Math.abs(d).toFixed(1)}%</span>`}
+const prevMonthOf=key=>{const i=months.findIndex(m=>m.key===key);return i>0?months[i-1]:null};
+function chip(cur,prev,invert=false){if(prev==null||!prev)return'';const d=pct(cur-prev,prev);const cls=Math.abs(d)<.5?'flat':(d>0)!==invert?'up':'down';return`<span class="chip ${cls}">${d>0?'↑':d<0?'↓':'•'} ${Math.abs(d).toFixed(1)}%</span>`}
+function ring(p,rgb){const r=16,c=2*Math.PI*r;return`<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="${r}" fill="none" stroke="var(--line-2)" stroke-width="5"/><circle cx="20" cy="20" r="${r}" fill="none" stroke="${rgb}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(c*p/100).toFixed(1)} ${c.toFixed(1)}"/></svg>`}
+function renderHero(){
+  const ms=selMonths(),t=totals(aggSum(ms));let meta='';
+  if(state.month!=='all'){const p=prevMonthOf(state.month);if(p){const pt=totals(aggSum([p]));const d=pct(t.c-pt.c,pt.c);meta=`<span class="chip">${d>=0?'↑':'↓'} ${Math.abs(d).toFixed(1)}%</span> مقارنة بـ${MONTHS[p.m-1]} (${fmt(pt.c)} ريال)`}else meta='أول شهر في البيانات المحملة'}
+  else if(ms.length)meta=`<span class="chip">${ms.length} أشهر</span> متوسط شهري ${fmt(t.c/ms.length)} ريال`;
+  $('#heroCard').innerHTML=`<div class="lab">${ico('coin')}إجمالي تكاليف الإصلاح</div><div class="big">${fmt(t.c)}<small>ريال</small></div><div class="meta">${meta}</div><div class="spark"><canvas id="cSpark" aria-hidden="true"></canvas></div>`;
+  const tot=months.map(m=>totals(aggSum([m])).c);const hi=css('--hero-ink');
+  draw('cSpark',{type:'line',data:{labels:months.map(m=>MONTHS[m.m-1]),datasets:[{data:tot,borderColor:hi,borderWidth:2,tension:.4,fill:true,
+      backgroundColor:c=>{const a=c.chart.chartArea;if(!a)return'transparent';const g=c.chart.ctx.createLinearGradient(0,a.top,0,a.bottom);g.addColorStop(0,'rgba(255,255,255,.28)');g.addColorStop(1,'rgba(255,255,255,0)');return g},
+      pointRadius:months.map(m=>state.month===m.key||(state.month==='all'&&m===months[months.length-1])?5:2.5),pointBackgroundColor:hi,pointBorderColor:css('--hero-b'),pointBorderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:700},layout:{padding:{top:8,bottom:2,left:22,right:14}},scales:{x:{display:true,reverse:true,grid:{display:false},border:{display:false},ticks:{color:css('--hero-muted'),font:{size:10}}},y:{display:false,beginAtZero:true}},
+      plugins:{legend:{display:false},tooltip:tip({title:i=>mlabel(months[i[0].dataIndex]),label:i=>`${fmt(i.raw)} ريال`})}}});
+}
 function renderKPIs(){
-  const ms=selMonths(),t=totals(aggSum(ms));const paid=t.n-t.z;
-  let cmp='',cmpN='',cmpB='';
-  if(state.month!=='all'){const p=prevMonthOf(state.month);if(p){const pt=totals(aggSum([p]));cmp=deltaPill(t.c,pt.c)+` عن ${MONTHS[p.m-1]}`;cmpN=deltaPill(t.n,pt.n,true)+` عن ${MONTHS[p.m-1]}`;if(t.b!=null&&pt.b!=null)cmpB=deltaPill(t.b,pt.b)+` عن ${MONTHS[p.m-1]}`}}
-  else if(ms.length)cmp=`متوسط شهري ${fmt(t.c/ms.length)} ريال`;
-  const avg=paid?t.c/paid:0;const zp=pct(t.z,t.n);
+  const ms=selMonths(),t=totals(aggSum(ms));const paid=t.n-t.z;const avg=paid?t.c/paid:0;const zp=pct(t.z,t.n);
+  let cN='',cA='',cB='';
+  if(state.month!=='all'){const p=prevMonthOf(state.month);if(p){const pt=totals(aggSum([p]));const pp=pt.n-pt.z;cN=chip(t.n,pt.n,true)+` عن ${MONTHS[p.m-1]}`;cA=chip(avg,pp?pt.c/pp:0)+` عن ${MONTHS[p.m-1]}`;if(t.b!=null&&pt.b!=null)cB=chip(t.b,pt.b)+` عن ${MONTHS[p.m-1]}`}}
+  else if(ms.length){cN=`متوسط شهري <b class="num">${fmt(t.n/ms.length)}</b> آلية`;cA='للإصلاحات ذات التكلفة فقط'}
   const bAvail=ms.some(m=>Object.values(m.sum).some(s=>s.b!=null));
+  const bm=[...ms].reverse().find(m=>Object.values(m.sum).some(s=>s.b!=null));
   $('#kpis').innerHTML=`
-   <div class="kpi"><span class="k">إجمالي تكاليف الإصلاح</span><span class="v num">${fmt(t.c)}<small>ريال</small></span><span class="d">${cmp||'&nbsp;'}</span></div>
-   <div class="kpi"><span class="k">الآليات التي تم إصلاحها</span><span class="v num">${fmt(t.n)}<small>آلية</small></span><span class="d">${cmpN||(state.month==='all'&&ms.length?`متوسط شهري ${fmt(t.n/ms.length)} آلية`:'&nbsp;')}</span></div>
-   <div class="kpi"><span class="k">إصلاحات بتكاليف / بدون تكاليف</span><span class="v num">${fmt(paid)}<small>/ ${fmt(t.z)}</small></span>
-     <div class="meter" aria-hidden="true"><i style="width:${100-zp}%;background:var(--s1)"></i><i style="width:${zp}%;background:var(--s2)"></i></div><span class="d">${zp.toFixed(1)}% أُنجزت بدون تكاليف</span></div>
-   <div class="kpi"><span class="k">متوسط تكلفة الآلية</span><span class="v num">${fmt(avg)}<small>ريال</small></span><span class="d">للآليات ذات التكلفة فقط</span></div>
-   <div class="kpi"><span class="k">الآليات المتعطلة</span><span class="v num">${bAvail&&t.b!=null?fmt(t.b):'—'}${bAvail?'<small>آلية</small>':''}</span><span class="d">${bAvail?(cmpB||(state.month==='all'?`حسب آخر بيان (${MONTHS[[...ms].reverse().find(m=>Object.values(m.sum).some(s=>s.b!=null)).m-1]})`:'')+(t.b?' <span class="pill warn">تحتاج متابعة</span>':'')):'غير مدرجة في بيانات هذه الفترة'}</span></div>`;
+   <div class="kpi"><span class="k">الآليات التي تم إصلاحها</span><span class="v">${fmt(t.n)}<small>آلية</small></span><span class="ic">${ico('truck')}</span><span class="d">${cN||'&nbsp;'}</span></div>
+   <div class="kpi"><span class="k">أُنجزت بدون تكاليف</span><span class="v">${zp.toFixed(1)}<small>%</small></span><span class="ic s" style="background:none;width:auto;height:auto">${ring(zp,'var(--sand)')}</span>
+     <span class="d"><span class="bar2" aria-hidden="true"><i style="width:${100-zp}%;background:var(--accent)"></i><i style="width:${zp}%;background:var(--sand)"></i></span><span>${fmt(paid)} بتكاليف · ${fmt(t.z)} بدونها</span></span></div>
+   <div class="kpi"><span class="k">متوسط تكلفة الآلية</span><span class="v">${fmt(avg)}<small>ريال</small></span><span class="ic">${ico('avg')}</span><span class="d">${cA||'&nbsp;'}</span></div>
+   <div class="kpi"><span class="k">الآليات المتعطلة</span><span class="v">${bAvail&&t.b!=null?fmt(t.b):'—'}${bAvail?'<small>آلية</small>':''}</span><span class="ic s">${ico('alert')}</span>
+     <span class="d">${bAvail?(cB||(state.month==='all'?`حسب بيان ${MONTHS[bm.m-1]}`:''))+(t.b?' <span class="chip warn">تحتاج متابعة</span>':''):'غير مدرجة في بيانات هذه الفترة'}</span></div>`;
 }
 function renderInsights(){
   const ms=selMonths();const o=aggSum(ms);const t=totals(o);const out=[];
   const regs=Object.entries(o).sort((a,b)=>b[1].c-a[1].c);
-  if(state.region==='all'&&regs.length){out.push(`أعلى منطقة تكلفة <b>${esc(regs[0][0])}</b> بمبلغ <b class="num">${fmt(regs[0][1].c)}</b> ريال، أي <b>${pct(regs[0][1].c,t.c).toFixed(1)}%</b> من الإجمالي.`);
-    const top3=regs.slice(0,3).reduce((a,r)=>a+r[1].c,0);out.push(`أعلى ثلاث مناطق (${regs.slice(0,3).map(r=>esc(r[0])).join('، ')}) تستحوذ على <b>${pct(top3,t.c).toFixed(0)}%</b> من التكاليف.`)}
+  if(state.region==='all'&&regs.length){out.push(['pin','',`<b>${esc(regs[0][0])}</b> الأعلى تكلفة بـ<b class="num">${fmt(regs[0][1].c)}</b> ريال، تمثل <b>${pct(regs[0][1].c,t.c).toFixed(1)}%</b> من الإجمالي.`]);
+    const top3=regs.slice(0,3).reduce((a,r)=>a+r[1].c,0);out.push(['map','',`أعلى ثلاث مناطق تستحوذ على <b>${pct(top3,t.c).toFixed(0)}%</b> من التكاليف.`])}
   if(months.length>1){const last=months[months.length-1],prev=months[months.length-2];const a=totals(aggSum([last])).c,b=totals(aggSum([prev])).c;
-    if(b)out.push(`تكاليف ${MONTHS[last.m-1]} ${a>=b?'ارتفعت':'انخفضت'} بنسبة <b>${Math.abs(pct(a-b,b)).toFixed(1)}%</b> مقارنة بـ${MONTHS[prev.m-1]} (<span class="num">${fmt(a)}</span> مقابل <span class="num">${fmt(b)}</span> ريال).`)}
-  if(t.n)out.push(`<b>${pct(t.z,t.n).toFixed(0)}%</b> من الآليات (${fmt(t.z)} آلية) أُصلحت بدون تكاليف داخل الورش.`);
+    if(b)out.push(['trend','s',`تكاليف ${MONTHS[last.m-1]} ${a>=b?'ارتفعت':'انخفضت'} <b>${Math.abs(pct(a-b,b)).toFixed(1)}%</b> عن ${MONTHS[prev.m-1]}.`])}
   const rows=detailRows(ms);
   if(rows.length){const ty={};for(const r of rows){const k=norm(r.t);(ty[k]||(ty[k]={n:r.t,c:0,k:0})).c+=r.c;ty[k].k++}
-    const top=Object.values(ty).sort((a,b)=>b.c-a.c)[0];if(top)out.push(`أكثر أنواع الآليات تكلفة <b>${esc(top.n)}</b> بإجمالي <b class="num">${fmt(top.c)}</b> ريال عبر ${top.k} إصلاح.`)}
-  const rep=repeats();if(rep.length)out.push(`<b>${rep.length}</b> آلية تكرر إصلاحها أكثر من مرة بتكلفة مجمعة <b class="num">${fmt(rep.reduce((a,r)=>a+r.c,0))}</b> ريال.`);
-  if(t.b){const br=regs.filter(r=>r[1].b).sort((a,b)=>b[1].b-a[1].b)[0];if(br)out.push(`أعلى عدد آليات متعطلة في <b>${esc(br[0])}</b> (${fmt(br[1].b)} آلية).`)}
-  $('#insights').innerHTML=`<h2>قراءة سريعة</h2>`+(out.length?out.map(s=>`<p>${s}</p>`).join(''):'<p>لا توجد بيانات كافية للفترة المحددة.</p>');
+    const top=Object.values(ty).sort((a,b)=>b.c-a.c)[0];if(top)out.push(['truck','',`<b>${esc(top.n)}</b> أكثر الأنواع تكلفة: <b class="num">${fmt(top.c)}</b> ريال في ${top.k} إصلاح.`])}
+  const rep=repeats();if(rep.length)out.push(['repeat','s',`<b>${rep.length}</b> آلية تكرر إصلاحها بتكلفة مجمعة <b class="num">${fmt(rep.reduce((a,r)=>a+r.c,0))}</b> ريال.`]);
+  $('#insights').innerHTML=out.slice(0,4).map(([i,c,s])=>`<div class="c ${c}"><span class="dot">${ico(i)}</span><p>${s}</p></div>`).join('');
 }
 function renderTrend(){
-  const s1=css('--s1'),s2=css('--s2'),grid=css('--line-2');
-  const labels=months.map(m=>MONTHS[m.m-1]+(months.some(x=>x.y!==m.y)?' '+m.y:''));
-  const tot=months.map(m=>totals(aggSum([m])));
-  const colors=months.map(m=>state.month==='all'||state.month===m.key?s1:alpha(s1,.3));
-  const scales={x:{reverse:true,grid:{display:false}},y:{position:'right',grid:{color:grid},border:{display:false},ticks:{callback:kfmt}}};
-  draw('cTrend',{type:'bar',data:{labels,datasets:[{data:tot.map(t=>t.c),backgroundColor:colors,borderRadius:{topLeft:4,topRight:4},borderSkipped:'start',maxBarThickness:56}]},
-    options:{...baseOpts(),scales,onClick:(e,el)=>{if(el.length){const k=months[el[0].index].key;state.month=state.month===k?'all':k;state.page=0;render()}},
-      plugins:{...baseOpts().plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:{title:i=>mlabel(months[i[0].dataIndex]),label:i=>`التكلفة: ${fmt(i.raw)} ريال`,afterLabel:i=>`الآليات: ${fmt(tot[i.dataIndex].n)}`}}}}});
+  const t=T();const labels=months.map(m=>MONTHS[m.m-1]+(months.some(x=>x.y!==m.y)?' '+m.y:''));
+  const tot=months.map(m=>totals(aggSum([m])));const on=m=>state.month==='all'||state.month===m.key;
+  draw('cTrend',{type:'bar',data:{labels,datasets:[{data:tot.map(x=>x.c),backgroundColor:c=>on(months[c.dataIndex])?grad(c,t.acc,.55,1):rgba(t.acc,.16),hoverBackgroundColor:rgba(t.acc,1),borderRadius:10,borderSkipped:'start',maxBarThickness:64,categoryPercentage:.6}]},
+    options:{...base(),scales:{x:axisX(t),y:axisY(t,{beginAtZero:true})},onHover:(e,el)=>{e.native.target.style.cursor=el.length?'pointer':'default'},
+      onClick:(e,el)=>{if(el.length){const k=months[el[0].index].key;state.month=state.month===k?'all':k;state.page=0;render()}},
+      plugins:{...base().plugins,valueLabels:{on:true},tooltip:tip({title:i=>mlabel(months[i[0].dataIndex]),label:i=>`التكلفة: ${fmt(i.raw)} ريال`,footer:i=>`الآليات: ${fmt(tot[i[0].dataIndex].n)}`})}}});
   draw('cCount',{type:'bar',data:{labels,datasets:[
-      {label:'بتكاليف',data:tot.map(t=>t.n-t.z),backgroundColor:months.map(m=>state.month==='all'||state.month===m.key?s1:alpha(s1,.3)),borderColor:css('--surface'),borderWidth:{top:2},maxBarThickness:56},
-      {label:'بدون تكاليف',data:tot.map(t=>t.z),backgroundColor:months.map(m=>state.month==='all'||state.month===m.key?s2:alpha(s2,.3)),borderRadius:{topLeft:4,topRight:4},borderSkipped:'start',maxBarThickness:56}]},
-    options:{...baseOpts(),scales:{x:{...scales.x,stacked:true},y:{...scales.y,stacked:true,ticks:{}}},
-      plugins:{...baseOpts().plugins,tooltip:{...baseOpts().plugins.tooltip,mode:'index',displayColors:true,callbacks:{title:i=>mlabel(months[i[0].dataIndex]),label:i=>`${i.dataset.label}: ${fmt(i.raw)}`,footer:i=>`الإجمالي: ${fmt(tot[i[0].dataIndex].n)}`}}}}});
+      {label:'بتكاليف',data:tot.map(x=>x.n-x.z),backgroundColor:months.map(m=>on(m)?rgba(t.acc,.92):rgba(t.acc,.18)),borderColor:t.surface,borderWidth:{top:3},borderSkipped:'start',maxBarThickness:64,categoryPercentage:.6},
+      {label:'بدون تكاليف',data:tot.map(x=>x.z),backgroundColor:months.map(m=>on(m)?rgba(t.sand,.92):rgba(t.sand,.2)),borderRadius:{topLeft:10,topRight:10},borderSkipped:'start',maxBarThickness:64,categoryPercentage:.6}]},
+    options:{...base(),scales:{x:{...axisX(t),stacked:true},y:{...axisY(t),stacked:true,ticks:{padding:10,font:{family:t.font,size:11}}}},
+      plugins:{...base().plugins,valueLabels:{on:true,stackTop:true,f:fmt},tooltip:tip({title:i=>mlabel(months[i[0].dataIndex]),label:i=>`${i.dataset.label}: ${fmt(i.raw)}`,footer:i=>`الإجمالي: ${fmt(tot[i[0].dataIndex].n)} آلية`},{mode:'index',displayColors:true})}}});
+  const tt=totals(aggSum(selMonths()));const paid=tt.n-tt.z;
+  draw('cDonut',{type:'doughnut',data:{labels:['بتكاليف','بدون تكاليف'],datasets:[{data:[paid,tt.z],backgroundColor:[rgba(t.acc,1),rgba(t.sand,1)],borderColor:t.surface,borderWidth:4,borderRadius:8,hoverOffset:6}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'76%',animation:{duration:700},plugins:{legend:{display:false},tooltip:tip({label:i=>`${i.label}: ${fmt(i.raw)} (${pct(i.raw,tt.n).toFixed(1)}%)`})}}});
+  $('#donutC').innerHTML=`<div><b>${fmt(tt.n)}</b><span>آلية</span></div>`;
+  $('#donutL').innerHTML=`<div><i style="background:var(--accent)"></i><span>بتكاليف</span><b class="num">${fmt(paid)}</b><span class="p">${pct(paid,tt.n).toFixed(0)}%</span></div><div><i style="background:var(--sand)"></i><span>بدون تكاليف</span><b class="num">${fmt(tt.z)}</b><span class="p">${pct(tt.z,tt.n).toFixed(0)}%</span></div>`;
+}
+function renderMap(){
+  const o=aggSum(selMonths(),true);const k=state.map;const val=r=>{const s=o[r];if(!s)return null;return k==='b'?s.b:k==='n'?s.n:s.c};
+  let max=0;for(const r in TILE){const v=val(r);if(v)max=Math.max(max,v)}
+  const acc=css('--accent-rgb');
+  $('#tmap').innerHTML=Object.entries(TILE).map(([r,[row,c]])=>{const v=val(r);const a=v?(.12+.88*(v/max)):.05;const dark=a>.5;
+    const txt=v==null?'—':k==='c'?short(v):fmt(v);
+    return`<button type="button" class="tile${state.region===r?' sel':''}${state.region!=='all'&&state.region!==r?' dim':''}" data-r="${esc(r)}" style="grid-row:${row};grid-column:${c};background:rgba(${acc},${a.toFixed(2)});color:${dark?'#fff':'var(--ink)'}" title="${esc(r)}"><span class="n">${esc(SHORT[r]||r)}</span><span class="v">${txt}</span></button>`}).join('');
 }
 function renderRegion(){
-  const o=aggSum(selMonths());const ent=Object.entries(o).sort((a,b)=>b[1].c-a[1].c);const t=totals(o);const s1=css('--s1');
-  draw('cRegion',{type:'bar',data:{labels:ent.map(e=>e[0]),datasets:[{data:ent.map(e=>e[1].c),backgroundColor:ent.map(e=>state.region==='all'||state.region===e[0]?s1:alpha(s1,.3)),borderRadius:{topLeft:4,bottomLeft:4},borderSkipped:'start',maxBarThickness:22}]},
-    options:{...baseOpts(),indexAxis:'y',scales:{x:{reverse:true,grid:{color:css('--line-2')},border:{display:false},ticks:{callback:kfmt}},y:{position:'right',grid:{display:false},ticks:{autoSkip:false,color:css('--ink')}}},
+  const t=T();const o=aggSum(selMonths());const ent=Object.entries(o).sort((a,b)=>b[1].c-a[1].c);const tt=totals(o);
+  draw('cRegion',{type:'bar',data:{labels:ent.map(e=>e[0]),datasets:[{data:ent.map(e=>e[1].c),backgroundColor:c=>state.region==='all'||state.region===ent[c.dataIndex]?.[0]?grad(c,t.acc,.35,1,true):rgba(t.acc,.15),borderRadius:8,borderSkipped:'start',maxBarThickness:20,categoryPercentage:.75}]},
+    options:{...base({layout:{padding:{left:60,top:4}}}),indexAxis:'y',scales:{x:{reverse:true,display:false,beginAtZero:true},y:{position:'right',grid:{display:false},border:{display:false},ticks:{autoSkip:false,color:t.ink,padding:8,font:{size:12}}}},
+      onHover:(e,el)=>{e.native.target.style.cursor=el.length?'pointer':'default'},
       onClick:(e,el)=>{if(el.length){const r=ent[el[0].index][0];state.region=state.region===r?'all':r;state.page=0;render()}},
-      plugins:{...baseOpts().plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:{label:i=>`التكلفة: ${fmt(i.raw)} ريال (${pct(i.raw,t.c).toFixed(1)}%)`,afterLabel:i=>{const s=ent[i.dataIndex][1];return`الآليات: ${fmt(s.n)} · بدون تكاليف: ${fmt(s.z)}`}}}}}});
+      plugins:{...base().plugins,valueLabels:{on:true},tooltip:tip({label:i=>`التكلفة: ${fmt(i.raw)} ريال (${pct(i.raw,tt.c).toFixed(1)}%)`,afterLabel:i=>{const s=ent[i.dataIndex][1];return`الآليات: ${fmt(s.n)} · بدون تكاليف: ${fmt(s.z)}`}})}}});
 }
 function renderHeat(){
   const regs=[...new Set(months.flatMap(m=>Object.keys(m.sum)))].filter(regOK);
   const cell=(m,r)=>(m.sum[r]||{}).c||0;let max=0;for(const m of months)for(const r of regs)max=Math.max(max,cell(m,r));
-  const heat=css('--heat');const ink=css('--ink');
-  const order=regs.sort((a,b)=>months.reduce((s,m)=>s+cell(m,b),0)-months.reduce((s,m)=>s+cell(m,a),0));
+  const acc=css('--accent-rgb');
+  regs.sort((a,b)=>months.reduce((s,m)=>s+cell(m,b),0)-months.reduce((s,m)=>s+cell(m,a),0));
   const last=months[months.length-1],prev=months[months.length-2];
-  let h=`<thead><tr><th>المنطقة</th>${months.map(m=>`<th class="n">${MONTHS[m.m-1]}</th>`).join('')}${prev?'<th class="n">التغير</th>':''}</tr></thead><tbody>`;
-  for(const r of order){h+=`<tr class="clickable" data-r="${esc(r)}"><td>${esc(r)}</td>`+months.map(m=>{const v=cell(m,r);const a=max?.08+.82*(v/max):0;const sel=state.month==='all'||state.month===m.key;
-      return`<td class="h" style="background:rgba(${heat},${v?a.toFixed(2):0});color:${a>.55?'#fff':ink};${sel?'':'opacity:.45'}">${v?(v/1000).toFixed(1):'<span class="zero">–</span>'}</td>`}).join('');
-    if(prev){const a=cell(last,r),b=cell(prev,r);h+=`<td class="n">${b&&last.sum[r]?deltaPill(a,b):'<span class="zero">–</span>'}</td>`}h+='</tr>'}
+  let h=`<thead><tr><th>المنطقة</th>${months.map(m=>`<th style="text-align:center">${MONTHS[m.m-1]}</th>`).join('')}<th class="n">الإجمالي</th>${prev?`<th class="n">${MONTHS[last.m-1]} مقابل ${MONTHS[prev.m-1]}</th>`:''}</tr></thead><tbody>`;
+  for(const r of regs){const sum=months.reduce((s,m)=>s+cell(m,r),0);
+    h+=`<tr class="clk${state.region===r?' sel':''}" data-r="${esc(r)}"><td>${esc(r)}</td>`+months.map(m=>{const v=cell(m,r);const a=max?.07+.85*(v/max):0;const sel=state.month==='all'||state.month===m.key;
+      return`<td class="h" style="background:rgba(${acc},${v?a.toFixed(2):0});color:${a>.5?'#fff':'var(--ink)'};${sel?'':'opacity:.4'}">${v?(v/1000).toFixed(1):'<span class="zero">–</span>'}</td>`}).join('')+`<td class="n">${(sum/1000).toFixed(1)}</td>`;
+    if(prev){const a=cell(last,r),b=cell(prev,r);h+=`<td class="n">${b&&last.sum[r]?chip(a,b):'<span class="zero">–</span>'}</td>`}h+='</tr>'}
   $('#tHeat').innerHTML=h+'</tbody>';
 }
 function renderRegionTable(){
-  const o=aggSum(selMonths());const t=totals(o);const ent=Object.entries(o).sort((a,b)=>b[1].c-a[1].c);const bA=t.b!=null;
-  const tr=(name,s,cls='')=>{const paid=s.n-s.z;return`<tr class="${cls}" ${cls?'':`data-r="${esc(name)}"`}><td>${esc(name)}</td><td class="n">${fmt(s.n)}</td><td class="n">${fmt(paid)}</td><td class="n">${fmt(s.z)}</td><td class="n">${fmt2(s.c)}</td><td class="n">${paid?fmt(s.c/paid):'–'}</td><td class="n">${pct(s.c,t.c).toFixed(1)}%</td>${bA?`<td class="n">${s.b==null?'–':fmt(s.b)}</td>`:''}</tr>`};
-  $('#tRegion').innerHTML=`<thead><tr><th>المنطقة</th><th class="n">تم الإصلاح</th><th class="n">بتكاليف</th><th class="n">بدون تكاليف</th><th class="n">مبالغ الإصلاح (ريال)</th><th class="n">متوسط التكلفة</th><th class="n">الحصة</th>${bA?'<th class="n">آليات متعطلة</th>':''}</tr></thead><tbody>`+
-    ent.map(([r,s])=>tr(r,s).replace('<tr class=""','<tr class="clickable"')).join('')+tr('المجموع',t,'total')+'</tbody>';
+  const o=aggSum(selMonths());const t=totals(o);const ent=Object.entries(o).sort((a,b)=>b[1].c-a[1].c);const bA=t.b!=null;const mx=Math.max(...ent.map(e=>e[1].c),1);
+  const tr=(name,s,total)=>{const paid=s.n-s.z;const sh=pct(s.c,t.c);return`<tr class="${total?'total':'clk'+(state.region===name?' sel':'')}" ${total?'':`data-r="${esc(name)}"`}><td>${total?'<b>المجموع</b>':esc(name)}</td><td class="n">${fmt(s.n)}</td><td class="n">${fmt(paid)}</td><td class="n">${fmt(s.z)}</td><td class="n">${fmt2(s.c)}</td><td class="n">${paid?fmt(s.c/paid):'–'}</td><td class="n"><span class="share">${total?'':`<i style="width:${(s.c/mx*80).toFixed(0)}px"></i>`}${sh.toFixed(1)}%</span></td>${bA?`<td class="n">${s.b==null?'–':fmt(s.b)}</td>`:''}</tr>`};
+  $('#tRegion').innerHTML=`<thead><tr><th>المنطقة</th><th class="n">تم الإصلاح</th><th class="n">بتكاليف</th><th class="n">بدون تكاليف</th><th class="n">مبالغ الإصلاح (ريال)</th><th class="n">متوسط التكلفة</th><th class="n">الحصة</th>${bA?'<th class="n">آليات متعطلة</th>':''}</tr></thead><tbody>`+ent.map(([r,s])=>tr(r,s)).join('')+tr('',t,true)+'</tbody>';
 }
 function renderDetailPanels(){
-  const ms=selMonths();const rows=detailRows(ms);const summ=ms.filter(m=>!m.detail);
+  const t=T();const ms=selMonths();const rows=detailRows(ms);const summ=ms.filter(m=>!m.detail);
   $('#detailNote').hidden=!summ.length;
-  $('#detailNoteText').textContent=summ.length?(rows.length?`تحليل أنواع الآليات والأعطال والسجل التفصيلي يشمل الأشهر ذات البيانات التفصيلية فقط. شهر ${summ.map(m=>MONTHS[m.m-1]).join('، ')} متوفر كملخص على مستوى المنطقة.`:`بيانات ${summ.map(m=>mlabel(m)).join('، ')} ملخص على مستوى المنطقة فقط. لعرض تحليل الآليات والأعطال ارفع ملف الشهر التفصيلي بصيغة النموذج.`):'';
-  const s1=css('--s1'),grid=css('--line-2'),ink=css('--ink');
-  const hb=(id,labels,data,tip,color=s1)=>draw(id,{type:'bar',data:{labels,datasets:[{data,backgroundColor:color,borderRadius:{topLeft:4,bottomLeft:4},borderSkipped:'start',maxBarThickness:20}]},
-    options:{...baseOpts(),indexAxis:'y',scales:{x:{reverse:true,grid:{color:grid},border:{display:false},ticks:{callback:kfmt}},y:{position:'right',grid:{display:false},ticks:{autoSkip:false,color:ink,callback:function(v){const l=this.getLabelForValue(v);return l.length>22?l.slice(0,21)+'…':l}}}},
-      plugins:{...baseOpts().plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:tip}}}});
+  $('#detailNoteText').textContent=summ.length?(rows.length?`هذا القسم يشمل الأشهر ذات البيانات التفصيلية فقط. ${summ.map(m=>MONTHS[m.m-1]).join('، ')} متوفر كملخص على مستوى المنطقة.`:`بيانات ${summ.map(m=>mlabel(m)).join('، ')} ملخص على مستوى المنطقة فقط. ارفع الملف التفصيلي للشهر بصيغة النموذج لعرض تحليل الآليات والأعطال.`):'';
+  const hbar=(id,labels,data,rgb,tipcb,f)=>draw(id,{type:'bar',data:{labels,datasets:[{data,backgroundColor:c=>grad(c,rgb,.3,.95,true),borderRadius:8,borderSkipped:'start',maxBarThickness:18,categoryPercentage:.75}]},
+    options:{...base({layout:{padding:{left:56,top:4}}}),indexAxis:'y',scales:{x:{reverse:true,display:false,beginAtZero:true},y:{position:'right',grid:{display:false},border:{display:false},ticks:{autoSkip:false,color:t.ink,padding:8,font:{size:12},callback:function(v){const l=this.getLabelForValue(v);return l.length>24?l.slice(0,23)+'…':l}}}},
+      plugins:{...base().plugins,valueLabels:{on:true,f},tooltip:tip(tipcb)}}});
   const ty={};for(const r of rows){const k=norm(r.t)||'غير محدد';(ty[k]||(ty[k]={n:r.t||'غير محدد',c:0,k:0})).c+=r.c;ty[k].k++}
-  const tt=Object.values(ty).sort((a,b)=>b.c-a.c).slice(0,12);
-  hb('cTypes',tt.map(x=>x.n),tt.map(x=>x.c),{label:i=>`التكلفة: ${fmt(i.raw)} ريال`,afterLabel:i=>`عدد الإصلاحات: ${tt[i.dataIndex].k} · المتوسط: ${fmt(tt[i.dataIndex].c/tt[i.dataIndex].k)}`});
+  const tt=Object.values(ty).sort((a,b)=>b.c-a.c).slice(0,10);
+  hbar('cTypes',tt.map(x=>x.n),tt.map(x=>x.c),t.acc,{label:i=>`التكلفة: ${fmt(i.raw)} ريال`,afterLabel:i=>`عدد الإصلاحات: ${tt[i.dataIndex].k} · المتوسط: ${fmt(tt[i.dataIndex].c/tt[i.dataIndex].k)} ريال`});
   const cs={};for(const r of rows)for(const c of catsOf(r.d)){(cs[c]||(cs[c]={k:0,c:0})).k++;cs[c].c+=r.c}
   const ce=Object.entries(cs).sort((a,b)=>b[1].k-a[1].k);
-  draw('cCats',{type:'bar',data:{labels:ce.map(e=>e[0]),datasets:[{data:ce.map(e=>e[1].k),backgroundColor:css('--s3'),borderRadius:{topLeft:4,bottomLeft:4},borderSkipped:'start',maxBarThickness:20}]},
-    options:{...baseOpts(),indexAxis:'y',scales:{x:{reverse:true,grid:{color:grid},border:{display:false}},y:{position:'right',grid:{display:false},ticks:{autoSkip:false,color:ink}}},
-      plugins:{...baseOpts().plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:{label:i=>`عدد الإصلاحات: ${fmt(i.raw)}`,afterLabel:i=>`تكلفة الإصلاحات المتضمنة: ${fmt(ce[i.dataIndex][1].c)} ريال`}}}}});
-  const B=[['بدون تكاليف',0],['1–500',500],['501–1,000',1000],['1,001–2,500',2500],['2,501–5,000',5000],['5,001–10,000',10000],['أكثر من 10,000',Infinity]];
+  hbar('cCats',ce.map(e=>e[0]),ce.map(e=>e[1].k),t.sand,{label:i=>`عدد الإصلاحات: ${fmt(i.raw)}`,afterLabel:i=>`تكلفة الإصلاحات المتضمنة: ${fmt(ce[i.dataIndex][1].c)} ريال`},fmt);
+  const B=[[['بدون','تكلفة'],0],[['حتى','500'],500],[['501','–1,000'],1000],[['1,001','–2,500'],2500],[['2,501','–5,000'],5000],[['5,001','–10,000'],10000],[['أكثر من','10,000'],Infinity]];
   const bc=B.map(()=>0);for(const r of rows)bc[B.findIndex(b=>r.c<=b[1])]++;
-  draw('cDist',{type:'bar',data:{labels:B.map(b=>b[0]),datasets:[{data:bc,backgroundColor:B.map((b,i)=>i===0?css('--s2'):s1),borderRadius:{topLeft:4,topRight:4},borderSkipped:'start',maxBarThickness:44}]},
-    options:{...baseOpts(),scales:{x:{reverse:true,grid:{display:false},ticks:{maxRotation:0,autoSkip:false,font:{size:10}}},y:{position:'right',grid:{color:grid},border:{display:false}}},
-      plugins:{...baseOpts().plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:{title:i=>`شريحة: ${i[0].label} ريال`,label:i=>`${fmt(i.raw)} إصلاح (${pct(i.raw,rows.length).toFixed(1)}%)`}}}}});
+  draw('cDist',{type:'bar',data:{labels:B.map(b=>b[0]),datasets:[{data:bc,backgroundColor:c=>c.dataIndex===0?rgba(t.sand,.9):grad(c,t.acc,.4,1),borderRadius:8,borderSkipped:'start',maxBarThickness:40,categoryPercentage:.7}]},
+    options:{...base(),scales:{x:axisX(t,{ticks:{padding:8,color:t.ink2,maxRotation:0,autoSkip:false,font:{size:10.5}}}),y:axisY(t,{beginAtZero:true,ticks:{padding:10,font:{family:t.font,size:11}}})},
+      plugins:{...base().plugins,valueLabels:{on:true,f:fmt},tooltip:tip({title:i=>`شريحة: ${B[i[0].dataIndex][0].join(' ')} ريال`,label:i=>`${fmt(i.raw)} إصلاح (${pct(i.raw,rows.length).toFixed(1)}%)`})}}});
   const top=[...rows].sort((a,b)=>b.c-a.c).slice(0,10);
-  const mOf=k=>months.find(m=>m.key===k);
-  $('#topList').innerHTML=top.length?top.map((r,i)=>`<div class="row"><span class="i">${i+1}</span><div class="t"><div><b>${esc(r.t)}</b> ${r.p&&r.p!=='-'?`<span class="plate">${esc(r.p)}</span>`:''}</div><div class="s" title="${esc(r.d)}">${esc(r.r)} · ${esc(MONTHS[mOf(r.mk).m-1])} · ${esc(r.d)}</div></div><span class="c">${fmt(r.c)} <small class="zero">ريال</small></span></div>`).join(''):'<div class="empty">لا توجد بيانات تفصيلية للفترة المحددة.</div>';
+  $('#topList').innerHTML=top.length?top.map((r,i)=>`<div class="row"><span class="i">${i+1}</span><div class="t"><div class="a"><b>${esc(r.t)}</b>${r.p&&r.p.trim()!=='-'?plate(r.p):''}<span class="badge a">${esc(r.r)}</span></div><div class="s" title="${esc(r.d)}">${esc(r.d)}</div></div><span class="c">${fmt(r.c)}<small>ريال · ${esc(MONTHS[monthOf(r.mk).m-1])}</small></span></div>`).join(''):'<div class="empty">لا توجد بيانات تفصيلية للفترة المحددة.</div>';
 }
 function repeats(){
   const g={};for(const m of months.filter(m=>m.detail))for(const r of m.rows){if(!regOK(r.r))continue;const k=plateKey(r.p);if(!k)continue;(g[k]||(g[k]={p:r.p,t:r.t,r:r.r,items:[]})).items.push(r)}
@@ -495,7 +697,7 @@ function repeats(){
 function renderRepeats(){
   const rep=repeats();$('#repBadge').textContent=`${rep.length} آلية`;
   $('#tRepeat').innerHTML=rep.length?`<thead><tr><th>رقم اللوحة</th><th>نوع الآلية</th><th>المنطقة</th><th class="n">مرات الإصلاح</th><th>الأشهر</th><th class="n">التكلفة المجمعة</th><th>الإصلاحات</th></tr></thead><tbody>`+
-    rep.slice(0,200).map(x=>`<tr><td><span class="plate">${esc(x.p)}</span></td><td>${esc(x.t)}</td><td>${esc(x.r)}</td><td class="n"><span class="pill ${x.items.length>2?'up':'warn'}">${x.items.length}</span></td><td>${x.ms.map(k=>MONTHS[months.find(m=>m.key===k).m-1]).join('، ')}</td><td class="n">${fmt(x.c)}</td><td class="wrap">${x.items.map(r=>esc(r.d)).join(' | ')}</td></tr>`).join('')+'</tbody>'
+    rep.slice(0,200).map(x=>`<tr><td>${plate(x.p)}</td><td>${esc(x.t)}</td><td>${esc(x.r)}</td><td class="n"><span class="chip ${x.items.length>2?'up':'warn'}">${x.items.length}×</span></td><td>${x.ms.map(k=>MONTHS[monthOf(k).m-1]).join('، ')}</td><td class="n">${fmt(x.c)}</td><td class="wrap">${x.items.map(r=>esc(r.d)).join(' • ')}</td></tr>`).join('')+'</tbody>'
     :'<tbody><tr><td class="empty">لا توجد آليات مكررة في البيانات التفصيلية.</td></tr></tbody>';
 }
 function filteredDetail(){
@@ -503,48 +705,52 @@ function filteredDetail(){
   if(state.cost==='paid')rows=rows.filter(r=>r.c>0);else if(state.cost==='free')rows=rows.filter(r=>!r.c);
   if(q)rows=rows.filter(r=>norm(r.t+' '+r.p+' '+r.d+' '+r.r).includes(q)||plateKey(r.p).includes(q.replace(/\s/g,'')));
   const{k,d}=state.sort;rows.sort((a,b)=>k==='c'?(a.c-b.c)*d:k==='mk'?(a.mk-b.mk)*d:String(a[k]).localeCompare(String(b[k]),'ar')*d);return rows}
-const PG=25;
+const PG=20;
 function renderDetail(){
   const rows=filteredDetail();const pages=Math.max(1,Math.ceil(rows.length/PG));state.page=Math.min(state.page,pages-1);
   const sl=rows.slice(state.page*PG,state.page*PG+PG);const sum=rows.reduce((a,r)=>a+r.c,0);
   const th=(k,l,n)=>`<th class="sort${n?' n':''}${state.sort.k===k?(state.sort.d>0?' asc':' desc'):''}" data-k="${k}">${l}</th>`;
   $('#tDetail').innerHTML=`<thead><tr>${th('mk','الشهر')}${th('t','نوع الآلية')}${th('p','رقم اللوحة')}${th('r','المنطقة')}<th>نوع الإصلاح</th>${th('c','قيمة الإصلاح',1)}</tr></thead><tbody>`+
-    (sl.length?sl.map(r=>`<tr><td>${MONTHS[months.find(m=>m.key===r.mk).m-1]}</td><td>${esc(r.t)}</td><td>${r.p&&r.p!=='-'?`<span class="plate">${esc(r.p)}</span>`:'<span class="zero">–</span>'}</td><td>${esc(r.r)}</td><td class="wrap">${esc(r.d)}</td><td class="n">${r.c?fmt2(r.c):'<span class="badge">بدون تكاليف</span>'}</td></tr>`).join(''):'<tr><td colspan="6" class="empty">لا توجد سجلات مطابقة.</td></tr>')+'</tbody>';
-  $('#tblHint').textContent=`${fmt(rows.length)} سجل · الإجمالي ${fmt2(sum)} ريال`;
+    (sl.length?sl.map(r=>`<tr><td>${MONTHS[monthOf(r.mk).m-1]}</td><td><b style="font-weight:500">${esc(r.t)}</b></td><td>${plate(r.p)}</td><td>${esc(r.r)}</td><td class="wrap">${esc(r.d)}</td><td class="n">${r.c?fmt2(r.c):'<span class="badge s">بدون تكاليف</span>'}</td></tr>`).join(''):'<tr><td colspan="6" class="empty">لا توجد سجلات مطابقة.</td></tr>')+'</tbody>';
+  $('#tblHint').textContent=`${fmt(rows.length)} سجل · ${fmt2(sum)} ريال`;
   $('#pgInfo').textContent=`صفحة ${state.page+1} من ${pages}`;$('#pgPrev').disabled=state.page===0;$('#pgNext').disabled=state.page>=pages-1;
 }
 let pendingDel=null;
 function renderMonthsList(){
-  $('#mlist').innerHTML=months.length?months.map(m=>{const t=totals(Object.fromEntries(Object.entries(m.sum)));return`<div class="mitem"><div><div class="mt">${esc(mlabel(m))} <span class="badge">${m.detail?'تفصيلي':'ملخص مناطق'}</span> <span class="badge">${m.source==='builtin'?'مدمج':'مرفوع'}</span></div><div class="ms">${esc(m.file)} · ${fmt(t.n)} آلية · ${fmt(t.c)} ريال</div></div><button class="btn ghost" type="button" data-del="${m.key}">${pendingDel===m.key?'تأكيد الحذف':'حذف'}</button></div>`}).join(''):'<div class="empty">لا توجد أشهر محملة. ارفع ملفاً للبدء.</div>';
+  $('#mCount').textContent=`${months.length} أشهر محملة`;
+  $('#mlist').innerHTML=months.length?months.map(m=>{const t=totals(m.sum);return`<div class="mitem"><div><span class="mi${m.detail?'':' s'}">${ico('cal')}</span><div style="min-width:0"><div class="mt">${esc(mlabel(m))}<span class="badge ${m.detail?'a':'s'}">${m.detail?'تفصيلي':'ملخص مناطق'}</span><span class="badge">${m.source==='builtin'?'مدمج':'مرفوع'}</span></div><div class="ms">${fmt(t.n)} آلية · ${fmt(t.c)} ريال · ${esc(m.file)}</div></div></div><button class="btn" type="button" data-del="${m.key}">${ico('trash')}${pendingDel===m.key?'تأكيد الحذف':'حذف'}</button></div>`}).join(''):'<div class="empty">لا توجد أشهر محملة. ارفع ملفاً للبدء.</div>';
 }
-function render(){renderFilters();renderKPIs();renderInsights();renderTrend();renderRegion();renderHeat();renderRegionTable();renderDetailPanels();renderRepeats();renderDetail();renderMonthsList()}
+function render(){renderFilters();renderHero();renderKPIs();renderInsights();renderTrend();renderMap();renderRegion();renderHeat();renderRegionTable();renderDetailPanels();renderRepeats();renderDetail();renderMonthsList()}
 
 /* ---------- events ---------- */
 $('#monthSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.month=b.dataset.m==='all'?'all':+b.dataset.m;state.page=0;render()});
 $('#regionSel').addEventListener('change',e=>{state.region=e.target.value;state.page=0;render()});
-document.addEventListener('click',e=>{const tr=e.target.closest('tr[data-r]');if(tr&&tr.closest('#tRegion,#tHeat')){const r=tr.dataset.r;state.region=state.region===r?'all':r;state.page=0;render()}});
+$('#mapMetric').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.map=b.dataset.k;[...e.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',x===b));renderMap()});
+document.addEventListener('click',e=>{const el=e.target.closest('[data-r]');if(el&&el.closest('#tRegion,#tHeat,#tmap')){const r=el.dataset.r;state.region=state.region===r?'all':r;state.page=0;render()}});
 $('#q').addEventListener('input',e=>{state.q=e.target.value;state.page=0;renderDetail()});
 $('#costFilter').addEventListener('change',e=>{state.cost=e.target.value;state.page=0;renderDetail()});
 $('#tDetail').addEventListener('click',e=>{const th=e.target.closest('th[data-k]');if(!th)return;const k=th.dataset.k;state.sort=state.sort.k===k?{k,d:-state.sort.d}:{k,d:k==='c'?-1:1};renderDetail()});
 $('#pgPrev').onclick=()=>{state.page--;renderDetail()};$('#pgNext').onclick=()=>{state.page++;renderDetail()};
 $('#mlist').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(!b)return;const k=+b.dataset.del;
   if(pendingDel!==k){pendingDel=k;renderMonthsList();setTimeout(()=>{if(pendingDel===k){pendingDel=null;renderMonthsList()}},4000);return}
-  pendingDel=null;const m=months.find(x=>x.key===k);months=months.filter(x=>x.key!==k);if(state.month===k)state.month='all';saveStore();render();toast(`تم حذف ${mlabel(m)}`)});
+  pendingDel=null;const m=monthOf(k);months=months.filter(x=>x.key!==k);if(state.month===k)state.month='all';saveStore();render();toast(`حُذف ${mlabel(m)}`)});
 let resetArm=false;
-$('#btnReset').onclick=e=>{if(!resetArm){resetArm=true;e.target.textContent='تأكيد: حذف المرفوعات واستعادة الأصل';setTimeout(()=>{resetArm=false;e.target.textContent='استعادة البيانات الأصلية'},4000);return}
-  resetArm=false;e.target.textContent='استعادة البيانات الأصلية';try{localStorage.removeItem(STORE)}catch(_){}initData();state.month='all';state.region='all';render();toast('تمت استعادة البيانات الأصلية')};
+$('#btnReset').onclick=e=>{const b=e.currentTarget;if(!resetArm){resetArm=true;b.textContent='تأكيد الاستعادة';setTimeout(()=>{resetArm=false;b.textContent='استعادة البيانات الأصلية'},4000);return}
+  resetArm=false;b.textContent='استعادة البيانات الأصلية';try{localStorage.removeItem(STORE)}catch(_){}initData();state.month='all';state.region='all';render();toast('استُعيدت البيانات الأصلية')};
+const navLinks=[...document.querySelectorAll('.nav a')];
+try{const io=new IntersectionObserver(es=>{for(const en of es)if(en.isIntersecting){navLinks.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id))}},{rootMargin:'-30% 0px -60% 0px'});
+  ['overview','regions','fleet','records','data'].forEach(id=>io.observe(document.getElementById(id)))}catch(e){}
 function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>el.hidden=true,3200)}
 function saveFile(blob,name){try{const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);toast(`جارٍ تنزيل ${name}`)}catch(e){toast('تعذر التنزيل في هذا العرض. افتح ملف HTML مباشرة في المتصفح.')}}
 function dlTemplate(){const bin=atob(TPL_B64);const u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);
   saveFile(new Blob([u8],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),'نموذج_تكاليف_الصيانة_الشهرية.xlsx')}
-$('#btnTpl').onclick=dlTemplate;$('#btnTpl2').onclick=dlTemplate;
+['#btnTpl','#btnTpl2','#btnTpl3'].forEach(s=>$(s).onclick=dlTemplate);
 $('#btnExport').onclick=()=>{const rows=filteredDetail();if(!rows.length){toast('لا توجد سجلات للتصدير');return}
-  const ws=XLSX.utils.aoa_to_sheet([['الشهر','نوع الآلية','رقم اللوحة','المنطقة','نوع الإصلاح','قيمة الإصلاح'],...rows.map(r=>{const m=months.find(x=>x.key===r.mk);return[mlabel(m),r.t,r.p,r.r,r.d,r.c]})]);
-  ws['!cols']=[{wch:16},{wch:22},{wch:14},{wch:24},{wch:60},{wch:14}];ws['!views']=[{RTL:true}];
+  const ws=XLSX.utils.aoa_to_sheet([['الشهر','نوع الآلية','رقم اللوحة','المنطقة','نوع الإصلاح','قيمة الإصلاح'],...rows.map(r=>[mlabel(monthOf(r.mk)),r.t,r.p,r.r,r.d,r.c])]);
+  ws['!cols']=[{wch:16},{wch:22},{wch:14},{wch:24},{wch:60},{wch:14}];
   const o=aggSum(selMonths());const ws2=XLSX.utils.aoa_to_sheet([['المنطقة','تم الإصلاح','بتكاليف','بدون تكاليف','مبالغ الإصلاح','آليات متعطلة'],...Object.entries(o).sort((a,b)=>b[1].c-a[1].c).map(([r,s])=>[r,s.n,s.n-s.z,s.z,s.c,s.b??''])]);
   const wb=XLSX.utils.book_new();wb.Workbook={Views:[{RTL:true}]};XLSX.utils.book_append_sheet(wb,ws,'السجل');XLSX.utils.book_append_sheet(wb,ws2,'ملخص المناطق');
-  const out=XLSX.write(wb,{type:'array',bookType:'xlsx'});saveFile(new Blob([out],{type:'application/octet-stream'}),'تحليل_تكاليف_الصيانة.xlsx')};
-
+  saveFile(new Blob([XLSX.write(wb,{type:'array',bookType:'xlsx'})],{type:'application/octet-stream'}),'تحليل_تكاليف_الصيانة.xlsx')};
 /* ---------- upload & parse ---------- */
 let parsed=null;
 const modal=$('#modal');
@@ -628,12 +834,15 @@ $('#mAdd').onclick=()=>{const y=+$('#fYear').value,m=+$('#fMonth').value;if(!y||
   const mo=buildMonth(y,m,parsed.kind==='detail'?{rows:parsed.rows,broken:parsed.broken,source:'upload',file:parsed.file}:{summary:parsed.summary,broken:parsed.broken,source:'upload',file:parsed.file});
   months=months.filter(x=>x.key!==mo.key).concat(mo).sort((a,b)=>a.key-b.key);state.month=mo.key;state.region='all';state.page=0;saveStore();closeModal();render();toast(`أُضيف ${mlabel(mo)} إلى التحليل`)};
 
+$('#btnUpload2').onclick=openModal;
+
 /* ---------- boot ---------- */
-function rerenderCharts(){if(months.length)render()}
-try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',rerenderCharts)}catch(e){}
-new MutationObserver(rerenderCharts).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+let rt;function rerender(){clearTimeout(rt);rt=setTimeout(()=>{if(months.length)render()},60)}
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',rerender)}catch(e){}
+new MutationObserver(rerender).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 initData();
-if(window.Chart&&window.XLSX)render();else window.addEventListener('load',render);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(charts.cTrend)render()});
+render();
 </script>
 
 </body>
