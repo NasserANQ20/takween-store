@@ -40,3 +40,30 @@
 - خطوط مقاسات هندسية بالمليمتر، وشريط «ENG. NASSER».
 - بدون حبيبات فيلم، وبدون تعتيم أطراف، وبدون تلاشي بطيء.
 - الختام دايماً: التوقيع، و@takweentables، و0504688928، و«اطلبها الآن · TikTok Shop».
+
+## 3) لابيا (LABIA): «البرومت + المنتج = النتيجة النهائية» (تيك توك، 3 مقاطع)
+- **المدة والمقاس:** 15 ثانية لكل مقطع، 9:16.
+- **طريقة العرض:**
+  - فوق: «النتيجة النهائية»، وهو الفيديو المولّد.
+  - تحت: صورة المنتج الوحيدة، ونص البرومت الإنجليزي يمرّ.
+  - الرسالة: من صورة منتج وحدة تطلع فيلم إعلاني كامل.
+- **المحتوى:** فيلم «كيف انصنع» سينمائي.
+  - **الحذاء:**
+    1. شفرة تقص الجلد.
+    2. ماكينة خياطة.
+    3. ماكرو للغرز.
+    4. رباط.
+    5. ظهور الحذاء على منصة رمادية.
+    6. لون ثاني.
+  - **الهودي:** ماكرو للقماش، ثم تطريز الشعار، ثم شخص تحت إضاءة علوية في الظلام.
+  - **الكنزة:** مانيكان في واجهة محل، ثم ماكرو للحياكة.
+- **مفاتيح البرومت** (مقروءة من الشاشة):
+  - *mechanical, hypnotic, sophisticated, tactile, premium and luxury industrial*
+  - *Fast, rhythmic editing during the manufacturing process, with every cut synchronized to a subtle mechanical beat. The final moments become slower, calmer and more luxurious.*
+  - *realistic material response, subtle halation, fine 35mm-style grain, natural shadows, no artificial CGI appearance*
+  - *Colour palette must be derived naturally from the exact colours of the reference product. Never introduce decorative colours.*
+  - *@image1 is the exact product reference — the absolute and final source of truth.*
+- **نأخذ منه:** فيلم «صناعة الطاولة» من صورة وحدة، بتوليد واحد مدته 15 ثانية مع صوت. هذا أقوى وأرخص شي لتكوين.
+  - **التكلفة:** Kling 3.0 Pro بمدة 15 ثانية مع صوت = 37.5 رصيد.
+  - **البديل:** Seedance 2.5 بدقة 720p وبمرجع الصورة = 105 أرصدة.
+- **ملاحظة:** الحبيبات هنا خفيفة وواقعية (35mm)، مو تأثير «قديم» ثقيل.
