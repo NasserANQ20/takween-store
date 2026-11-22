@@ -1,0 +1,987 @@
+                 The General Authority for Military Industries (GAMI)
+
+         The Regulations on Organizing Military Industrial Activities in the
+                                    Kingdom
+
+
+                      English Translation of the Official Arabic Text
+
+
+
+
+    Issued by the Board of Directors of the General Authority for Military Industries (GAMI)
+        Under a decision no. (C/2/6) dated 14/11/1440 AH, corresponding to 17/07/2019 AD
+   Based on the regulations of the General Authority for Military Industries (GAMI) issued by a
+  Council of Ministers Resolution No. (210) dated on 25/04/1440 AH, corresponding to 01/01/2019
+                                                AD.
+               Version 1.0.0 dated 14/11/1440 AH, corresponding to 17/07/2019 AD
+
+
+
+
+Disclaimer: The English version is a translation of the original Arabic text for information
+purposes only. In case of a discrepancy, the Arabic original will prevail.
+    Version: 1.0.0
+                                                 The Regulations on Organizing Military Industrial Activities                       General Authority for
+    Date: 17 July, 2019                                               in the Kingdom                                                 Military Industries
+
+
+
+
+Table of Contents
+1      Chapter 1: General Provisions ........................................................................................ 2
+       1.1 Definitions ............................................................................................................................................ 2
+       1.2 Purposes of the Regulations ................................................................................................................ 3
+       1.3 General Provisions ............................................................................................................................... 3
+           1.3.1 Establishment Permits and Licenses......................................................................................... 3
+2      Chapter 2: Manufacturing of Military Products and Providing Military Services ........... 5
+       2.1 Types of Licenses .................................................................................................................................. 5
+       2.2 Applications of Establishment Permit/License .................................................................................. 5
+       2.3 The Authority’s Jurisdiction in relation to Establishment Permits/License applications ............... 6
+       2.4 General Requirements for License Issuance....................................................................................... 6
+       2.5 Procedures for Issuing Military Manufacturing Licenses .................................................................. 6
+            2.5.1 Basis of Issuing Military Manufacturing Licenses .................................................................... 6
+            2.5.2 Special Requirements for Issuing Establishment Permit for Military Manufacturing .......... 7
+            2.5.3 Special Requirements for Issuing Military Manufacturing Licenses ...................................... 7
+       2.6 Procedures for Issuing Licensing for Providing Military Services .................................................... 8
+            2.6.1 Rules for Issuing Licensing for Providing Military Services .................................................... 8
+            2.6.2 Special Requirements for Issuing Establishment Permit for Military Service Provision ...... 8
+            2.6.3 Special Requirements for Issuing Licenses for Providing Military Service ............................ 9
+       2.7 Procedures for Issuing Licenses for Trading of Military Articles or Services ................................. 10
+            2.7.1 Rules for Issuing Licenses for Trading of Military Articles or Services ................................ 10
+            2.7.2 Special Requirements for Issuing Licenses for Military Articles or Services ........................ 10
+       2.8 Rejection of License Issuance ............................................................................................................. 11
+       2.9 Period of Establishment Permit ......................................................................................................... 11
+       2.10 Period of Licenses ................................................................................................................................ 11
+       2.11 Change in the Commercial registration Information ........................................................................ 11
+       2.12 Change in Ownership .......................................................................................................................... 11
+       2.13 Transport Military Products ............................................................................................................... 11
+       2.14 Change in Production Lines or Military Services ............................................................................. 12
+            2.14.1 Approval to change production lines ....................................................................................... 12
+            2.14.2 Approval to Change Military Services ..................................................................................... 12
+       2.15 Purchase Orders ................................................................................................................................. 13
+       2.16 Cancellation of the license upon Licensee’s request ......................................................................... 13
+       2.17 License Cancellation by the Authority .............................................................................................. 13
+       2.18 Renewal of Licenses ........................................................................................................................... 14
+            2.18.1 Requirements for renewal of License for Military Manufacturing ........................................ 14
+            2.18.2 Requirements for renewal of License for Providing Military Services .................................. 15
+            2.18.3 Requirements for renewal of License for Trading of Military Articles or Services ............... 16
+       2.19 Inspection and Monitoring of Licensee..............................................................................................17
+       2.20 Power to suspend/ cancel licenses .....................................................................................................17
+       2.21 Records Maintenance ..........................................................................................................................17
+       2.22 Information to be kept by Trader .......................................................................................................17
+3      Annexes ......................................................................................................................... 19
+       3.1 Table of fees for licenses .................................................................................................................... 19
+           3.1.1 Fees of Reviewing the Application........................................................................................... 19
+           3.1.2 Fees for Issuing or Renewing Licenses for Military Manufacturing ..................................... 19
+           3.1.3 Fees for issuing or renewing Licenses for Providing Military Service ................................... 19
+           3.1.4 Fees for issuing or renewing Licenses for Trading of Military Articles or Services .............. 19
+
+
+
+
+    Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+    case of a discrepancy, the Arabic original will prevail.
+                                                                                                                                                                        1
+ Version: 1.0.0
+                                    The Regulations on Organizing Military Industrial Activities   General Authority for
+ Date: 17 July, 2019                                     in the Kingdom                             Military Industries
+
+
+
+
+1      Chapter 1: General Provisions
+
+1.1       Definitions
+           The following words and expressions, wherever mentioned in these regulations,
+           shall have the meanings ascribed thereto, unless the context requires otherwise:
+           Kingdom: Kingdom of Saudi Arabia.
+           Regulations: The Regulations on Organizing Military Industrial Activities in
+           the Kingdom.
+           Authority: General Authority for Military Industries.
+           Applicant: Entity that applies to the Authority for obtaining a license or
+           establishment permit issued by the Authority.
+           Controllers: Include founders, owners, partners and members of board of
+           directors, CEO and/or Managing Directors and anyone who routinely reports to
+           him/her of the Applicant.
+           Foreign Person: Any natural person who is not a permanent and legal resident
+           in the Kingdom, a foreign company, an association, an organization, an
+           institution, partnership, or any other entity not licensed to practice the activities
+           included in the regulations in the Kingdom. It also includes foreign governments,
+           their branches and agencies, and international missions.
+           Trader: Entity that obtained a license for trading of military articles or services.
+           Receiving Intermediate: Freight forwarder, customs agent / broker, air, land
+           or sea Transport Company, or any other entity practising the above activities as
+           an agent for others.
+           Manufacturing: Any activity that includes manufacturing, installing,
+           assembling or disassembling of military products.
+           Establishment Permit for Military Manufacturing: A permit issued by the
+           Authority to the Applicant that desires to manufacture military products in order
+           to allow starting measures related to the site of facility and approvals from the
+           relevant entities in preparation for issuing military manufacturing licenses.
+           Establishment Permit for Providing Military Services: A permit issued
+           by the Authority to the Applicant that desires to provide military services in order
+           to allow starting measures related to the site of facility and approvals from the
+           relevant entities in preparation for issuing licensing for providing military
+           services.
+           Industrial Licenses: Licenses issued by the Ministry of Industry and Mineral
+           Resources.
+           Licenses: Licenses for military manufacturing, providing military services, and
+           trading of military articles or services.
+           Licensee: Any entity having any licenses issued by the Authority and practising
+           one or more business activity set forth in the Regulations.
+
+
+    Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+    case of a discrepancy, the Arabic original will prevail.
+                                                                                                                           2
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+ Date: 17 July, 2019                                  in the Kingdom                             Military Industries
+
+
+
+
+          Licenses for Military Manufacturing: License issued by the Authority which
+          authorizes the Licensee to practise the activities of developing, manufacturing,
+          storing, promoting, selling, re-selling, leasing and testing military articles.
+          Licenses for Providing Military Service: Licenses issued by the Authority
+          which authorizes the licensee to practise the activities of providing military
+          services, whether inside or outside the Kingdom, including the field of
+          improvement, operation, repair, maintenance, restoration, technical assignment,
+          providing of technical jobs along with providing any person with any technical or
+          technological information subject to the provisions of the regulations, whether
+          inside or outside the Kingdom.
+          Licenses for Trading of Military Articles or Service: Licenses issued by
+          the Authority which authorizes the licensee to practise the activities of trading
+          military articles or services to The Kingdom for the purpose of selling, leasing,
+          offering, promoting them to military and security government entities, the
+          entities licensed by the Authority along with testing them by the military and
+          security government entities in the Kingdom.
+          Host: Economic Cities Authority, The Royal Commission for Jubail and Yanbu,
+          The General Authority for Civil Aviation, The Saudi Authority for Industrial Cities
+          and Technology Zones (MODON), and areas within the scope of sites designated
+          for industrial cities, in addition to military installations.
+          Transport: Transport of military articles and services resulting from the process
+          of sale, import or export in any way and in any mean of transportation.
+
+1.2 Purposes of the Regulations
+        The purpose of the regulations is to organize activities related to military
+        industries along with determining the provisions, procedures and conditions for
+        obtaining the following licenses and permits:
+                 1. Establishment Permits
+                 2. Licenses for Military Manufacturing
+                 3. Licenses for Providing Military Service
+                 4. Licenses for Trading of Military Articles or Services
+
+1.3 General Provisions
+
+1.3.1      Establishment Permits and Licenses
+           1. Except for industrial licenses, the Authority issues establishment permits and
+              licenses set forth in the Regulations.
+           2. No person may engage in any activity included in the provisions of this
+              Regulation or apply for government tenders and procurement related to
+              manufacturing or providing military services without obtaining a license
+              from the Authority.
+           3. In view of the above, the establishment permit for providing military services
+              allows its holder to engage in government tenders and procurement related
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        3
+Version: 1.0.0
+                                The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                  in the Kingdom                             Military Industries
+
+
+
+
+                 to providing military services in military installations only, which requires a
+                 license to practise and commence the activity, provided that the final
+                 approval is granted after fulfilling the requirements of licenses for providing
+                 military service.
+          4. Without prejudice to the laws applicable in the Kingdom, in case of practising
+             activities included in the Regulation without obtaining a license, the
+             Authority shall coordinate with the competent authorities to take the
+             necessary measures to suspend such activities.
+          5. The Licenses shall determine the business activities to be practiced, in
+             addition to the scope of such activities.
+          6. The Licenses shall include a specific location to practise the activities set
+             forth in the Regulations and shall include licenses for providing military
+             services within the geographical boundaries for providing such services.
+          7. No license is issued for more than one location or geographical boundaries.
+          8. The Authority shall approve the exporting of military articles and services.
+
+
+
+
+Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+case of a discrepancy, the Arabic original will prevail.
+                                                                                                                       4
+Version: 1.0.0
+                                   The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                     in the Kingdom                             Military Industries
+
+
+
+
+2 Chapter 2: Manufacturing of Military Products and Providing
+  Military Services
+
+2.1 Types of Licenses
+       1. Licenses for Military Manufacturing, which include:
+                      1) License for manufacturing of military explosives
+                      2) License for manufacturing of firearms
+                      3) License for manufacturing of ammunitions
+                      4) License for manufacturing of military equipment
+                      5) License for manufacturing of individual military equipment
+                      6) License for manufacturing of military electronics
+       2. Licenses for Providing Military Service, which include:
+                      1) License for providing military services on military explosives
+                      2) License for providing military services on firearms
+                      3) License for providing military services on ammunitions
+                      4) License for providing military services on military equipment
+                      5) License for providing military services on individual military
+                         equipment
+                      6) License for providing military services on military electronics
+       3. Licenses for Trading of Military Articles or Services, which include:
+                      1) License for trading of military explosives
+                      2) License for trading of firearms
+                      3) License for trading of ammunitions
+                      4) License for trading of military equipment
+                      5) License for trading of individual military equipment
+                      6) License for trading of military electronics
+
+2.2 Applications of Establishment Permit/License
+       1. Provisions of the Regulations shall apply to the Applicant as of the date of
+          application submission.
+       2. The Establishment Permit/License application shall be submitted by a person
+          authorized by the Applicant.
+       3. Establishment Permit/License applications shall be submitted as per the forms
+          specified by the Authority, and shall have attached thereto all documents and
+          information specified in the Regulations.
+
+
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                          5
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+2.3 The Authority’s Jurisdiction in relation to Establishment
+    Permits/License applications
+        1. The Authority is entitled to verify the authenticity of the submitted data by any
+           means seen fit.
+        2. The Authority is entitled to request the Applicant to appear in order to seek any
+           necessary clarifications to process the Establishment Permit/License
+           application. The Applicant shall be notified of the requested clarifications.
+        3. The Authority is entitled to reject Establishment Permit/License application in
+           case of incompletion of the required data or documents or the lack of response
+           from the Applicant to the Authority’s requests within two weeks of the
+           notification date.
+
+2.4 General Requirements for License Issuance
+        Subject to the special requirements of each license type specified by the
+        Regulations, the following terms and conditions shall be fulfilled in order to obtain
+        a license:
+        1. An Applicant shall have a Commercial Registration that specifies the Business
+           Activities to be licensed by the Authority or pursuant to the Foreign Investment
+           Law. The Applicant shall have one of the following legal forms existence in the
+           Kingdom:
+                       i. A sole establishment
+                      ii. A limited-liability company
+                      iii. A joint-stock company
+        2. The Applicant shall be based in the Kingdom.
+        3. None of the Applicant's Owners should have previously sentenced to any
+           punishment or have convicted of a crime involving immorality or dishonesty, or
+           have been subjected to a disciplinary suspension from military service, unless
+           rehabilitated.
+        4. Any other requirements set out by the Authority at its discretion.
+
+2.5 Procedures for Issuing Military Manufacturing Licenses
+
+2.5.1     Basis of Issuing Military Manufacturing Licenses
+         1. The Applicant shall obtain an Establishment Permit for Military
+            Manufacturing prior issuing the license.
+         2. The license application shall be reviewed and evaluated by the Authority after
+            completion of the documents and papers required from the Applicant.
+         3. The Applicant shall be compliant with the Security, Safety, and Fire
+            Protection specifications, in relation to the activity, set out by the High
+            Commission for Industrial Security.
+
+
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        6
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+         4. The result of field inspection (conducted by the Authority in conjunction with
+            the relevant government entities) shall be positive.
+
+2.5.2 Special Requirements for Issuing Establishment Permit for Military
+      Manufacturing
+          In order to obtain an Establishment Permit for Military Manufacturing, a permit
+          application shall be submitted to the Authority by filling out the form provided
+          for such purpose and attaching the following documents:
+                 A valid Commercial Registration of the Applicant;
+                 Incorporation Documents/Articles of Association of the Applicant;
+                 An investment license issued by the Saudi Arabian General Investment
+                 Authority, in case of foreign investors;
+                 Governing Body Resolution issued by the Applicant's board of directors or the
+                 Applicant's owner in case of sole establishments, as per the form provided by
+                 the Authority, providing the activities to be licensed, approving license
+                 application submission and its contents, specifying persons authorized on
+                 behalf of the Applicant, and the Applicant's acknowledgment of being aware
+                 of the laws, regulations and obligations resulting from carrying out the
+                 activity.
+                 A list of the Controllers' information and their national ID or passport copies
+                 (for non-Saudis). If any of the partners is a company, a copy of the
+                 commercial registration shall be attached.
+                 Initial production details which include the following (attached)
+                        i. For manufacturing:
+                               a) Initial details on military products that the applicant intends
+                                  to manufacture to include the type and description of the
+                                  product.
+                               b) Max production capacity for each production line
+                               c) Material or component used in production for each product
+                                  (Top -5 items by value and quantity)
+                       ii. For Development (Initial Product)
+                               a) Initial details on the scope of the development, including the
+                                  description of the scope and capabilities available
+                 The organizational structure of the Applicant establishing the organizational
+                 hierarchy of the organization that illustrates the positions, and the lines of
+                 authority and responsibility within the organization.
+                 Proof of payment for application review.
+
+2.5.3 Special Requirements for Issuing Military Manufacturing Licenses
+          After obtaining all the necessary approvals from all the relevant government
+          entities, the Applicant shall apply online to the Authority for Military
+          Manufacturing license, and shall attach the following documents:
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        7
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+                 A valid Establishment Permit for Military Manufacturing issued by the
+                 Authority;
+                 A building completion certificate issued by the host, or a permission from a
+                 military installation;
+                 Security and Safety certificate issued by the High Commission for Industrial
+                 Security;
+                 Actual information about manufacturing and development (for primary
+                 products), including but not limited to, the following:
+                        i. For Manufacturing:
+                              b) Actual details on military products that the applicant intends
+                                 to manufacture to include the type and description of the
+                                 product.
+                              c) Max production capacity for each production line
+                              d) Material or component used in production for each product
+                                 (Top -5 items by value and quantity)
+                       ii. For Development:
+                              a) Actual details on the scope of the development, including the
+                                 description of the scope and capabilities available
+                 2) Payment receipt of licensing fees after obtaining the Authority’s approval
+                    for issuing the license.
+                 3) Notifying the Authority of any changes made to the documents submitted
+                    for obtaining the Establishment Permit.
+
+2.6 Procedures for Issuing Licensing for Providing Military Services
+
+2.6.1 Rules for Issuing Licensing for Providing Military Services
+          1. To obtain an Establishment Permit for Providing Military Services.
+          2. To have the license application reviewed and evaluated by the Authority after
+             the Applicant's completion of the required documents.
+          3. The Applicant shall be compliant with the fire security, safety and protection
+             specifications, in relation to the activity, set out by the High Commission for
+             Industrial Security.
+          4. The result of field inspection (conducted by the Authority in conjunction with
+             the relevant bodies) shall be positive.
+
+2.6.2 Special Requirements for Issuing Establishment Permit for
+      Providing Military Services
+          In order to obtain an Establishment Permit for Providing Military Services, a
+          permit application shall be submitted to the Authority by filling out the form
+          provided online by the Authority for such purpose and attaching the following
+          documents:
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        8
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+                 A valid commercial registration of the Applicant
+                 The Articles of Association or Statute of the Applicant
+                 An investment license issued from the General Investment Authority, in case
+                 of foreign investors.
+                 Governing Body Resolution issued by the Applicant's board of directors or the
+                 Applicant's owner in case of sole establishments, as per the form provided by
+                 the Authority, providing the activities to be licensed, approving license
+                 application submission and its contents, specifying persons authorized on
+                 behalf of the Applicant, and the Applicant's acknowledgment of being aware
+                 of the laws, regulations and obligations resulting from carrying out the
+                 activity.
+                 A list of the Controllers' information and their national ID or passport copies
+                 (for non-Saudis). If any of the partners is a company, a copy of the
+                 commercial registration shall be attached.
+                 Basic information about the scope of military services to be provided (if any),
+                 including but not limited to:
+                        i. Description of the scope of military services to be provided,
+                           available capabilities, and capacity.
+                       ii. Materials and components used (top five items based on quantity
+                           and value).
+                 The organizational structure of the Applicant, establishing the administrative
+                 hierarchy or the organizational frame that specifies job positions, their
+                 administrative connections and the relationships between individuals, and
+                 specifies the lines of authority and responsibility of the Applicant.
+                 Proof of payment for application review.
+
+2.6.3 Special Requirements for Issuing Licenses for Providing Military
+      Service
+          After obtaining all the necessary approvals from relevant government entities,
+          the Applicant shall apply to the Authority for license for providing military
+          services, and shall attach the following documents:
+                 1) A valid Establishment Permit for Providing Military Services issued from
+                    the Authority.
+                 2) A certificate of facility building completion from the host, or a permission
+                    from a military facility.
+                 3) Security and Safety certificate issued from the High Commission for
+                    Industrial Security.
+                 4) Actual information about the scope of military services to be provided (if
+                    any), including but not limited to:
+                        i. Description of the scope of military services to be provided,
+                           available capabilities, and capacity.
+
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        9
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+                       ii. Materials and components used (top five items based on quantity
+                           and value).
+                 5) A payment receipt of licensing fees after the Authority’s approval of the
+                    license.
+                 6) Notifying the Authority of any changes made to the documents submitted
+                    for obtaining the Establishment Permit.
+
+2.7 Procedures for Issuing Licenses for Trading of Military Articles or
+    Services
+
+2.7.1     Rules for Issuing Licenses for Trading of Military Articles or Services
+          1. The Applicant shall be an affiliate of a foreign company that works in the
+             field of military product manufacturing or providing military services, or a
+             certified distributor or agent from such companies.
+          2. The license application shall be reviewed and evaluated by the Authority after
+             the Applicant's completion of the required documents.
+
+2.7.2 Special Requirements for Issuing Licenses for Trading of Military
+      Articles or Services
+          In order to obtain a Military Articles or Services Trading Licenses, a license
+          application shall be submitted to the Authority by filling out the form provided
+          online by the Authority for such purpose and attaching the following documents:
+          A valid commercial registration of the Applicant
+          The Articles of Association or Statute of the Applicant
+          An investment license issued by the General Investment Authority, in case of
+          foreign investors.
+          A letter issued by the Original Equipment Manufacturer (OEM) stating the
+          appointment of the Applicant as a certified distributor or agent inside the
+          Kingdom for each item to be traded (in case of certified distributors or agents).
+          Governing Body Resolution issued by the Applicant's board of directors or the
+          Applicant's owner in case of sole establishments, as per the form provided by the
+          Authority, providing the activities to be licensed, approving the license
+          application submission and its contents, specifying persons authorized on behalf
+          of the Applicant, and the Applicant's acknowledgment of being aware of the
+          laws, regulations and obligations resulting from carrying out the activity.
+          A list of the Controllers' information and their national ID or passport copies
+          (for non-Saudis). If any of the partners is a company, a copy of the commercial
+          registration shall be attached.
+          The organizational structure of the Applicant establishing the administrative
+          hierarchy or the organizational frame that specifies job positions, their
+          administrative connections and the relationships between individuals, and
+          specifies the lines of authority and responsibility of the Applicant.
+
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        10
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+          A Proof of payment for application review.
+          A payment receipt of licensing fees after the Authority’s approval of the license.
+
+2.8 Rejection of License Issuance
+       In case the Authority rejects issuing any license for the Applicant, the Authority
+       shall notify the Applicant of such rejection.
+
+2.9 Period of Establishment Permit
+       The Establishment Permit shall be valid for two years, and the Authority has the
+       right to renew it for a period specified by the Authority at the request of the license
+       holder.
+
+2.10 Period of Licenses
+       The licenses shall be valid for three years from the date of the Authority approval
+       to issue the license. Such Period may be renewed by the Authority, at the request
+       of the Licensee, once the Authority confirms that the Licensee continues to comply
+       with the provisions, controls and instructions issued by the Authority and the
+       relevant other authorities.
+
+2.11 Change in the Commercial registration Information
+       Any Licensee who wishes to change any of his commercial registration
+       information, including establishment’s premise, business activities, directors/
+       representatives or powers of director/ directors, shall obtain the Authority’s
+       written approval prior to making such change.
+
+2.12 Change in Ownership
+       With the exception of publicly listed companies, a Licensee shall obtain the
+       Authority’s written approval prior to any change in ownership or actual or legal
+       control, directly or indirectly, whether due to the change in or control of the
+       shares, for the Licensee or any other company or entity to which the Licensee is
+       affiliated.
+
+2.13 Transport Military Products
+       Subject to the relevant laws and regulations in the kingdom, the Licensee shall not
+       transport any military articles inside or outside the Kingdom without obtaining a
+       permission from the Authority. For issuing such permission, the Licensee shall
+       provide the Authority with the following:
+                 1. Full and specific description (including quantity) of military articles to be
+                    transported.
+                 2. Determine whether the transport results in a transfer of ownership or not.
+                 3. Rationale and reasons for transport.
+                 4. Transport timeframe.
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        11
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+                 5. The current location of the Military articles and the location to which the
+                    articles will be transported.
+                 6. The method of transport used and the carrier’s information.
+                 7. An acknowledgement by the transferee that the transfer or possession of
+                    the transported military articles does not conflict with the laws and
+                    regulation of location.
+
+
+
+2.14 Change in Production Lines or Military Services
+
+2.14.1 Approval to change production lines
+          1. The Licensee shall determine the military article to be manufactured, and
+             obtain the Authority’s written approval on each production line, whether it is
+             an expansion of the production capacity of an existing article, modification,
+             or addition of a new article, provided that the following information shall be
+             sent to the Authority to obtain the approval:
+                       1) Valid Industrial License.
+                       2) Valid Military Manufacturing License
+                       3) Security and Safety Certificate issued by the High Commission for
+                          Industrial Security.
+                       4) Valid Commercial Registration, taking into consideration the
+                          addition of new business activities, if needed.
+                       5) Military Production Capability Report for the current period.
+                       6) Reasons for the change in the production lines.
+                       7) Type of the military articles and the quantity expected to be
+                          manufactured.
+                       8) Materials and components used in manufacturing for each product
+                          individually (Top five items based on quantity and value).
+          2. If the Licensee wishes to suspend any production line, it shall notify the
+             Authority at least (60) days prior to the proposed date of suspension,
+             including adequate information on the reasons for suspension, to consider
+             approval thereon.
+
+2.14.2 Approval to Change Military Services
+          1. The Licensee shall determine the military services to be provided, and obtain
+             the Authority’s written approval on each service, whether it is an increase of
+             the capacity of an existing service, modification, or addition of a new service,
+             provided that the following information shall be sent to the Authority to
+             obtain the approval:
+                       1) Valid Licenses for Providing Military Services.
+
+
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        12
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+                        2) Valid Commercial Registration, taking into consideration the
+                           addition of new business activities, if any.
+                        3) Security and Safety Certificate issued by the High Commission for
+                           Industrial Security.
+                        4) Military Service Capability Report for the current period.
+                        5) Reason for the change in military services.
+                        6) Description of the military services and the capacity of each service.
+          2. If the Licensee wishes to suspend any Military Services Capacity, it shall
+             notify the Authority at least (60) days prior to the proposed date of
+             suspension, including adequate information on the reasons for suspension,
+             to consider its approval.
+
+2.15 Purchase Orders
+       With the exception of purchase orders from the Government’s Military and
+       Security entities within the Kingdom of Saudi Arabia or entities licensed by the
+       Authority, the Licensee shall notify the Authority upon receiving an order to
+       purchase military products or provide military services from a foreign party within
+       (30) days of receiving the purchase order in order to obtain the Authority written
+       approval.
+
+2.16 Cancellation of the license upon Licensee’s request
+       The Licensee shall be entitled to request the cancellation of its License, provided
+       that Licensee shall submit an application to the Authority at least (60) days prior
+       to the proposed date of license cancellation, including full information on the
+       reasons for cancellation application, to consider approval thereon.
+
+2.17 License Cancellation by the Authority
+       The Authority shall be entitled to cancel the license if the Licensee violates any of
+       the provisions of the regulations, including but not limited to:
+                 1. Licensee Bankruptcy.
+                 2. If the License was issued based on incorrect information.
+                 3. If the Licensee, or any of its responsible persons or its representative
+                    provide the Authority or one of its representatives with incorrect or false
+                    information.
+                 4. If the Licensee fails to satisfy any of Licensing Conditions or the Licensee
+                    violates one of the conditions for issuing the License.
+                 5. If the Licensee’s business harms the National Security Interests, or is
+                    harmful according to the requirements of Public Interest.
+                 6. In case of manufacturing military articles or providing military services
+                    outside the scope of the License.
+                 7. Change in the ownership of the Licensee without the Authority’s approval.
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        13
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+                 8. Any change in the Parent Company’s Ownership without the Authority’s
+                    approval.
+                 9. Any change in the actual or legal control, whether directly or indirectly, for
+                    the Licensee without the Authority’s approval.
+                 10. Change in the Licensee’s workplace without the Authority’s approval.
+                 11. If the Licensee ceases to practice the activity for more than one year.
+                 12. If the Licensee violates one of the security, environmental, health, or safety
+                     requirements of the kingdom.
+                 13. Failure to comply with the Authority’s instructions.
+
+2.18 Renewal of Licenses
+       If the Licensee wishes to renew its Licenses, the Licensee shall submit a renewal
+       application to the Authority at least (60) days prior to the License expiry date. In
+       case of expiry without submitting a renewal application, the Authority is entitled
+       not to renew the License.
+
+2.18.1 Requirements for renewal of License for Military Manufacturing
+   For the renewal of License for Military Manufacturing, it is required to submit the
+   application for renewal of the license to the Authority by completing the form
+   prepared by the Authority for such purpose, and attaching the following documents:
+   1. Valid Commercial registration, specifying the business activities to be renewed.
+   2. Licensee’s Articles of Association or Statute
+   3. Governing Body Resolution issued by the board of directors of Licensee or its
+      owner in case of sole establishments, as per the form determined by the
+      Authority, specifying the activities to be renewed, approval of submitting
+      Licenses' Renewal Application and contents thereof, identification of
+      representatives on behalf of Licensee, in addition to Licensee’s acknowledgment
+      of being aware of laws, regulations and obligations resulting from practicing such
+      activity.
+   4. Valid Military Manufacturing License.
+   5. Valid Security and Safety Certificate issued by the High Commission for
+      Industrial Security.
+   6. Military Production Capability Report for the current period.
+   7. List of Controllers information, their National IDs or passports copies (For non-
+      Saudis). If one of the partners is a company, a copy of the commercial
+      registration shall be attached.
+   8. Actual information on manufacturing and developing (for primary products)
+      which includes, but not limited to:
+                        i. Manufacturing:
+
+
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        14
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+                             Actual information on military products that the Applicant
+                              intends to manufacture or complete its manufacturing,
+                              including the product type and description.
+                             Maximum Production Capacity of each production line.
+                             Materials and components used in manufacturing each
+                              individual product (Top five items based on quantity and value).
+                      ii. Development (for primary products):
+                             Actual information on the scope of development, including
+                              scope description and available capabilities.
+   9. The organizational structure of Licensee, establishing the administrative
+      hierarchy or the organizational frame that specifies job positions, their
+      administrative connections and the relationships between individuals, and
+      specifies the lines of authority and responsibility of Licensee.
+   10. A payment receipt of License Renewal fees.
+
+2.18.2 Requirements for renewal of License for Providing Military Services
+         For the renewal of License for Providing Military Service, it is required to submit
+         the application for renewal of license to the Authority online by completing the
+         form prepared by the Authority for such purpose, and attaching the following
+         documents:
+         1. Valid Commercial registration, specifying the business activities to be
+            renewed.
+         2. Licensee’s Articles of Association or Statute
+         3. Governing Body Resolution issued by the board of directors of Licensee or its
+            owner in case of sole establishments, as determined by the Authority,
+            specifying the activities to be renewed, approval of submitting the License
+            Renewal Application and contents thereof, identifying representatives on
+            behalf of Licensee, in addition to Licensee’s acknowledgment of being aware
+            of laws, regulations and obligations resulting from practicing such activity.
+         4. Valid License for Providing Military Services.
+         5. Valid Security and Safety Certificate issued by the High Commission for
+            Industrial Security.
+         6. Military Services Capability Report for the current period.
+         7. List of Controllers information, their National IDs or passports copies (For
+            non-Saudis). If one of the partners is a company, a copy of the commercial
+            registration shall be attached.
+         8. Actual information on the scope of Military Services to be provided (if any)
+            which includes, but not limited to:
+                      i. Description of the scope of Military Services to be provided or
+                         continue to be provided, available capabilities, in addition to the
+                         capacity.
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        15
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+                       ii. Used materials and components (Top 5 items based on quantity
+                           and value).
+         9. The organizational structure of Licensee, including the administrative
+            hierarchy or the organizational frame that specifies job positions, their
+            administrative connections and the relationships between individuals, and
+            specifies the lines of authority and responsibility of Licensee.
+         10. A payment receipt of License Renewal fees.
+
+
+2.18.3 Requirements for renewal of License for Trading of Military Articles
+       or Services
+          For renewal of License for Trading of Military Articles or Services, it is required
+          to submit the application for renewal of license to the Authority online by
+          completing the form prepared by the Authority for such purpose, and attaching
+          the following documents:
+                 1. Valid Commercial registration.
+                 2. Licensee’s Articles of Association or Statute.
+                 3. Investment license issued from the General Investment Authority, in case
+                    of foreign investors.
+                 4. A letter issued by the Original Equipment Manufacturer (OEM) stating the
+                    continuous appointment of the Licensee as a certified distributor or agent
+                    inside the Kingdom for each item to be traded (in case of certified
+                    distributors or agents).
+                 5. Valid Military Articles or Services Trading License.
+                 6. Governing Body Resolution issued by the board of directors of Licensee or
+                    its owner in case of sole establishments, as determined by the Authority,
+                    specifying the activities to be renewed, approval of submitting application
+                    for renewal of licenses and contents thereof, identification of
+                    representatives on behalf of the Applicant, in addition to Licensee’s
+                    acknowledgment of being aware of laws, regulations and obligations
+                    resulting from practicing such activity.
+                 7. List of Controllers information, their National IDs or passports copies (For
+                    non-Saudis). If one of the partners is a company, a copy of the commercial
+                    registration shall be attached.
+                 8. The organizational structure of Licensee, establishing the administrative
+                    hierarchy or the organizational frame that specifies job positions, their
+                    administrative connections and the relationships between individuals, and
+                    specifies the lines of authority and responsibility of the Applicant.
+                 9. A payment receipt of License Renewal fees.
+
+
+
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        16
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                   in the Kingdom                             Military Industries
+
+
+
+
+2.19 Inspection and Monitoring of Licensee
+       The Authority’s employees and other persons assigned by the Authority are
+       entitled to conduct on-site inspections and monitoring, including access to the
+       Licensee’s premises, without prejudice to International Agreements. This includes
+       access to store areas, testing of military materials and production facilities, and
+       reviewing of the Licensee’s documents, data and records.
+       The powers of the Authority’s employees and officers shall include the following:
+                 o Power to inspect and monitor throughout Licensee’s premises.
+                 o Power to examine and test within Licensee’s premises.
+                 o Power to photograph, video record, or any recording means within the
+                   Licensee’s premises.
+                 o Power to examine and copy any documents of the Licensee.
+                 o Power to enter any machine or equipment approved by the Authority to
+                   carry out one or some of the inspection and testing requirements within
+                   Licensee’s premises.
+                 o Power to operate or test the Military Articles within the Licensee’s
+                   premises.
+                 o Power to impound any item for the purpose of examination or testing
+                   outside the Licensee’s premises, provided that the period shall not exceed
+                   24 hours.
+
+2.20 Power to suspend/ cancel licenses
+       Licenses shall be temporarily cancelled or suspended under a reasoned resolution
+       by the Authority.
+
+2.21 Records Maintenance
+       The Licensee shall maintain records including all activities of military
+       manufacturing or services authorized under the License, and they shall be kept for
+       10 years.
+
+2.22 Information to be kept by Trader
+       Trader shall maintain information about military articles and services and
+       associated import permits number, in addition to the following:
+                 o Information about end-user and delivery location.
+                 o Information about persons associated with the Trader, who provided the
+                   Trader with military articles and services.
+                 o The effective date of import.
+                 o The effective date of re-export for temporary import permits.
+                 o Dates of delivery or service providing.
+
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        17
+Version: 1.0.0
+                                The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                  in the Kingdom                             Military Industries
+
+
+
+
+                 o Transport method, information about all parties involved in the transport
+                   process, as well as the method of transporting operations involving the
+                   electronic transfer of information, data or any military services.
+
+
+
+
+Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+case of a discrepancy, the Arabic original will prevail.
+                                                                                                                       18
+Version: 1.0.0
+                                 The Regulations on Organizing Military Industrial Activities   General Authority for
+ Date: 17 July, 2019                                  in the Kingdom                             Military Industries
+
+
+
+
+3 Annexes
+
+3.1 Table of fees for licenses
+
+3.1.1      Fees of Reviewing the Application
+ S/N Type of Application                                                                               Fees
+           Review an application of establishment permit for military
+   1                                                                                                   500 SAR
+           manufacturing
+           Review an application of establishment permit for providing
+   2                                                                                                   500 SAR
+           military services
+           Review an application of trading military articles or services
+   3                                                                                                   500 SAR
+           license
+
+3.1.2       Fees for Issuing or Renewing Licenses for Military Manufacturing
+ S/N Type of Application                                                                               Fees
+   1       License for manufacturing of military explosives                                            2,850 SAR
+   2       License for manufacturing of firearms                                                       2,850 SAR
+   3       License for manufacturing of ammunitions                                                    2,850 SAR
+   4       License for manufacturing of military equipment                                             2,850 SAR
+   5       License for manufacturing of individual military equipment                                  2,850 SAR
+   6       License for manufacturing of military electronics                                           2,850 SAR
+
+3.1.3 Fees for issuing or renewing Licenses for Providing Military Service
+ S/N Type of Application                                                                              Fees
+   1       License for providing military services on military explosives                             2,850 SAR
+   2       License for providing military services on firearms                                        2,850 SAR
+   3       License for providing military services on ammunitions                                     2,850 SAR
+   4       License for providing military services on military equipment                              2,850 SAR
+           License for providing military services on individual military                             2,850 SAR
+   5
+           equipment
+   6       License for providing military services on military electronics                            2,850 SAR
+
+3.1.4 Fees for issuing or renewing Licenses for Trading of Military Articles
+      or Services
+ S/N Type of Application                                                                              Fees
+   1       License for trading of military explosives                                                 2,850 SAR
+   2       License for trading of firearms                                                            2,850 SAR
+
+ Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+ case of a discrepancy, the Arabic original will prevail.
+                                                                                                                        19
+Version: 1.0.0
+                                The Regulations on Organizing Military Industrial Activities   General Authority for
+Date: 17 July, 2019                                  in the Kingdom                             Military Industries
+
+
+
+
+  3       License for trading of ammunitions                                                         2,850 SAR
+  4       License for trading of military equipment                                                  2,850 SAR
+  5       License for trading of individual military equipment                                       2,850 SAR
+  6       License for trading of military electronics                                                2,850 SAR
+
+
+
+
+Disclaimer: The English version is a translation of the original Arabic text for information purposes only. In
+case of a discrepancy, the Arabic original will prevail.
+                                                                                                                       20
+
